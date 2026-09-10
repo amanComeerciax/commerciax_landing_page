@@ -107,7 +107,7 @@ export default function HowWeWork() {
       <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
 
       {/* Soft Ambient Background Lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-blue-100/30 via-indigo-50/15 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-blue-100/30 via-blue-50/15 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
 
       {/* Blueprint Crosshair Accent on Right */}
       <div className="hidden lg:block absolute top-36 right-36 w-14 h-14 pointer-events-none opacity-25">
@@ -149,13 +149,13 @@ export default function HowWeWork() {
           </div>
 
           {/* Main 3-Line Editorial Headline */}
-          <h2 className="font-instrument text-[36px] xs:text-[48px] sm:text-[62px] lg:text-[72px] font-normal leading-[1.08] sm:leading-[1.04] tracking-tight text-navy">
-            <span className="italic text-blue-600 font-normal">
+          <h2 className="font-plus-jakarta font-extrabold text-[36px] xs:text-[48px] sm:text-[62px] lg:text-[72px] leading-[1.08] sm:leading-[1.04] tracking-[-0.03em] text-[#0A1628]">
+            <span className="font-instrument italic font-normal text-blue-600">
               <FoldText text="10x Speed" splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />{' '}
             </span>
             <FoldText text="to Production." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
             <br />
-            <span className="italic text-navy/90 font-normal">
+            <span className="font-instrument italic font-normal text-blue-600">
               <FoldText text="By Design." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
             </span>
           </h2>

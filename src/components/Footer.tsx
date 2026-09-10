@@ -111,7 +111,7 @@ export default function Footer() {
                         className="shrink-0"
                         icon={
                           subscribed ? (
-                            <Check className="w-3.5 h-3.5 text-emerald-400" />
+                            <Check className="w-3.5 h-3.5 text-blue-300" />
                           ) : (
                             <ArrowRight className="w-3.5 h-3.5" />
                           )

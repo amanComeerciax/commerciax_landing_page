@@ -85,9 +85,9 @@ export default function IntegrationsHub() {
             <Zap className="w-3.5 h-3.5 text-blue-600" />
             Seamless Interoperability
           </div>
-          <h2 className="font-instrument text-4xl sm:text-5xl font-normal text-navy tracking-tight leading-tight">
+          <h2 className="font-plus-jakarta text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0A1628] tracking-tight leading-tight">
             Connects seamlessly with your <br />
-            <span className="italic font-instrument bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-600 bg-clip-text text-transparent">
+            <span className="font-instrument italic font-normal text-blue-600">
               entire commerce stack
             </span>
           </h2>
@@ -129,8 +129,8 @@ export default function IntegrationsHub() {
                   <span className="text-[11.5px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
                     {item.badge}
                   </span>
-                  <div className="flex items-center gap-1.5 text-[12px] font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200/60">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <div className="flex items-center gap-1.5 text-[12px] font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full border border-blue-200/60">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
                     {item.status}
                   </div>
                 </div>
@@ -152,7 +152,7 @@ export default function IntegrationsHub() {
         </div>
 
         {/* Integration Bottom Callout */}
-        <div className="mt-14 p-6 rounded-2xl bg-gradient-to-r from-blue-50/80 via-white to-indigo-50/80 border border-blue-200/70 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+        <div className="mt-14 p-6 rounded-2xl bg-gradient-to-r from-blue-50/80 via-white to-blue-50/80 border border-blue-200/70 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-sm shadow-blue-500/30">
               <Shield className="w-5 h-5" />

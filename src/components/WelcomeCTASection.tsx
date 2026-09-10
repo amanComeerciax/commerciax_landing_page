@@ -34,7 +34,7 @@ export default function WelcomeCTASection() {
       className="relative w-full py-20 sm:py-28 lg:py-32 bg-[#FAF8F5] text-navy overflow-hidden"
     >
       {/* Ambient Lighting Background Glows */}
-      <div className="absolute top-10 right-0 w-[600px] h-[600px] bg-gradient-to-b from-blue-100/35 via-indigo-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-10 right-0 w-[600px] h-[600px] bg-gradient-to-b from-blue-100/35 via-blue-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
       <div className="absolute bottom-10 -left-20 w-[500px] h-[500px] bg-blue-100/25 rounded-full blur-3xl pointer-events-none z-0" />
 
       <div className="site-container relative px-4 sm:px-8 lg:px-12 max-w-[1340px] mx-auto z-10">
@@ -244,8 +244,8 @@ export default function WelcomeCTASection() {
                 <span className="font-plus-jakarta font-bold text-[14.5px] text-[#0A1628]">
                   Your Sprint Plan
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/70 text-[10.5px] font-semibold text-emerald-700">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200/70 text-[10.5px] font-semibold text-blue-700">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
                   Ready in 24 hours
                 </span>
               </div>

@@ -192,7 +192,7 @@ export default function GlobalProgramsSection() {
       className="relative w-full py-20 sm:py-28 lg:py-32 bg-[#FAF8F5] text-navy overflow-hidden"
     >
       {/* Background Soft Lighting Glows */}
-      <div className="absolute top-10 right-0 w-[600px] h-[600px] bg-gradient-to-b from-blue-100/35 via-indigo-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-10 right-0 w-[600px] h-[600px] bg-gradient-to-b from-blue-100/35 via-blue-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
       <div className="absolute bottom-10 -left-20 w-[500px] h-[500px] bg-blue-100/25 rounded-full blur-3xl pointer-events-none z-0" />
 
       {/* Background Global Network Map & Flight Arc Lines with Seamless Top/Bottom Melt */}
@@ -347,9 +347,9 @@ export default function GlobalProgramsSection() {
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-instrument text-[34px] xs:text-[44px] sm:text-[54px] lg:text-[62px] font-normal text-navy leading-[1.1] sm:leading-[1.08] tracking-tight mb-4">
+          <h2 className="font-plus-jakarta font-extrabold text-[32px] xs:text-[40px] sm:text-[50px] lg:text-[58px] text-[#0A1628] leading-[1.08] tracking-[-0.03em] mb-4">
             <FoldText text="Part of the programs shaping" splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />{' '}
-            <span className="italic text-blue-600 font-normal">
+            <span className="font-instrument italic font-normal text-blue-600">
               <FoldText text="global AI." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
             </span>
           </h2>

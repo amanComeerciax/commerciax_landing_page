@@ -139,7 +139,7 @@ export default function SaaSProductsSection() {
       <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
 
       {/* Background Soft Lighting & Trajectory Lines */}
-      <div className="absolute top-10 right-0 w-[600px] h-[600px] bg-gradient-to-b from-blue-100/40 via-indigo-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-10 right-0 w-[600px] h-[600px] bg-gradient-to-b from-blue-100/40 via-blue-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
       <div className="absolute bottom-10 -left-20 w-[500px] h-[500px] bg-blue-100/25 rounded-full blur-3xl pointer-events-none z-0" />
 
       <div className="site-container relative px-4 sm:px-8 lg:px-12 max-w-[1340px] mx-auto z-10">
@@ -156,9 +156,9 @@ export default function SaaSProductsSection() {
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-instrument text-[42px] sm:text-[54px] lg:text-[62px] font-normal text-[#0A1628] leading-[1.06] tracking-[-0.03em] mb-4">
+          <h2 className="font-plus-jakarta font-extrabold text-[36px] sm:text-[48px] lg:text-[58px] text-[#0A1628] leading-[1.08] tracking-[-0.03em] mb-4">
             <FoldText text="Two SaaS products," splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />{' '}
-            <span className="italic text-blue-600">
+            <span className="font-instrument italic font-normal text-blue-600">
               <FoldText text="one promise." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
             </span>
           </h2>
@@ -475,7 +475,7 @@ export default function SaaSProductsSection() {
                             {currentTab.chartType === 'crm' && (
                               <div className="flex items-center justify-between h-10 px-1 text-[9px] font-dm-sans">
                                 <div className="flex -space-x-1">
-                                  {['bg-blue-500', 'bg-indigo-500', 'bg-emerald-500'].map((c, i) => (
+                                  {['bg-blue-600', 'bg-blue-500', 'bg-blue-400'].map((c, i) => (
                                     <div
                                       key={i}
                                       className={`w-4 h-4 rounded-full ${c} text-white text-[7.5px] flex items-center justify-center font-bold ring-2 ring-white`}

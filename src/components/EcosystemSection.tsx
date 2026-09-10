@@ -86,9 +86,9 @@ export default function EcosystemSection() {
       <div className="absolute bottom-0 left-0 right-0 h-44 sm:h-64 lg:h-80 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/85 to-transparent pointer-events-none z-[1]" />
 
       {/* Soft Ambient Background Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[850px] h-[400px] sm:h-[500px] bg-gradient-to-b from-blue-100/30 via-indigo-50/15 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[850px] h-[400px] sm:h-[500px] bg-gradient-to-b from-blue-100/30 via-blue-50/15 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
       <div className="absolute top-12 -left-20 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-blue-100/20 rounded-full blur-3xl pointer-events-none z-0" />
-      <div className="absolute top-20 -right-20 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-indigo-100/15 rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-20 -right-20 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-blue-100/15 rounded-full blur-3xl pointer-events-none z-0" />
 
       <div className="site-container relative px-3.5 xs:px-4 sm:px-8 lg:px-12 z-10">
         {/* ========================================================== */}
@@ -110,9 +110,9 @@ export default function EcosystemSection() {
           </motion.div>
 
           {/* Main Heading */}
-          <h2 className="font-instrument text-[30px] xs:text-[36px] sm:text-[48px] lg:text-[56px] xl:text-[62px] font-normal leading-[1.1] sm:leading-[1.08] tracking-tight text-navy">
+          <h2 className="font-plus-jakarta font-extrabold text-[32px] xs:text-[40px] sm:text-[52px] lg:text-[62px] xl:text-[68px] leading-[1.08] tracking-[-0.03em] text-[#0A1628]">
             <FoldText text="Built with" splitBy="word" trigger="scroll" duration={0.65} />{' '}
-            <span className="italic text-cobalt font-normal">
+            <span className="font-instrument italic font-normal text-blue-600">
               <FoldText text="trust." splitBy="word" trigger="scroll" duration={0.65} />
             </span>{' '}
             <FoldText text="Backed by the right people." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
@@ -863,7 +863,7 @@ export default function EcosystemSection() {
         >
           {/* Ambient Lighting Gradient Inside Card */}
           <div className="absolute top-0 right-1/4 w-[350px] h-[200px] bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-1/3 w-[300px] h-[180px] bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-1/3 w-[300px] h-[180px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6 sm:gap-8 lg:gap-6">
             {/* Left Headline */}
@@ -871,9 +871,9 @@ export default function EcosystemSection() {
               <span className="text-[9.5px] sm:text-[10.5px] font-extrabold font-plus-jakarta uppercase tracking-[0.22em] text-slate-400 mb-1.5 sm:mb-2">
                 A STRONGER TOMORROW
               </span>
-              <h3 className="font-instrument text-[24px] xs:text-[28px] sm:text-[34px] lg:text-[38px] font-normal leading-[1.1] sm:leading-[1.08] text-white">
+              <h3 className="font-plus-jakarta text-[22px] xs:text-[26px] sm:text-[30px] lg:text-[34px] font-extrabold leading-[1.1] sm:leading-[1.08] text-white">
                 Recognized<br className="hidden xs:inline" />{' '}
-                <span className="italic text-blue-500 font-normal">beyond</span> the product.
+                <span className="font-instrument italic font-normal text-blue-400">beyond</span> the product.
               </h3>
             </div>
 

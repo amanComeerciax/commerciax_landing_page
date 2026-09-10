@@ -22,16 +22,16 @@ export default function RevenueChart() {
           opacity: { delay: 0.4, duration: 0.4 },
           scale: { delay: 1, duration: 2.8, repeat: Infinity, ease: 'easeInOut' },
         }}
-        className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-emerald-50 border border-emerald-100/80 shadow-xs"
+        className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-blue-50 border border-blue-100/80 shadow-xs"
       >
         <span className="relative flex h-1.5 w-1.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-500" />
         </span>
-        <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-emerald-600 flex items-center gap-0.5">
+        <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-blue-600 flex items-center gap-0.5">
           +62%
         </span>
-        <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-emerald-700/70 hidden xs:inline">Velocity</span>
+        <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-blue-700/70 hidden xs:inline">Velocity</span>
       </motion.div>
 
       {/* Ascending Blue Gradient Bars with continuous rhythmic wave */}

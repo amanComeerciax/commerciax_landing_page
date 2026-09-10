@@ -16,71 +16,22 @@ import { gsap, useGSAP } from '@/lib/gsap';
 
 // Reusable 3D Photorealistic Sphere Marble with Specular Lighting
 function MarbleSphere({
-  color = 'blue',
   size = 40,
 }: {
-  color?: 'blue' | 'emerald' | 'gold' | 'cyan' | 'violet';
+  color?: string;
   size?: number;
 }) {
-  const colorMap = {
-    blue: {
-      id: 'marbleBlue',
-      stops: [
-        { offset: '0%', color: '#FFFFFF', opacity: 0.95 },
-        { offset: '22%', color: '#93C5FD', opacity: 1 },
-        { offset: '60%', color: '#2563EB', opacity: 1 },
-        { offset: '100%', color: '#0F2557', opacity: 1 },
-      ],
-      glow: 'rgba(37, 99, 235, 0.35)',
-      ring: 'rgba(147, 197, 253, 0.45)',
-    },
-    emerald: {
-      id: 'marbleEmerald',
-      stops: [
-        { offset: '0%', color: '#FFFFFF', opacity: 0.95 },
-        { offset: '24%', color: '#A7F3D0', opacity: 1 },
-        { offset: '62%', color: '#059669', opacity: 1 },
-        { offset: '100%', color: '#064E3B', opacity: 1 },
-      ],
-      glow: 'rgba(5, 150, 105, 0.32)',
-      ring: 'rgba(167, 243, 208, 0.45)',
-    },
-    gold: {
-      id: 'marbleGold',
-      stops: [
-        { offset: '0%', color: '#FFFFFF', opacity: 0.95 },
-        { offset: '26%', color: '#FDE68A', opacity: 1 },
-        { offset: '65%', color: '#D97706', opacity: 1 },
-        { offset: '100%', color: '#78350F', opacity: 1 },
-      ],
-      glow: 'rgba(217, 119, 6, 0.32)',
-      ring: 'rgba(253, 230, 138, 0.45)',
-    },
-    cyan: {
-      id: 'marbleCyan',
-      stops: [
-        { offset: '0%', color: '#FFFFFF', opacity: 0.95 },
-        { offset: '25%', color: '#BAE6FD', opacity: 1 },
-        { offset: '60%', color: '#0284C7', opacity: 1 },
-        { offset: '100%', color: '#075985', opacity: 1 },
-      ],
-      glow: 'rgba(2, 132, 199, 0.35)',
-      ring: 'rgba(186, 230, 253, 0.45)',
-    },
-    violet: {
-      id: 'marbleViolet',
-      stops: [
-        { offset: '0%', color: '#FFFFFF', opacity: 0.95 },
-        { offset: '25%', color: '#DDD6FE', opacity: 1 },
-        { offset: '62%', color: '#7C3AED', opacity: 1 },
-        { offset: '100%', color: '#4C1D95', opacity: 1 },
-      ],
-      glow: 'rgba(124, 58, 237, 0.35)',
-      ring: 'rgba(221, 214, 254, 0.45)',
-    },
+  const scheme = {
+    id: 'marbleBlue',
+    stops: [
+      { offset: '0%', color: '#FFFFFF', opacity: 0.95 },
+      { offset: '22%', color: '#93C5FD', opacity: 1 },
+      { offset: '60%', color: '#2563EB', opacity: 1 },
+      { offset: '100%', color: '#0F2557', opacity: 1 },
+    ],
+    glow: 'rgba(37, 99, 235, 0.35)',
+    ring: 'rgba(147, 197, 253, 0.45)',
   };
-
-  const scheme = colorMap[color];
 
   return (
     <div
@@ -176,8 +127,8 @@ export default function CapabilitiesBento() {
       <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
 
       {/* Background Soft Lighting Gradients */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] sm:w-[900px] h-[400px] bg-gradient-to-b from-blue-100/35 via-indigo-50/15 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
-      <div className="absolute bottom-10 -right-20 w-[400px] h-[400px] bg-amber-50/40 rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] sm:w-[900px] h-[400px] bg-gradient-to-b from-blue-100/35 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute bottom-10 -right-20 w-[400px] h-[400px] bg-blue-100/20 rounded-full blur-3xl pointer-events-none z-0" />
 
       <div className="site-container relative px-4 sm:px-8 lg:px-12 z-10">
         {/* ========================================================== */}
@@ -199,13 +150,13 @@ export default function CapabilitiesBento() {
           </motion.div>
 
           {/* Heading */}
-          <h2 className="font-instrument text-[32px] xs:text-[40px] sm:text-[52px] lg:text-[60px] font-normal leading-[1.1] sm:leading-[1.06] tracking-tight text-navy">
+          <h2 className="font-plus-jakarta font-extrabold text-[32px] xs:text-[40px] sm:text-[52px] lg:text-[62px] leading-[1.08] tracking-[-0.03em] text-[#0A1628]">
             <FoldText text="Architected for" splitBy="word" trigger="scroll" duration={0.65} />{' '}
-            <span className="italic text-cobalt font-normal">
+            <span className="font-instrument italic font-normal text-blue-600">
               <FoldText text="clarity." splitBy="word" trigger="scroll" duration={0.65} />
             </span>{' '}
             <FoldText text="Engineered for" splitBy="word" trigger="scroll" duration={0.65} />{' '}
-            <span className="italic text-cobalt font-normal">
+            <span className="font-instrument italic font-normal text-blue-600">
               <FoldText text="speed." splitBy="word" trigger="scroll" duration={0.65} />
             </span>
           </h2>
@@ -248,105 +199,49 @@ export default function CapabilitiesBento() {
                 </p>
               </div>
 
-              {/* Visual Graphic: 3D Animated Atomic / Satellite Orbit */}
+              {/* Visual Graphic: Interactive Natural Language Live Query Node */}
               <div className="relative w-full h-[180px] sm:h-[195px] mt-6 flex items-center justify-center">
-                {/* 3 Fixed Orbital Rings with Continuous Flowing Dotted Dashes */}
-                <svg className="w-full h-full overflow-visible" viewBox="0 0 260 180" fill="none">
-                  {/* ORBIT 1: FIXED HORIZONTAL PLANE (0°) */}
-                  <g>
-                    <motion.path
-                      d="M 25,90 a 105,42 0 1,0 210,0 a 105,42 0 1,0 -210,0"
-                      fill="none"
-                      stroke="#93C5FD"
-                      strokeWidth="1.3"
-                      strokeDasharray="4 6"
-                      className="opacity-75"
-                      animate={{ strokeDashoffset: [0, -100] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-                    />
-                    {/* Rotating Black Dots on Orbit 1 */}
-                    <circle r="4.2" fill="#0F172A">
-                      <animateMotion
-                        path="M 25,90 a 105,42 0 1,0 210,0 a 105,42 0 1,0 -210,0"
-                        dur="8s"
-                        repeatCount="indefinite"
-                        begin="0s"
-                      />
-                    </circle>
-                    <circle r="4.2" fill="#0F172A">
-                      <animateMotion
-                        path="M 25,90 a 105,42 0 1,0 210,0 a 105,42 0 1,0 -210,0"
-                        dur="8s"
-                        repeatCount="indefinite"
-                        begin="-4s"
-                      />
-                    </circle>
-                  </g>
+                {/* Concentric Signal Rings */}
+                <div className="absolute w-[160px] h-[160px] rounded-full border border-blue-200/50 flex items-center justify-center pointer-events-none">
+                  <div className="w-[115px] h-[115px] rounded-full border border-blue-200/70 flex items-center justify-center">
+                    <div className="w-[70px] h-[70px] rounded-full border border-blue-300/80" />
+                  </div>
+                </div>
 
-                  {/* ORBIT 2: FIXED TILTED PLANE (35°) */}
-                  <g transform="rotate(35 130 90)">
-                    <motion.path
-                      d="M 25,90 a 105,42 0 1,0 210,0 a 105,42 0 1,0 -210,0"
-                      fill="none"
-                      stroke="#60A5FA"
-                      strokeWidth="1.3"
-                      strokeDasharray="4 6"
-                      className="opacity-70"
-                      animate={{ strokeDashoffset: [0, -100] }}
-                      transition={{ duration: 4.5, repeat: Infinity, ease: 'linear' }}
-                    />
-                    {/* Rotating Black Dots on Orbit 2 */}
-                    <circle r="4.2" fill="#0F172A">
-                      <animateMotion
-                        path="M 25,90 a 105,42 0 1,0 210,0 a 105,42 0 1,0 -210,0"
-                        dur="9s"
-                        repeatCount="indefinite"
-                        begin="-2.25s"
-                      />
-                    </circle>
-                    <circle r="4.2" fill="#0F172A">
-                      <animateMotion
-                        path="M 25,90 a 105,42 0 1,0 210,0 a 105,42 0 1,0 -210,0"
-                        dur="9s"
-                        repeatCount="indefinite"
-                        begin="-6.75s"
-                      />
-                    </circle>
-                  </g>
+                {/* 4 Orbiting Query Pill Badges */}
+                <motion.div
+                  className="absolute -top-1 left-2 px-2.5 py-1 bg-white/95 rounded-full border border-blue-100/90 shadow-xs text-[10.5px] font-medium text-slate-700 font-dm-sans"
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  &ldquo;What is Q3 churn?&rdquo;
+                </motion.div>
 
-                  {/* ORBIT 3: FIXED COUNTER-TILTED PLANE (-35°) */}
-                  <g transform="rotate(-35 130 90)">
-                    <motion.path
-                      d="M 25,90 a 105,42 0 1,0 210,0 a 105,42 0 1,0 -210,0"
-                      fill="none"
-                      stroke="#93C5FD"
-                      strokeWidth="1.3"
-                      strokeDasharray="4 6"
-                      className="opacity-70"
-                      animate={{ strokeDashoffset: [0, 100] }}
-                      transition={{ duration: 4.2, repeat: Infinity, ease: 'linear' }}
-                    />
-                    {/* Rotating Black Dots on Orbit 3 */}
-                    <circle r="4.2" fill="#0F172A">
-                      <animateMotion
-                        path="M 235,90 a 105,42 0 1,0 -210,0 a 105,42 0 1,0 210,0"
-                        dur="8.5s"
-                        repeatCount="indefinite"
-                        begin="-1.5s"
-                      />
-                    </circle>
-                    <circle r="4.2" fill="#0F172A">
-                      <animateMotion
-                        path="M 235,90 a 105,42 0 1,0 -210,0 a 105,42 0 1,0 210,0"
-                        dur="8.5s"
-                        repeatCount="indefinite"
-                        begin="-5.75s"
-                      />
-                    </circle>
-                  </g>
-                </svg>
+                <motion.div
+                  className="absolute top-10 right-1 px-2.5 py-1 bg-white/95 rounded-full border border-blue-100/90 shadow-xs text-[10.5px] font-medium text-slate-700 font-dm-sans"
+                  animate={{ y: [0, 3, 0] }}
+                  transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+                >
+                  &ldquo;Sync inventory SKU&rdquo;
+                </motion.div>
 
-                {/* Central Glossy Blue Sphere with Pulse Waves */}
+                <motion.div
+                  className="absolute bottom-6 left-1 px-2.5 py-1 bg-white/95 rounded-full border border-blue-100/90 shadow-xs text-[10.5px] font-medium text-slate-700 font-dm-sans"
+                  animate={{ y: [0, -3, 0] }}
+                  transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut', delay: 0.8 }}
+                >
+                  &ldquo;Run audit trace&rdquo;
+                </motion.div>
+
+                <motion.div
+                  className="absolute -bottom-2 right-4 px-2.5 py-1 bg-white/95 rounded-full border border-blue-100/90 shadow-xs text-[10.5px] font-medium text-slate-700 font-dm-sans"
+                  animate={{ y: [0, 3, 0] }}
+                  transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
+                >
+                  &ldquo;Summarize tickets&rdquo;
+                </motion.div>
+
+                {/* Glowing Core Radar Beacon */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                   <motion.div
                     className="absolute w-16 h-16 rounded-full bg-blue-400/20"
@@ -366,7 +261,7 @@ export default function CapabilitiesBento() {
                   transition={{ duration: 0.4, delay: 0.5 }}
                   className="absolute -bottom-1 px-3 py-1 bg-white/95 backdrop-blur-md rounded-full border border-slate-200 shadow-xs flex items-center gap-1.5"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-cobalt animate-pulse" />
                   <span className="text-[10px] font-semibold text-slate-600 font-dm-sans">
                     Natural Language · Live Answers
                   </span>
@@ -379,12 +274,12 @@ export default function CapabilitiesBento() {
               className="group relative bg-white/95 hover:bg-white rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-slate-200/90 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(10,22,40,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(10,22,40,0.09)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               <div className="relative z-10">
-                {/* Header: Title + 3D Emerald Sphere */}
+                {/* Header: Title + 3D Blue Sphere */}
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <h3 className="font-instrument text-[26px] sm:text-[29px] font-normal leading-tight text-navy">
-                    One <span className="italic text-emerald-700">Trusted</span> View
+                    One <span className="italic text-cobalt">Trusted</span> View
                   </h3>
-                  <MarbleSphere color="emerald" size={38} />
+                  <MarbleSphere color="blue" size={38} />
                 </div>
 
                 {/* Body Text */}
@@ -398,22 +293,18 @@ export default function CapabilitiesBento() {
               <div className="relative w-full h-[180px] sm:h-[195px] mt-6 flex items-center justify-center px-1">
                 <svg className="w-full h-full" viewBox="0 0 280 160" fill="none">
                   {/* Curved Connection Lines from 4 Sources converging to Central Gateway */}
-                  {/* CRM Path (top) */}
                   <path d="M 68 30 C 115 30, 125 80, 148 80" stroke="#94A3B8" strokeWidth="1.5" />
-                  {/* ERP Path (mid-top) */}
                   <path d="M 68 62 C 105 62, 125 80, 148 80" stroke="#94A3B8" strokeWidth="1.5" />
-                  {/* BI Path (mid-bottom) */}
                   <path d="M 68 98 C 105 98, 125 80, 148 80" stroke="#94A3B8" strokeWidth="1.5" />
-                  {/* DW Path (bottom) */}
                   <path d="M 68 130 C 115 130, 125 80, 148 80" stroke="#94A3B8" strokeWidth="1.5" />
 
                   {/* Outgoing Path from Gateway to API */}
                   <path d="M 166 80 L 210 80" stroke="#0F172A" strokeWidth="1.8" />
 
-                  {/* Flowing Signal Dots */}
+                  {/* Flowing Signal Dots in Blue */}
                   <motion.circle
                     r="2.5"
-                    fill="#059669"
+                    fill="#2563EB"
                     animate={{
                       cx: [68, 110, 148],
                       cy: [30, 50, 80],
@@ -423,7 +314,7 @@ export default function CapabilitiesBento() {
                   />
                   <motion.circle
                     r="2.5"
-                    fill="#0284C7"
+                    fill="#3B82F6"
                     animate={{
                       cx: [68, 105, 148],
                       cy: [62, 70, 80],
@@ -433,7 +324,7 @@ export default function CapabilitiesBento() {
                   />
                   <motion.circle
                     r="2.5"
-                    fill="#7C3AED"
+                    fill="#1D4ED8"
                     animate={{
                       cx: [68, 105, 148],
                       cy: [98, 90, 80],
@@ -443,7 +334,7 @@ export default function CapabilitiesBento() {
                   />
                   <motion.circle
                     r="2.5"
-                    fill="#D97706"
+                    fill="#60A5FA"
                     animate={{
                       cx: [68, 110, 148],
                       cy: [130, 110, 80],
@@ -468,7 +359,7 @@ export default function CapabilitiesBento() {
                 {/* Central Verified Gateway Junction */}
                 <div className="absolute left-[51%] -translate-x-1/2 flex items-center justify-center">
                   <div className="w-8 h-8 rounded-full bg-[#0A1628] text-white flex items-center justify-center shadow-md shadow-navy/20 border border-slate-700/80">
-                    <Check className="w-4 h-4 stroke-[2.8] text-emerald-400" />
+                    <Check className="w-4 h-4 stroke-[2.8] text-blue-400" />
                   </div>
                 </div>
 
@@ -477,7 +368,7 @@ export default function CapabilitiesBento() {
                   <span className="text-[11px] font-bold text-white tracking-wide font-dm-sans">
                     API
                   </span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
                 </div>
               </div>
             </div>
@@ -487,12 +378,12 @@ export default function CapabilitiesBento() {
               className="group relative bg-white/95 hover:bg-white rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-slate-200/90 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(10,22,40,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(10,22,40,0.09)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               <div className="relative z-10">
-                {/* Header: Title + 3D Gold Sphere */}
+                {/* Header: Title + 3D Blue Sphere */}
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <h3 className="font-instrument text-[26px] sm:text-[29px] font-normal leading-tight text-navy">
-                    Safe AI <span className="italic text-amber-700">Outputs</span>
+                    Safe AI <span className="italic text-cobalt">Outputs</span>
                   </h3>
-                  <MarbleSphere color="gold" size={38} />
+                  <MarbleSphere color="blue" size={38} />
                 </div>
 
                 {/* Body Text */}
@@ -514,25 +405,25 @@ export default function CapabilitiesBento() {
                   {/* Pulsing signal on lines */}
                   <motion.circle
                     r="2.2"
-                    fill="#D97706"
+                    fill="#2563EB"
                     animate={{ cx: [130, 60], cy: [85, 40], opacity: [0, 1, 0] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
                   />
                   <motion.circle
                     r="2.2"
-                    fill="#D97706"
+                    fill="#2563EB"
                     animate={{ cx: [130, 200], cy: [85, 40], opacity: [0, 1, 0] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
                   />
                   <motion.circle
                     r="2.2"
-                    fill="#D97706"
+                    fill="#2563EB"
                     animate={{ cx: [130, 60], cy: [85, 130], opacity: [0, 1, 0] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
                   />
                   <motion.circle
                     r="2.2"
-                    fill="#D97706"
+                    fill="#2563EB"
                     animate={{ cx: [130, 200], cy: [85, 130], opacity: [0, 1, 0] }}
                     transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
                   />
@@ -540,7 +431,7 @@ export default function CapabilitiesBento() {
 
                 {/* Central Dark Pill Badge: deterministic */}
                 <div className="absolute z-10 px-3 py-1 rounded-full bg-[#0A1628] text-white border border-slate-700/80 shadow-md flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
                   <span className="text-[11px] font-bold font-dm-sans tracking-wide">
                     deterministic
                   </span>
@@ -548,7 +439,7 @@ export default function CapabilitiesBento() {
 
                 {/* 4 Connected Verification Nodes */}
                 <div className="absolute top-4 left-4 px-2.5 py-0.5 rounded-full bg-white/95 border border-slate-200/90 shadow-xs flex items-center gap-1">
-                  <CheckCircle2 className="w-2.5 h-2.5 text-emerald-600" />
+                  <CheckCircle2 className="w-2.5 h-2.5 text-blue-600" />
                   <span className="text-[10px] font-semibold text-slate-700 font-dm-sans">
                     Trusted
                   </span>
@@ -568,7 +459,7 @@ export default function CapabilitiesBento() {
                 </div>
 
                 <div className="absolute bottom-4 right-4 px-2.5 py-0.5 rounded-full bg-white/95 border border-slate-200/90 shadow-xs flex items-center gap-1">
-                  <Lock className="w-2.5 h-2.5 text-amber-600" />
+                  <Lock className="w-2.5 h-2.5 text-blue-600" />
                   <span className="text-[10px] font-semibold text-slate-700 font-dm-sans">
                     Verifiable
                   </span>
@@ -584,12 +475,12 @@ export default function CapabilitiesBento() {
               className="lg:col-span-7 group relative bg-white/95 hover:bg-white rounded-[24px] sm:rounded-[30px] p-6 sm:p-8 border border-slate-200/90 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(10,22,40,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(10,22,40,0.09)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               <div className="relative z-10">
-                {/* Header: Title + 3D Cyan Sphere */}
+                {/* Header: Title + 3D Blue Sphere */}
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <h3 className="font-instrument text-[26px] sm:text-[32px] font-normal leading-tight text-navy">
-                    ROI From <span className="italic text-cyan-600">Tools</span>
+                    ROI From <span className="italic text-cobalt">Tools</span>
                   </h3>
-                  <MarbleSphere color="cyan" size={42} />
+                  <MarbleSphere color="blue" size={42} />
                 </div>
 
                 {/* Body Text */}
@@ -612,9 +503,9 @@ export default function CapabilitiesBento() {
                       </div>
                     </div>
                   </div>
-                  <div className="shrink-0 flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 rounded-full border border-emerald-100">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[10px] font-bold text-emerald-700 uppercase font-dm-sans">
+                  <div className="shrink-0 flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 rounded-full border border-blue-100">
+                    <span className="w-2 h-2 rounded-full bg-cobalt animate-pulse" />
+                    <span className="text-[10px] font-bold text-cobalt uppercase font-dm-sans">
                       Active
                     </span>
                   </div>
@@ -709,7 +600,7 @@ export default function CapabilitiesBento() {
                       key={`serv-${activeScenario}`}
                       initial={{ scale: 0.95 }}
                       animate={{ scale: 1 }}
-                      className="text-[14px] xs:text-[16px] sm:text-[18px] font-extrabold text-emerald-600 font-plus-jakarta mt-0.5"
+                      className="text-[14px] xs:text-[16px] sm:text-[18px] font-extrabold text-cobalt font-plus-jakarta mt-0.5"
                     >
                       {activeScenario === 'opt' ? '99.8%' : '98.4%'}
                     </motion.div>
@@ -738,7 +629,7 @@ export default function CapabilitiesBento() {
                   </div>
                   <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden relative">
                     <motion.div
-                      className="h-full rounded-full bg-gradient-to-r from-blue-600 via-sky-400 to-emerald-400"
+                      className="h-full rounded-full bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400"
                       animate={{
                         width: activeScenario === 'opt' ? ['70%', '94%', '88%'] : ['55%', '65%', '60%'],
                       }}

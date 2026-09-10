@@ -45,7 +45,7 @@ export default function RevenueCard() {
       <div className="flex items-end justify-between mt-0.5 sm:mt-1">
         <div>
           <span className="text-[15px] xs:text-[18px] sm:text-[24px] font-extrabold font-plus-jakarta text-navy tracking-tight">{formatted}+</span>
-          <div className="flex items-center gap-1 mt-0.5 sm:mt-1 text-[8px] xs:text-[9px] sm:text-[10.5px] font-medium font-dm-sans text-emerald-600">
+          <div className="flex items-center gap-1 mt-0.5 sm:mt-1 text-[8px] xs:text-[9px] sm:text-[10.5px] font-medium font-dm-sans text-blue-600">
             <motion.span
               animate={{ y: [0, -2, 0] }}
               transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}

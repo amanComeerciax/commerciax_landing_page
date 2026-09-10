@@ -52,9 +52,9 @@ export default function AnnouncementTicker() {
               className="flex items-center gap-2.5 text-[12.5px] sm:text-[13.5px] font-dm-sans tracking-tight whitespace-nowrap text-slate-300"
             >
               {item.icon === '⚡' ? (
-                <span className="text-amber-400 font-bold text-sm animate-pulse">{item.icon}</span>
+                <span className="text-blue-400 font-bold text-sm animate-pulse">{item.icon}</span>
               ) : (
-                <span className="text-cyan-400 text-[11px] opacity-80">{item.icon}</span>
+                <span className="text-blue-400 text-[11px] opacity-90">{item.icon}</span>
               )}
 
               {item.badge && (
@@ -81,9 +81,9 @@ export default function AnnouncementTicker() {
               className="flex items-center gap-2.5 text-[12.5px] sm:text-[13.5px] font-dm-sans tracking-tight whitespace-nowrap text-slate-300"
             >
               {item.icon === '⚡' ? (
-                <span className="text-amber-400 font-bold text-sm animate-pulse">{item.icon}</span>
+                <span className="text-blue-400 font-bold text-sm animate-pulse">{item.icon}</span>
               ) : (
-                <span className="text-cyan-400 text-[11px] opacity-80">{item.icon}</span>
+                <span className="text-blue-400 text-[11px] opacity-90">{item.icon}</span>
               )}
 
               {item.badge && (

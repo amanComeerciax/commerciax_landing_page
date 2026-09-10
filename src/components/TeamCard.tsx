@@ -49,8 +49,8 @@ export default function TeamCard() {
       <div className="flex items-center justify-between">
         <span className="text-[8.5px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">Engineers</span>
         <span className="relative flex h-1.5 w-1.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
         </span>
       </div>
       <div className="mt-0.5 sm:mt-1">

@@ -54,9 +54,9 @@ export default function GlobeVisualization() {
         </motion.div>
       </div>
 
-      {/* Studio Depth: Soft Blurred Plant Leaf on Far Right Edge */}
+      {/* Studio Depth: Soft Blurred Architectural Accent on Far Right Edge */}
       <div className="absolute -right-8 bottom-10 w-28 h-44 opacity-25 blur-sm pointer-events-none hidden xl:block select-none">
-        <svg viewBox="0 0 100 160" fill="none" className="w-full h-full text-emerald-800">
+        <svg viewBox="0 0 100 160" fill="none" className="w-full h-full text-slate-600">
           <path
             d="M 90,160 Q 50,110 30,70 Q 15,35 60,10 Q 95,50 85,110 Z"
             fill="currentColor"

@@ -27,17 +27,12 @@ export default function HeroContent() {
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="font-instrument text-[32px] xs:text-[42px] sm:text-[60px] lg:text-[70px] xl:text-[80px] 2xl:text-[88px] leading-[1.05] sm:leading-[1.04] tracking-[-0.02em] text-navy"
-        style={{ fontFamily: "var(--font-instrument-next), 'Instrument Serif', Georgia, serif" }}
+        className="font-plus-jakarta font-extrabold text-[34px] xs:text-[44px] sm:text-[62px] lg:text-[72px] xl:text-[82px] 2xl:text-[90px] leading-[1.05] sm:leading-[1.04] tracking-[-0.03em] text-[#0A1628]"
       >
-        <span 
-          className="block font-normal text-navy"
-        >
+        <span className="block font-extrabold text-[#0A1628]">
           We ship
         </span>
-        <span 
-          className="block italic font-normal text-[34px] xs:text-[44px] sm:text-[62px] lg:text-[72px] xl:text-[84px] 2xl:text-[92px] tracking-[-0.015em] overflow-hidden pr-2 sm:pr-4"
-        >
+        <span className="block font-instrument italic font-normal text-[36px] xs:text-[46px] sm:text-[64px] lg:text-[74px] xl:text-[86px] 2xl:text-[94px] tracking-[-0.015em] overflow-hidden pr-2 sm:pr-4">
           <AnimatePresence mode="wait">
             <motion.span 
               key={currentIndex}
@@ -45,24 +40,15 @@ export default function HeroContent() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -26 }}
               transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-              className="animated-dual-gradient inline-block pr-2"
-              style={{
-                backgroundImage: 'linear-gradient(100deg, #2563EB 0%, #06B6D4 48%, #2563EB 96%, #06B6D4 100%)',
-                backgroundSize: '250% 100%',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                animation: 'dual-gradient-flow 4.5s ease-in-out infinite',
-              }}
+              className="text-blue-600 inline-block pr-2"
             >
               {ROTATING_TEXTS[currentIndex]}
             </motion.span>
           </AnimatePresence>
         </span>
-        <span 
-          className="block text-navy whitespace-nowrap text-[32px] xs:text-[42px] sm:text-[60px] lg:text-[70px] xl:text-[80px] 2xl:text-[88px] tracking-[-0.02em]"
-        >
-          <span className="font-normal not-italic">at </span>
-          <span className="italic font-normal">high speed.</span>
+        <span className="block text-[#0A1628] whitespace-nowrap text-[34px] xs:text-[44px] sm:text-[62px] lg:text-[72px] xl:text-[82px] 2xl:text-[90px] tracking-[-0.03em]">
+          <span className="font-extrabold">at </span>
+          <span className="font-instrument italic font-normal text-blue-600">high speed.</span>
         </span>
       </motion.h1>
 

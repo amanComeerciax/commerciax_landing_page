@@ -63,7 +63,7 @@ export default function OurProofSection() {
       <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
 
       {/* Background Soft Glows */}
-      <div className="absolute top-12 right-0 w-[550px] h-[550px] bg-gradient-to-b from-blue-100/35 via-indigo-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-12 right-0 w-[550px] h-[550px] bg-gradient-to-b from-blue-100/35 via-blue-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
       <div className="absolute bottom-10 -left-20 w-[500px] h-[500px] bg-blue-100/25 rounded-full blur-3xl pointer-events-none z-0" />
 
       <div className="site-container relative px-4 sm:px-8 lg:px-12 max-w-[1340px] mx-auto z-10">
@@ -80,9 +80,9 @@ export default function OurProofSection() {
           </div>
 
           {/* Main Editorial Headline */}
-          <h2 className="font-instrument text-[42px] sm:text-[54px] lg:text-[64px] font-normal text-[#0A1628] leading-[1.06] tracking-[-0.03em] mb-4">
+          <h2 className="font-plus-jakarta font-extrabold text-[36px] sm:text-[48px] lg:text-[58px] text-[#0A1628] leading-[1.08] tracking-[-0.03em] mb-4">
             <FoldText text="We Don’t Just Claim." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />{' '}
-            <span className="italic text-blue-600">
+            <span className="font-instrument italic font-normal text-blue-600">
               <FoldText text="We Prove." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
             </span>
           </h2>

@@ -44,8 +44,8 @@ export default function UptimeCard() {
     <div className="flex flex-col items-center justify-between h-full py-0.5">
       <div className="flex items-center gap-1 sm:gap-1.5 self-start">
         <span className="relative flex h-1.5 w-1.5">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
         </span>
         <span className="text-[9px] xs:text-[10px] sm:text-[11px] font-medium font-dm-sans text-slate-400 tracking-tight">Uptime</span>
       </div>
@@ -86,8 +86,8 @@ export default function UptimeCard() {
       </div>
 
       <div className="flex flex-col items-center text-center">
-        <span className="text-[8px] xs:text-[9px] sm:text-[10px] font-medium font-dm-sans text-emerald-600 flex items-center gap-1">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
+        <span className="text-[8px] xs:text-[9px] sm:text-[10px] font-medium font-dm-sans text-blue-600 flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block animate-pulse" />
           SLA 99.9%
         </span>
         <span className="text-[7px] xs:text-[8px] sm:text-[8.5px] text-slate-400 font-dm-sans font-normal whitespace-nowrap hidden xs:inline">

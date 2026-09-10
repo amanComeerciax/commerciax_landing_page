@@ -78,7 +78,7 @@ const SERVICES_DATA: ServiceStory[] = [
       { num: '04', title: 'Execute', desc: 'Sandboxed autonomous dispatch', metric: 'Zero data leak', icon: Zap },
     ],
     icon: Cpu,
-    tintGradient: 'linear-gradient(145deg, #E0E7FF 0%, #C7D2FE 100%)',
+    tintGradient: 'linear-gradient(145deg, #DBEAFE 0%, #BFDBFE 100%)',
     accentBg: 'bg-blue-50',
     accentBorder: 'border-blue-200',
     accentText: 'text-blue-600',
@@ -113,10 +113,10 @@ const SERVICES_DATA: ServiceStory[] = [
       { num: '04', title: 'Meeting', desc: 'Qualified meetings delivered', metric: '3.4× conversion', icon: Calendar },
     ],
     icon: TrendingUp,
-    tintGradient: 'linear-gradient(145deg, #EDE9FE 0%, #DDD6FE 100%)',
-    accentBg: 'bg-indigo-50',
-    accentBorder: 'border-indigo-200',
-    accentText: 'text-indigo-600',
+    tintGradient: 'linear-gradient(145deg, #EFF6FF 0%, #DBEAFE 100%)',
+    accentBg: 'bg-blue-50',
+    accentBorder: 'border-blue-200',
+    accentText: 'text-blue-600',
   },
 
   /* 03 // SCALE: EMPLOYEE PODS */
@@ -148,10 +148,10 @@ const SERVICES_DATA: ServiceStory[] = [
       { num: '04', title: 'Scale', desc: 'Month-to-month, zero lock-in', metric: 'Dedicated lead', icon: Rocket },
     ],
     icon: Users,
-    tintGradient: 'linear-gradient(145deg, #CFFAFE 0%, #A5F3FC 100%)',
-    accentBg: 'bg-cyan-50',
-    accentBorder: 'border-cyan-200',
-    accentText: 'text-cyan-700',
+    tintGradient: 'linear-gradient(145deg, #DBEAFE 0%, #93C5FD 100%)',
+    accentBg: 'bg-blue-50',
+    accentBorder: 'border-blue-200',
+    accentText: 'text-blue-600',
   },
 
   /* 04 // LAUNCH: SAAS PRODUCT STUDIO */
@@ -183,10 +183,10 @@ const SERVICES_DATA: ServiceStory[] = [
       { num: '04', title: 'Launch', desc: 'GTM playbook & first users', metric: 'Weeks 11–14', icon: Rocket },
     ],
     icon: Rocket,
-    tintGradient: 'linear-gradient(145deg, #FEF3C7 0%, #FDE68A 100%)',
-    accentBg: 'bg-amber-50',
-    accentBorder: 'border-amber-200',
-    accentText: 'text-amber-700',
+    tintGradient: 'linear-gradient(145deg, #EFF6FF 0%, #BFDBFE 100%)',
+    accentBg: 'bg-blue-50',
+    accentBorder: 'border-blue-200',
+    accentText: 'text-blue-600',
   },
 ];
 
@@ -225,19 +225,19 @@ export default function ServicesSection() {
 
   // Autoplay countdown timer
   useEffect(() => {
-    if (isHovered) return;
-    const intervalTime = 50;
-    const step = (intervalTime / AUTOPLAY_DURATION) * 100;
+    const stepMs = 50;
+    const increment = (stepMs / AUTOPLAY_DURATION) * 100;
 
     const timer = setInterval(() => {
+      if (isHovered) return;
       setProgress((prev) => {
         if (prev >= 100) {
           handleNext();
           return 0;
         }
-        return prev + step;
+        return prev + increment;
       });
-    }, intervalTime);
+    }, stepMs);
 
     return () => clearInterval(timer);
   }, [isHovered, handleNext]);
@@ -264,8 +264,8 @@ export default function ServicesSection() {
       <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/85 to-transparent pointer-events-none z-[1]" />
 
       {/* Ambient Radial Lighting Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-blue-100/30 via-indigo-50/15 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
-      <div className="absolute bottom-10 right-0 w-[400px] h-[400px] bg-purple-100/20 rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-blue-100/30 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute bottom-10 right-0 w-[400px] h-[400px] bg-blue-100/20 rounded-full blur-3xl pointer-events-none z-0" />
 
       <div className="site-container relative px-3 xs:px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto z-10">
         {/* SECTION HEADER */}
@@ -276,13 +276,13 @@ export default function ServicesSection() {
               CAPABILITIES &amp; ENGAGEMENTS
             </span>
           </div>
-          <h2 className="font-instrument text-[34px] xs:text-[42px] sm:text-[54px] lg:text-[62px] font-normal text-navy leading-[1.1] sm:leading-[1.08] tracking-tight mb-4">
+          <h2 className="font-plus-jakarta font-extrabold text-[32px] xs:text-[40px] sm:text-[52px] lg:text-[60px] text-[#0A1628] leading-[1.08] tracking-[-0.03em] mb-4">
             <FoldText text="Architected for" splitBy="word" trigger="scroll" duration={0.65} />{' '}
-            <span className="italic text-blue-600 font-normal">
+            <span className="font-instrument italic font-normal text-blue-600">
               <FoldText text="speed." splitBy="word" trigger="scroll" duration={0.65} />
             </span>{' '}
             <FoldText text="Engineered for" splitBy="word" trigger="scroll" duration={0.65} />{' '}
-            <span className="italic text-blue-600 font-normal">
+            <span className="font-instrument italic font-normal text-blue-600">
               <FoldText text="scale." splitBy="word" trigger="scroll" duration={0.65} />
             </span>
           </h2>
@@ -491,7 +491,7 @@ export default function ServicesSection() {
                           initial={{ scaleY: 0 }}
                           animate={{ scaleY: 1 }}
                           transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                          className="absolute left-[17px] top-5 bottom-5 w-[1.5px] bg-gradient-to-b from-blue-500 via-blue-400 to-indigo-500 z-0 origin-top"
+                          className="absolute left-[17px] top-5 bottom-5 w-[1.5px] bg-gradient-to-b from-blue-500 via-blue-400 to-blue-600 z-0 origin-top"
                         />
 
                         <div className="flex flex-col gap-4">

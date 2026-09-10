@@ -49,17 +49,17 @@ export default function TestimonialsSection() {
       <div className="site-container mx-auto max-w-6xl">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200/60 text-[12px] font-semibold text-amber-800 uppercase tracking-wider mb-4">
-            <div className="flex gap-0.5 text-amber-500">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 border border-blue-200/60 text-[12px] font-semibold text-blue-700 uppercase tracking-wider mb-4">
+            <div className="flex gap-0.5 text-blue-600">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                <Star key={i} className="w-3.5 h-3.5 fill-blue-600 text-blue-600" />
               ))}
             </div>
             Trusted Worldwide
           </div>
-          <h2 className="font-instrument text-4xl sm:text-5xl font-normal text-navy tracking-tight leading-tight">
+          <h2 className="font-plus-jakarta text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#0A1628] tracking-tight leading-tight">
             Loved by leaders at <br />
-            <span className="italic font-instrument bg-gradient-to-r from-blue-700 via-indigo-600 to-sky-600 bg-clip-text text-transparent">
+            <span className="font-instrument italic font-normal text-blue-600">
               global commerce scale
             </span>
           </h2>

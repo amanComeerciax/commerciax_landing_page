@@ -83,7 +83,7 @@ export default function TurnIdeaSection() {
           {/* Ambient Glow in Background */}
           <div
             ref={glowRef}
-            className="absolute -right-24 -top-24 w-[450px] h-[450px] bg-gradient-to-br from-blue-400/10 via-cyan-300/10 to-transparent rounded-full blur-3xl pointer-events-none z-0"
+            className="absolute -right-24 -top-24 w-[450px] h-[450px] bg-gradient-to-br from-blue-400/10 via-blue-300/10 to-transparent rounded-full blur-3xl pointer-events-none z-0"
           />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
@@ -99,9 +99,9 @@ export default function TurnIdeaSection() {
                 </div>
 
                 {/* Headline */}
-                <h2 className="font-instrument text-[36px] xs:text-[46px] sm:text-[56px] lg:text-[64px] font-normal text-[#0A1628] leading-[1.08] sm:leading-[1.04] tracking-tight mb-5">
+                <h2 className="font-plus-jakarta font-extrabold text-[34px] xs:text-[44px] sm:text-[54px] lg:text-[62px] text-[#0A1628] leading-[1.08] sm:leading-[1.04] tracking-[-0.03em] mb-5">
                   <FoldText text="Turn your idea into" splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} /> <br />
-                  <span className="italic text-blue-600 font-normal">
+                  <span className="font-instrument italic font-normal text-blue-600">
                     <FoldText text="production." splitBy="word" trigger="scroll" duration={0.65} />
                   </span>
                 </h2>

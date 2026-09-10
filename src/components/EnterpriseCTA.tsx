@@ -17,7 +17,7 @@ export default function EnterpriseCTA() {
         >
           {/* Ambient radial glows */}
           <div className="absolute -top-32 -right-32 w-96 h-96 bg-blue-600/25 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-blue-700/20 rounded-full blur-3xl pointer-events-none" />
 
           {/* Grid pattern overlay */}
           <div 
@@ -35,9 +35,9 @@ export default function EnterpriseCTA() {
               Empower Your Commerce Operations
             </div>
 
-            <h2 className="font-instrument text-4xl sm:text-5xl lg:text-6xl font-normal tracking-tight text-white leading-[1.15]">
+            <h2 className="font-plus-jakarta text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
               Ready to unify and automate your{' '}
-              <span className="italic font-instrument bg-gradient-to-r from-blue-300 via-sky-200 to-indigo-300 bg-clip-text text-transparent">
+              <span className="font-instrument italic font-normal text-blue-400">
                 enterprise commerce?
               </span>
             </h2>
@@ -70,11 +70,11 @@ export default function EnterpriseCTA() {
                 <span>SOC2 Type II Certified</span>
               </div>
               <div className="flex items-center gap-2">
-                <Lock className="w-4 h-4 text-emerald-400" />
+                <Lock className="w-4 h-4 text-blue-400" />
                 <span>GDPR & CCPA Compliant</span>
               </div>
               <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-sky-400" />
+                <CheckCircle2 className="w-4 h-4 text-blue-400" />
                 <span>99.99% Guaranteed SLA</span>
               </div>
             </div>

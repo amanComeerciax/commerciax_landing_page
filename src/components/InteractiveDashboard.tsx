@@ -154,8 +154,8 @@ export default function InteractiveDashboard() {
                 {isPaused ? 'Paused' : 'Auto Sync'}
               </span>
               <span className="relative flex h-1.5 w-1.5">
-                <span className={`absolute inline-flex h-full w-full rounded-full ${isPaused ? 'bg-amber-400' : 'bg-cobalt animate-ping'} opacity-75`} />
-                <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${isPaused ? 'bg-amber-500' : 'bg-cobalt'}`} />
+                <span className={`absolute inline-flex h-full w-full rounded-full ${isPaused ? 'bg-slate-400' : 'bg-cobalt animate-ping'} opacity-75`} />
+                <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${isPaused ? 'bg-slate-500' : 'bg-cobalt'}`} />
               </span>
             </div>
           </div>
@@ -232,13 +232,13 @@ export default function InteractiveDashboard() {
                     {/* DIFFERENT CHART 1: Smooth Git Commit Spline Area Curve */}
                     <div className="col-span-4 flex justify-center">
                       <div className="flex flex-col items-start gap-1 sm:gap-1.5 pt-0.5 sm:pt-1 w-full max-w-[170px]">
-                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-cyan-50 border border-cyan-100/80 shadow-xs">
+                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-blue-50 border border-blue-100/80 shadow-xs">
                           <span className="relative flex h-1.5 w-1.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-500" />
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
                           </span>
-                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-cyan-600">+88%</span>
-                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-cyan-700/70 hidden xs:inline">Velocity</span>
+                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-blue-600">+88%</span>
+                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-blue-700/70 hidden xs:inline">Velocity</span>
                         </div>
 
                         {/* Git Commit Spline SVG */}
@@ -246,8 +246,8 @@ export default function InteractiveDashboard() {
                           <svg viewBox="0 0 150 75" className="w-full h-full overflow-visible">
                             <defs>
                               <linearGradient id="gitSplineGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#0EA5E9" stopOpacity="0.4" />
-                                <stop offset="100%" stopColor="#0EA5E9" stopOpacity="0.0" />
+                                <stop offset="0%" stopColor="#2563EB" stopOpacity="0.35" />
+                                <stop offset="100%" stopColor="#2563EB" stopOpacity="0.0" />
                               </linearGradient>
                             </defs>
                             {/* Animated filled spline */}
@@ -267,7 +267,7 @@ export default function InteractiveDashboard() {
                             <motion.path
                               d="M0,60 C30,65 45,35 75,40 C105,45 120,15 150,22"
                               fill="none"
-                              stroke="#0284C7"
+                              stroke="#2563EB"
                               strokeWidth="2.5"
                               strokeLinecap="round"
                               animate={{
@@ -280,8 +280,8 @@ export default function InteractiveDashboard() {
                               transition={{ duration: 3.4, repeat: Infinity, ease: 'easeInOut' }}
                             />
                             {/* Pulsing commit node markers */}
-                            <motion.circle cx="75" cy="40" r="3" fill="#0EA5E9" stroke="#fff" strokeWidth="1.5" animate={{ r: [2.5, 4, 2.5] }} transition={{ duration: 2, repeat: Infinity }} />
-                            <motion.circle cx="150" cy="22" r="3.5" fill="#0284C7" stroke="#fff" strokeWidth="1.5" animate={{ r: [3, 4.5, 3] }} transition={{ duration: 2.2, repeat: Infinity, delay: 0.5 }} />
+                            <motion.circle cx="75" cy="40" r="3" fill="#3B82F6" stroke="#fff" strokeWidth="1.5" animate={{ r: [2.5, 4, 2.5] }} transition={{ duration: 2, repeat: Infinity }} />
+                            <motion.circle cx="150" cy="22" r="3.5" fill="#1D4ED8" stroke="#fff" strokeWidth="1.5" animate={{ r: [3, 4.5, 3] }} transition={{ duration: 2.2, repeat: Infinity, delay: 0.5 }} />
                           </svg>
                         </div>
                       </div>
@@ -291,25 +291,25 @@ export default function InteractiveDashboard() {
                     <div className="col-span-3 flex justify-end">
                       <div className="flex flex-col items-center justify-between h-full py-0.5">
                         <div className="flex items-center gap-1 self-start">
-                          <GitBranch className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-cyan-600" />
+                          <GitBranch className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-blue-600" />
                           <span className="text-[9px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 tracking-tight truncate">Review</span>
                         </div>
                         <div className="relative w-[48px] h-[48px] xs:w-[58px] xs:h-[58px] sm:w-[72px] sm:h-[72px] flex items-center justify-center my-0.5 sm:my-1">
                           {/* Concentric Arcs */}
                           <svg viewBox="0 0 72 72" className="w-full h-full -rotate-90">
                             <circle cx="36" cy="36" r="31" fill="none" stroke="#F1F5F9" strokeWidth="3" />
-                            <circle cx="36" cy="36" r="31" fill="none" stroke="#0284C7" strokeWidth="3" strokeDasharray="194" strokeDashoffset="10" strokeLinecap="round" />
+                            <circle cx="36" cy="36" r="31" fill="none" stroke="#1D4ED8" strokeWidth="3" strokeDasharray="194" strokeDashoffset="10" strokeLinecap="round" />
                             <circle cx="36" cy="36" r="23" fill="none" stroke="#F1F5F9" strokeWidth="3" />
-                            <circle cx="36" cy="36" r="23" fill="none" stroke="#0EA5E9" strokeWidth="3" strokeDasharray="144" strokeDashoffset="14" strokeLinecap="round" />
+                            <circle cx="36" cy="36" r="23" fill="none" stroke="#3B82F6" strokeWidth="3" strokeDasharray="144" strokeDashoffset="14" strokeLinecap="round" />
                           </svg>
                           <div className="absolute flex flex-col items-center">
-                            <span className="text-[11px] xs:text-[12px] sm:text-[15px] font-black font-plus-jakarta text-cyan-700 leading-none">A+</span>
+                            <span className="text-[11px] xs:text-[12px] sm:text-[15px] font-black font-plus-jakarta text-blue-700 leading-none">A+</span>
                             <span className="text-[6px] sm:text-[7.5px] font-bold text-slate-400 uppercase tracking-wider mt-0.5">Grade</span>
                           </div>
                         </div>
                         <div className="flex flex-col items-center text-center">
-                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-cyan-600 flex items-center gap-0.5 sm:gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 inline-block animate-pulse" />
+                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-blue-600 flex items-center gap-0.5 sm:gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block animate-pulse" />
                             99.4%
                           </span>
                           <span className="text-[7px] sm:text-[8.5px] text-slate-400 font-dm-sans font-normal whitespace-nowrap hidden xs:inline">Clean Lint</span>
@@ -324,12 +324,12 @@ export default function InteractiveDashboard() {
                       <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">PRs Merged</span>
                       <div className="flex items-baseline justify-between mt-0.5 sm:mt-1">
                         <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight truncate">384+</span>
-                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-cyan-700 bg-cyan-50 px-1 sm:px-1.5 py-0.5 rounded border border-cyan-100/60 hidden xs:inline-block">100%</span>
+                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-blue-700 bg-blue-50 px-1 sm:px-1.5 py-0.5 rounded border border-blue-100/60 hidden xs:inline-block">100%</span>
                       </div>
                       <div className="w-full h-5 sm:h-8 mt-1 flex items-center">
-                        <div className="w-full bg-cyan-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-blue-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
                           <motion.div
-                            className="bg-cyan-500 h-full rounded-full"
+                            className="bg-blue-600 h-full rounded-full"
                             animate={{ width: ['70%', '95%', '70%'] }}
                             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                           />
@@ -340,8 +340,8 @@ export default function InteractiveDashboard() {
                       <div className="flex items-center justify-between">
                         <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">Tech Stack</span>
                         <span className="relative flex h-1.5 w-1.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-cyan-500" />
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
                         </span>
                       </div>
                       <div className="mt-0.5 sm:mt-1">
@@ -350,7 +350,7 @@ export default function InteractiveDashboard() {
                       <div className="flex items-center gap-0.5 sm:gap-1 mt-1 sm:mt-2 text-[7px] xs:text-[8px] sm:text-[9px] font-medium font-dm-sans">
                         <span className="bg-blue-50 text-cobalt px-1 sm:px-1.5 py-0.5 rounded font-bold">React</span>
                         <span className="bg-slate-200/80 text-slate-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">Next</span>
-                        <span className="bg-cyan-50 text-cyan-700 px-1 sm:px-1.5 py-0.5 rounded font-bold hidden xs:inline">Go</span>
+                        <span className="bg-blue-50 text-blue-700 px-1 sm:px-1.5 py-0.5 rounded font-bold hidden xs:inline">Go</span>
                       </div>
                     </div>
                     <div className="bg-slate-50/70 rounded-xl p-1 xs:p-2 sm:p-4 border border-slate-100 flex flex-col justify-between min-w-0 shadow-xs">
@@ -358,7 +358,7 @@ export default function InteractiveDashboard() {
                       <div className="flex items-end justify-between mt-0.5 sm:mt-1">
                         <div className="min-w-0 flex-1">
                           <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight block">14m</span>
-                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-emerald-600">
+                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-blue-600">
                             <span>↑</span>
                             <span>4.2x</span>
                           </div>
@@ -367,7 +367,7 @@ export default function InteractiveDashboard() {
                           {[30, 60, 45, 90].map((h, i) => (
                             <motion.div
                               key={i}
-                              className="w-1 xs:w-1.5 sm:w-2 bg-cyan-500 rounded-t-[2px]"
+                              className="w-1 xs:w-1.5 sm:w-2 bg-blue-600 rounded-t-[2px]"
                               animate={{ height: [`${h * 0.7}%`, `${h}%`, `${h * 0.7}%`] }}
                               transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
                             />
@@ -379,10 +379,10 @@ export default function InteractiveDashboard() {
                 </motion.div>
               )}
 
-              {/* TAB 2: AI SOLUTIONS (Neural Mesh Graph + Token Speedometer Dial) */}
+              {/* TAB 2: ENTERPRISE AI (Neural Network Mesh + Token Speedometer) */}
               {activeTabIndex === 2 && (
                 <motion.div
-                  key="tab-ai-solutions"
+                  key="tab-ai-systems"
                   initial={{ opacity: 0, x: 16 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -16 }}
@@ -392,9 +392,9 @@ export default function InteractiveDashboard() {
                   <div className="grid grid-cols-12 gap-2 sm:gap-3.5 items-center">
                     <div className="col-span-5 flex flex-col justify-center">
                       <h3 className="text-[15px] xs:text-[18px] sm:text-[25px] font-extrabold font-plus-jakarta text-navy leading-[1.1] tracking-tight">
-                        Agentic<br />
-                        AI Systems<br />
-                        Neural
+                        Enterprise<br />
+                        AI Models<br />
+                        At Scale
                       </h3>
                       <p className="mt-1 text-[8px] xs:text-[9.5px] sm:text-[10.5px] text-slate-400 leading-snug font-dm-sans font-normal line-clamp-2 sm:line-clamp-none">
                         Fine-tuned LLMs, neural search & autonomous workflow agents.
@@ -408,40 +408,40 @@ export default function InteractiveDashboard() {
                     {/* DIFFERENT CHART 2: Neural Network Connected Node Mesh */}
                     <div className="col-span-4 flex justify-center">
                       <div className="flex flex-col items-start gap-1 sm:gap-1.5 pt-0.5 sm:pt-1 w-full max-w-[170px]">
-                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-purple-50 border border-purple-100/80 shadow-xs">
+                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-blue-50 border border-blue-100/80 shadow-xs">
                           <span className="relative flex h-1.5 w-1.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-purple-500" />
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
                           </span>
-                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-purple-600">+94%</span>
-                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-purple-700/70 hidden xs:inline">Weights</span>
+                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-blue-600">+94%</span>
+                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-blue-700/70 hidden xs:inline">Weights</span>
                         </div>
 
                         {/* Neural Graph SVG */}
                         <div className="w-full h-[60px] xs:h-[80px] sm:h-[105px] flex items-center justify-center pt-1 relative">
                           <svg viewBox="0 0 150 75" className="w-full h-full overflow-visible">
-                            <line x1="20" y1="20" x2="75" y2="15" stroke="#C084FC" strokeWidth="1" strokeDasharray="3,3" />
-                            <line x1="20" y1="20" x2="75" y2="40" stroke="#C084FC" strokeWidth="1.2" />
-                            <line x1="20" y1="55" x2="75" y2="40" stroke="#C084FC" strokeWidth="1" />
-                            <line x1="20" y1="55" x2="75" y2="65" stroke="#C084FC" strokeWidth="1.2" strokeDasharray="3,3" />
+                            <line x1="20" y1="20" x2="75" y2="15" stroke="#93C5FD" strokeWidth="1" strokeDasharray="3,3" />
+                            <line x1="20" y1="20" x2="75" y2="40" stroke="#93C5FD" strokeWidth="1.2" />
+                            <line x1="20" y1="55" x2="75" y2="40" stroke="#93C5FD" strokeWidth="1" />
+                            <line x1="20" y1="55" x2="75" y2="65" stroke="#93C5FD" strokeWidth="1.2" strokeDasharray="3,3" />
 
-                            <line x1="75" y1="15" x2="130" y2="28" stroke="#818CF8" strokeWidth="1.5" />
-                            <line x1="75" y1="40" x2="130" y2="28" stroke="#818CF8" strokeWidth="1.5" />
-                            <line x1="75" y1="40" x2="130" y2="52" stroke="#818CF8" strokeWidth="1.5" />
-                            <line x1="75" y1="65" x2="130" y2="52" stroke="#818CF8" strokeWidth="1.5" />
+                            <line x1="75" y1="15" x2="130" y2="28" stroke="#3B82F6" strokeWidth="1.5" />
+                            <line x1="75" y1="40" x2="130" y2="28" stroke="#3B82F6" strokeWidth="1.5" />
+                            <line x1="75" y1="40" x2="130" y2="52" stroke="#3B82F6" strokeWidth="1.5" />
+                            <line x1="75" y1="65" x2="130" y2="52" stroke="#3B82F6" strokeWidth="1.5" />
 
-                            <motion.circle cx="20" cy="20" r="4.5" fill="#8B5CF6" animate={{ scale: [1, 1.25, 1] }} transition={{ duration: 2, repeat: Infinity }} />
-                            <motion.circle cx="20" cy="55" r="4.5" fill="#8B5CF6" animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2.2, repeat: Infinity, delay: 0.3 }} />
+                            <motion.circle cx="20" cy="20" r="4.5" fill="#2563EB" animate={{ scale: [1, 1.25, 1] }} transition={{ duration: 2, repeat: Infinity }} />
+                            <motion.circle cx="20" cy="55" r="4.5" fill="#2563EB" animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2.2, repeat: Infinity, delay: 0.3 }} />
 
-                            <motion.circle cx="75" cy="15" r="5" fill="#6366F1" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1.8, repeat: Infinity, delay: 0.2 }} />
-                            <motion.circle cx="75" cy="40" r="6" fill="#4F46E5" animate={{ scale: [1, 1.35, 1] }} transition={{ duration: 2.1, repeat: Infinity, delay: 0.4 }} />
-                            <motion.circle cx="75" cy="65" r="5" fill="#6366F1" animate={{ scale: [1, 1.25, 1] }} transition={{ duration: 1.9, repeat: Infinity, delay: 0.6 }} />
+                            <motion.circle cx="75" cy="15" r="5" fill="#1D4ED8" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1.8, repeat: Infinity, delay: 0.2 }} />
+                            <motion.circle cx="75" cy="40" r="6" fill="#0A1628" animate={{ scale: [1, 1.35, 1] }} transition={{ duration: 2.1, repeat: Infinity, delay: 0.4 }} />
+                            <motion.circle cx="75" cy="65" r="5" fill="#1D4ED8" animate={{ scale: [1, 1.25, 1] }} transition={{ duration: 1.9, repeat: Infinity, delay: 0.6 }} />
 
                             <motion.circle cx="130" cy="28" r="5.5" fill="#3B82F6" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2.4, repeat: Infinity, delay: 0.5 }} />
-                            <motion.circle cx="130" cy="52" r="5.5" fill="#0EA5E9" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2.3, repeat: Infinity, delay: 0.7 }} />
+                            <motion.circle cx="130" cy="52" r="5.5" fill="#60A5FA" animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 2.3, repeat: Infinity, delay: 0.7 }} />
 
-                            <motion.circle r="2" fill="#E879F9" animate={{ cx: [20, 75, 130], cy: [20, 40, 28], opacity: [0, 1, 0] }} transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }} />
-                            <motion.circle r="2" fill="#38BDF8" animate={{ cx: [20, 75, 130], cy: [55, 40, 52], opacity: [0, 1, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 0.8 }} />
+                            <motion.circle r="2" fill="#93C5FD" animate={{ cx: [20, 75, 130], cy: [20, 40, 28], opacity: [0, 1, 0] }} transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }} />
+                            <motion.circle r="2" fill="#3B82F6" animate={{ cx: [20, 75, 130], cy: [55, 40, 52], opacity: [0, 1, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "linear", delay: 0.8 }} />
                           </svg>
                         </div>
                       </div>
@@ -451,7 +451,7 @@ export default function InteractiveDashboard() {
                     <div className="col-span-3 flex justify-end">
                       <div className="flex flex-col items-center justify-between h-full py-0.5">
                         <div className="flex items-center gap-1 self-start">
-                          <Cpu className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-purple-600" />
+                          <Cpu className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-blue-600" />
                           <span className="text-[9px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 tracking-tight truncate">Throughput</span>
                         </div>
 
@@ -459,8 +459,8 @@ export default function InteractiveDashboard() {
                           <svg viewBox="0 0 76 76" className="w-full h-full overflow-visible">
                             <defs>
                               <linearGradient id="gpu-speed-grad" x1="0%" y1="100%" x2="100%" y2="0%">
-                                <stop offset="0%" stopColor="#A855F7" />
-                                <stop offset="100%" stopColor="#6366F1" />
+                                <stop offset="0%" stopColor="#2563EB" />
+                                <stop offset="100%" stopColor="#60A5FA" />
                               </linearGradient>
                             </defs>
 
@@ -494,14 +494,14 @@ export default function InteractiveDashboard() {
                           </svg>
 
                           <div className="absolute inset-0 flex flex-col items-center justify-center pt-0.5 pointer-events-none">
-                            <span className="text-[11px] xs:text-[12px] sm:text-[15px] font-extrabold font-plus-jakarta text-purple-950 leading-none">84</span>
-                            <span className="text-[6px] sm:text-[8px] font-bold text-purple-600 uppercase tracking-tight mt-0.5">Tok/s</span>
+                            <span className="text-[11px] xs:text-[12px] sm:text-[15px] font-extrabold font-plus-jakarta text-navy leading-none">84</span>
+                            <span className="text-[6px] sm:text-[8px] font-bold text-blue-600 uppercase tracking-tight mt-0.5">Tok/s</span>
                           </div>
                         </div>
 
                         <div className="flex flex-col items-center text-center">
-                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-purple-600 flex items-center gap-0.5 sm:gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 inline-block animate-pulse" />
+                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-blue-600 flex items-center gap-0.5 sm:gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block animate-pulse" />
                             H100
                           </span>
                           <span className="text-[7px] sm:text-[8.5px] text-slate-400 font-dm-sans font-normal whitespace-nowrap hidden xs:inline">24ms Latency</span>
@@ -516,12 +516,12 @@ export default function InteractiveDashboard() {
                       <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">AI Agents</span>
                       <div className="flex items-baseline justify-between mt-0.5 sm:mt-1">
                         <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight">36+</span>
-                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-purple-700 bg-purple-50 px-1 sm:px-1.5 py-0.5 rounded border border-purple-100/60 hidden xs:inline-block">Auto</span>
+                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-blue-700 bg-blue-50 px-1 sm:px-1.5 py-0.5 rounded border border-blue-100/60 hidden xs:inline-block">Auto</span>
                       </div>
                       <div className="w-full h-5 sm:h-8 mt-1 flex items-center">
-                        <div className="w-full bg-purple-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-blue-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
                           <motion.div
-                            className="bg-purple-600 h-full rounded-full"
+                            className="bg-blue-600 h-full rounded-full"
                             animate={{ width: ['60%', '98%', '60%'] }}
                             transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
                           />
@@ -532,16 +532,16 @@ export default function InteractiveDashboard() {
                       <div className="flex items-center justify-between">
                         <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">Models</span>
                         <span className="relative flex h-1.5 w-1.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-purple-500" />
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
                         </span>
                       </div>
                       <div className="mt-0.5 sm:mt-1">
                         <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight">18+</span>
                       </div>
                       <div className="flex items-center gap-0.5 sm:gap-1 mt-1 sm:mt-2 text-[7px] xs:text-[8px] sm:text-[9px] font-medium font-dm-sans">
-                        <span className="bg-purple-50 text-purple-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">Claude</span>
-                        <span className="bg-indigo-50 text-indigo-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">GPT-4</span>
+                        <span className="bg-blue-50 text-blue-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">Claude</span>
+                        <span className="bg-blue-50 text-blue-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">GPT-4</span>
                         <span className="bg-slate-200/80 text-slate-700 px-1 sm:px-1.5 py-0.5 rounded font-bold hidden xs:inline">Llama</span>
                       </div>
                     </div>
@@ -550,7 +550,7 @@ export default function InteractiveDashboard() {
                       <div className="flex items-end justify-between mt-0.5 sm:mt-1">
                         <div className="min-w-0 flex-1">
                           <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight block">4.2M+</span>
-                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-emerald-600">
+                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-blue-600">
                             <span>↑</span>
                             <span>GPU Fast</span>
                           </div>
@@ -559,7 +559,7 @@ export default function InteractiveDashboard() {
                           {[40, 75, 55, 95].map((h, i) => (
                             <motion.div
                               key={i}
-                              className="w-1 xs:w-1.5 sm:w-2 bg-purple-600 rounded-t-[2px]"
+                              className="w-1 xs:w-1.5 sm:w-2 bg-blue-600 rounded-t-[2px]"
                               animate={{ height: [`${h * 0.7}%`, `${h}%`, `${h * 0.7}%`] }}
                               transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.2 }}
                             />
@@ -600,26 +600,26 @@ export default function InteractiveDashboard() {
                     {/* DIFFERENT CHART 3: Multi-Region Cluster Server Blades */}
                     <div className="col-span-4 flex justify-center">
                       <div className="flex flex-col items-start gap-1 sm:gap-1.5 pt-0.5 sm:pt-1 w-full max-w-[170px]">
-                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-teal-50 border border-teal-100/80 shadow-xs">
+                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-blue-50 border border-blue-100/80 shadow-xs">
                           <span className="relative flex h-1.5 w-1.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-500" />
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
                           </span>
-                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-teal-600">3 Regions</span>
-                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-teal-700/70 hidden xs:inline">Synced</span>
+                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-blue-600">3 Regions</span>
+                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-blue-700/70 hidden xs:inline">Synced</span>
                         </div>
 
                         {/* 3 Horizontal Blade Servers */}
                         <div className="w-full flex flex-col gap-1 sm:gap-1.5 pt-0.5 sm:pt-1 justify-center">
                           {[
-                            { name: 'us-east', pct: '88%', col: 'bg-teal-500' },
-                            { name: 'eu-west', pct: '74%', col: 'bg-sky-500' },
-                            { name: 'ap-south', pct: '92%', col: 'bg-blue-600' },
+                            { name: 'us-east', pct: '88%', col: 'bg-blue-600' },
+                            { name: 'eu-west', pct: '74%', col: 'bg-blue-500' },
+                            { name: 'ap-south', pct: '92%', col: 'bg-blue-700' },
                           ].map((cluster, i) => (
                             <div key={i} className="bg-slate-50 border border-slate-200/70 rounded sm:rounded-lg p-0.5 sm:p-1.5 flex flex-col gap-0.5">
                               <div className="flex justify-between items-center text-[7px] sm:text-[8.5px] font-bold text-slate-600">
                                 <span className="truncate">{cluster.name}</span>
-                                <span className="text-teal-700">{cluster.pct}</span>
+                                <span className="text-blue-700">{cluster.pct}</span>
                               </div>
                               <div className="w-full bg-slate-200 h-1 sm:h-1.5 rounded-full overflow-hidden">
                                 <motion.div
@@ -638,7 +638,7 @@ export default function InteractiveDashboard() {
                     <div className="col-span-3 flex justify-end">
                       <div className="flex flex-col items-center justify-between h-full py-0.5">
                         <div className="flex items-center gap-1 self-start">
-                          <Layers className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-teal-600" />
+                          <Layers className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-blue-600" />
                           <span className="text-[9px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 tracking-tight truncate">Pod Grid</span>
                         </div>
 
@@ -647,7 +647,7 @@ export default function InteractiveDashboard() {
                           {Array.from({ length: 12 }).map((_, i) => (
                             <motion.div
                               key={i}
-                              className="w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 rounded-[1.5px] sm:rounded-[3px] bg-teal-500 shadow-[0_0_4px_#14B8A6]"
+                              className="w-2 h-2 xs:w-2.5 xs:h-2.5 sm:w-3 sm:h-3 rounded-[1.5px] sm:rounded-[3px] bg-blue-600 shadow-[0_0_4px_#3B82F6]"
                               animate={{ opacity: [0.6, 1, 0.6] }}
                               transition={{ duration: 1.8, repeat: Infinity, delay: (i % 4) * 0.25 }}
                             />
@@ -655,8 +655,8 @@ export default function InteractiveDashboard() {
                         </div>
 
                         <div className="flex flex-col items-center text-center">
-                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-bold font-dm-sans text-teal-600 flex items-center gap-0.5 sm:gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-teal-500 inline-block animate-pulse" />
+                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-bold font-dm-sans text-blue-600 flex items-center gap-0.5 sm:gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block animate-pulse" />
                             192 Pods
                           </span>
                           <span className="text-[7px] sm:text-[8.5px] text-slate-400 font-dm-sans font-normal whitespace-nowrap hidden xs:inline">Auto-Healing</span>
@@ -671,12 +671,12 @@ export default function InteractiveDashboard() {
                       <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">K8s Pods</span>
                       <div className="flex items-baseline justify-between mt-0.5 sm:mt-1">
                         <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight">192+</span>
-                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-teal-700 bg-teal-50 px-1 sm:px-1.5 py-0.5 rounded border border-teal-100/60 hidden xs:inline-block">Scale</span>
+                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-blue-700 bg-blue-50 px-1 sm:px-1.5 py-0.5 rounded border border-blue-100/60 hidden xs:inline-block">Scale</span>
                       </div>
                       <div className="w-full h-5 sm:h-8 mt-1 flex items-center">
-                        <div className="w-full bg-teal-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-blue-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
                           <motion.div
-                            className="bg-teal-600 h-full rounded-full"
+                            className="bg-blue-600 h-full rounded-full"
                             animate={{ width: ['75%', '96%', '75%'] }}
                             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                           />
@@ -687,8 +687,8 @@ export default function InteractiveDashboard() {
                       <div className="flex items-center justify-between">
                         <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">Regions</span>
                         <span className="relative flex h-1.5 w-1.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-500" />
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
                         </span>
                       </div>
                       <div className="mt-0.5 sm:mt-1">
@@ -696,8 +696,8 @@ export default function InteractiveDashboard() {
                       </div>
                       <div className="flex items-center gap-0.5 sm:gap-1 mt-1 sm:mt-2 text-[7px] xs:text-[8px] sm:text-[9px] font-medium font-dm-sans">
                         <span className="bg-blue-50 text-cobalt px-1 sm:px-1.5 py-0.5 rounded font-bold">US</span>
-                        <span className="bg-sky-50 text-sky-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">EU</span>
-                        <span className="bg-teal-50 text-teal-700 px-1 sm:px-1.5 py-0.5 rounded font-bold hidden xs:inline">Asia</span>
+                        <span className="bg-blue-50 text-blue-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">EU</span>
+                        <span className="bg-slate-200/80 text-slate-700 px-1 sm:px-1.5 py-0.5 rounded font-bold hidden xs:inline">Asia</span>
                       </div>
                     </div>
                     <div className="bg-slate-50/70 rounded-xl p-1 xs:p-2 sm:p-4 border border-slate-100 flex flex-col justify-between min-w-0 shadow-xs">
@@ -705,7 +705,7 @@ export default function InteractiveDashboard() {
                       <div className="flex items-end justify-between mt-0.5 sm:mt-1">
                         <div className="min-w-0 flex-1">
                           <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight block">18ms</span>
-                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-emerald-600">
+                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-blue-600">
                             <span>↑</span>
                             <span>Edge</span>
                           </div>
@@ -714,7 +714,7 @@ export default function InteractiveDashboard() {
                           {[35, 70, 50, 85].map((h, i) => (
                             <motion.div
                               key={i}
-                              className="w-1 xs:w-1.5 sm:w-2 bg-teal-600 rounded-t-[2px]"
+                              className="w-1 xs:w-1.5 sm:w-2 bg-blue-600 rounded-t-[2px]"
                               animate={{ height: [`${h * 0.7}%`, `${h}%`, `${h * 0.7}%`] }}
                               transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
                             />
@@ -755,10 +755,10 @@ export default function InteractiveDashboard() {
                     {/* DIFFERENT CHART 4: High-Frequency Real-time ECG Traffic Waveform */}
                     <div className="col-span-4 flex justify-center">
                       <div className="flex flex-col items-start gap-1 sm:gap-1.5 pt-0.5 sm:pt-1 w-full max-w-[170px]">
-                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-emerald-50 border border-emerald-100/80 shadow-xs">
-                          <Activity className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-emerald-600 animate-pulse" />
-                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-emerald-600">85K/s</span>
-                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-emerald-700/70 hidden xs:inline">Peak</span>
+                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-blue-50 border border-blue-100/80 shadow-xs">
+                          <Activity className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-blue-600 animate-pulse" />
+                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-blue-600">85K/s</span>
+                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-blue-700/70 hidden xs:inline">Peak</span>
                         </div>
 
                         {/* ECG Traffic Waveform SVG */}
@@ -766,14 +766,14 @@ export default function InteractiveDashboard() {
                           <svg viewBox="0 0 150 70" className="w-full h-full overflow-visible">
                             <defs>
                               <linearGradient id="ecgGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stopColor="#10B981" stopOpacity="0.3" />
-                                <stop offset="100%" stopColor="#10B981" stopOpacity="0.0" />
+                                <stop offset="0%" stopColor="#2563EB" stopOpacity="0.3" />
+                                <stop offset="100%" stopColor="#2563EB" stopOpacity="0.0" />
                               </linearGradient>
                             </defs>
                             <motion.path
                               d="M0,45 L30,45 L40,25 L48,55 L58,15 L68,60 L78,35 L88,45 L150,45"
                               fill="none"
-                              stroke="#10B981"
+                              stroke="#2563EB"
                               strokeWidth="2.2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -788,7 +788,7 @@ export default function InteractiveDashboard() {
                             />
                             <motion.circle
                               r="3"
-                              fill="#10B981"
+                              fill="#2563EB"
                               stroke="#FFFFFF"
                               strokeWidth="1.5"
                               animate={{
@@ -807,23 +807,23 @@ export default function InteractiveDashboard() {
                     <div className="col-span-3 flex justify-end">
                       <div className="flex flex-col items-center justify-between h-full py-0.5">
                         <div className="flex items-center gap-1 self-start">
-                          <Zap className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-emerald-600" />
+                          <Zap className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-blue-600" />
                           <span className="text-[9px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 tracking-tight truncate">Latency</span>
                         </div>
 
-                        <div className="relative w-[48px] h-[48px] xs:w-[58px] xs:h-[58px] sm:w-[72px] sm:h-[72px] flex items-center justify-center my-0.5 sm:my-1 bg-emerald-50/50 rounded-xl sm:rounded-2xl border border-emerald-100">
+                        <div className="relative w-[48px] h-[48px] xs:w-[58px] xs:h-[58px] sm:w-[72px] sm:h-[72px] flex items-center justify-center my-0.5 sm:my-1 bg-blue-50/50 rounded-xl sm:rounded-2xl border border-blue-100">
                           <div className="flex flex-col items-center">
-                            <span className="text-[13px] xs:text-[15px] sm:text-[18px] font-black font-plus-jakarta text-emerald-700 leading-none">18</span>
-                            <span className="text-[6.5px] sm:text-[8px] font-extrabold text-emerald-600 uppercase tracking-wide">ms</span>
+                            <span className="text-[13px] xs:text-[15px] sm:text-[18px] font-black font-plus-jakarta text-blue-700 leading-none">18</span>
+                            <span className="text-[6.5px] sm:text-[8px] font-extrabold text-blue-600 uppercase tracking-wide">ms</span>
                           </div>
                           <div className="absolute top-1 right-1 sm:top-1.5 sm:right-1.5">
-                            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 inline-block animate-ping" />
+                            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-blue-600 inline-block animate-ping" />
                           </div>
                         </div>
 
                         <div className="flex flex-col items-center text-center">
-                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-emerald-600 flex items-center gap-0.5 sm:gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
+                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-blue-600 flex items-center gap-0.5 sm:gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block" />
                             CDN
                           </span>
                           <span className="text-[7px] sm:text-[8.5px] text-slate-400 font-dm-sans font-normal whitespace-nowrap hidden xs:inline">&lt;20ms SLA</span>
@@ -838,12 +838,12 @@ export default function InteractiveDashboard() {
                       <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">Endpoints</span>
                       <div className="flex items-baseline justify-between mt-0.5 sm:mt-1">
                         <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight">260+</span>
-                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-emerald-700 bg-emerald-50 px-1 sm:px-1.5 py-0.5 rounded border border-emerald-100/60 hidden xs:inline-block">Live</span>
+                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-blue-700 bg-blue-50 px-1 sm:px-1.5 py-0.5 rounded border border-blue-100/60 hidden xs:inline-block">Live</span>
                       </div>
                       <div className="w-full h-5 sm:h-8 mt-1 flex items-center">
-                        <div className="w-full bg-emerald-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-blue-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
                           <motion.div
-                            className="bg-emerald-500 h-full rounded-full"
+                            className="bg-blue-600 h-full rounded-full"
                             animate={{ width: ['70%', '98%', '70%'] }}
                             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                           />
@@ -854,17 +854,17 @@ export default function InteractiveDashboard() {
                       <div className="flex items-center justify-between">
                         <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">Cache Hit</span>
                         <span className="relative flex h-1.5 w-1.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
                         </span>
                       </div>
                       <div className="mt-0.5 sm:mt-1">
                         <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight">98.8%</span>
                       </div>
                       <div className="flex items-center gap-0.5 sm:gap-1 mt-1 sm:mt-2 text-[7px] xs:text-[8px] sm:text-[9px] font-medium font-dm-sans">
-                        <span className="bg-emerald-50 text-emerald-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">Redis</span>
-                        <span className="bg-teal-50 text-teal-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">Edge</span>
-                        <span className="bg-slate-200/80 text-slate-700 px-1 sm:px-1.5 py-0.5 rounded font-bold hidden xs:inline">Fast</span>
+                        <span className="bg-blue-50 text-blue-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">Redis</span>
+                        <span className="bg-slate-200/80 text-slate-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">Edge</span>
+                        <span className="bg-blue-50 text-blue-700 px-1 sm:px-1.5 py-0.5 rounded font-bold hidden xs:inline">Fast</span>
                       </div>
                     </div>
                     <div className="bg-slate-50/70 rounded-xl p-1 xs:p-2 sm:p-4 border border-slate-100 flex flex-col justify-between min-w-0 shadow-xs">
@@ -872,7 +872,7 @@ export default function InteractiveDashboard() {
                       <div className="flex items-end justify-between mt-0.5 sm:mt-1">
                         <div className="min-w-0 flex-1">
                           <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight block">14.2M</span>
-                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-emerald-600">
+                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-blue-600">
                             <span>↑</span>
                             <span>Zero Lag</span>
                           </div>
@@ -881,7 +881,7 @@ export default function InteractiveDashboard() {
                           {[30, 65, 45, 95].map((h, i) => (
                             <motion.div
                               key={i}
-                              className="w-1 xs:w-1.5 sm:w-2 bg-emerald-500 rounded-t-[2px]"
+                              className="w-1 xs:w-1.5 sm:w-2 bg-blue-600 rounded-t-[2px]"
                               animate={{ height: [`${h * 0.7}%`, `${h}%`, `${h * 0.7}%`] }}
                               transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
                             />
@@ -922,21 +922,21 @@ export default function InteractiveDashboard() {
                     {/* DIFFERENT CHART 5: Sprint Execution Activity Heatmap Grid */}
                     <div className="col-span-4 flex justify-center">
                       <div className="flex flex-col items-start gap-1 sm:gap-1.5 pt-0.5 sm:pt-1 w-full max-w-[170px]">
-                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-amber-50 border border-amber-100/80 shadow-xs">
+                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-blue-50 border border-blue-100/80 shadow-xs">
                           <span className="relative flex h-1.5 w-1.5">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500" />
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
                           </span>
-                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-amber-600">Sprint 18</span>
-                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-amber-700/70 hidden xs:inline">Heatmap</span>
+                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-blue-600">Sprint 18</span>
+                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-blue-700/70 hidden xs:inline">Heatmap</span>
                         </div>
 
-                        {/* GitHub-style Sprint Activity Heatmap Matrix */}
+                        {/* GitHub-style Sprint Activity Heatmap Matrix in Blues */}
                         <div className="grid grid-cols-6 gap-0.5 sm:gap-1 p-1 sm:p-2 bg-slate-50/80 rounded-lg sm:rounded-xl border border-slate-100 my-0.5 sm:my-1 w-full">
                           {[
-                            'bg-amber-200', 'bg-amber-400', 'bg-amber-500', 'bg-amber-300', 'bg-amber-500', 'bg-amber-600',
-                            'bg-amber-300', 'bg-amber-500', 'bg-amber-600', 'bg-amber-400', 'bg-amber-500', 'bg-amber-300',
-                            'bg-amber-400', 'bg-amber-600', 'bg-amber-500', 'bg-amber-500', 'bg-amber-600', 'bg-amber-400',
+                            'bg-blue-200', 'bg-blue-400', 'bg-blue-600', 'bg-blue-300', 'bg-blue-500', 'bg-blue-700',
+                            'bg-blue-300', 'bg-blue-500', 'bg-blue-700', 'bg-blue-400', 'bg-blue-600', 'bg-blue-300',
+                            'bg-blue-400', 'bg-blue-700', 'bg-blue-500', 'bg-blue-600', 'bg-blue-700', 'bg-blue-400',
                           ].map((col, i) => (
                             <motion.div
                               key={i}
@@ -953,15 +953,15 @@ export default function InteractiveDashboard() {
                     <div className="col-span-3 flex justify-end">
                       <div className="flex flex-col items-center justify-between h-full py-0.5">
                         <div className="flex items-center gap-1 self-start">
-                          <Users2 className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-amber-600" />
+                          <Users2 className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-blue-600" />
                           <span className="text-[9px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 tracking-tight truncate">Squads</span>
                         </div>
 
                         <div className="relative w-[48px] h-[48px] xs:w-[58px] xs:h-[58px] sm:w-[72px] sm:h-[72px] flex items-center justify-center my-0.5 sm:my-1">
                           <svg viewBox="0 0 72 72" className="w-full h-full -rotate-90">
-                            <circle cx="36" cy="36" r="28" fill="none" stroke="#F59E0B" strokeWidth="6" strokeDasharray="176" strokeDashoffset="96" strokeLinecap="round" />
+                            <circle cx="36" cy="36" r="28" fill="none" stroke="#2563EB" strokeWidth="6" strokeDasharray="176" strokeDashoffset="96" strokeLinecap="round" />
                             <circle cx="36" cy="36" r="28" fill="none" stroke="#3B82F6" strokeWidth="6" strokeDasharray="176" strokeDashoffset="120" strokeLinecap="round" transform="rotate(160 36 36)" />
-                            <circle cx="36" cy="36" r="28" fill="none" stroke="#10B981" strokeWidth="6" strokeDasharray="176" strokeDashoffset="140" strokeLinecap="round" transform="rotate(285 36 36)" />
+                            <circle cx="36" cy="36" r="28" fill="none" stroke="#60A5FA" strokeWidth="6" strokeDasharray="176" strokeDashoffset="140" strokeLinecap="round" transform="rotate(285 36 36)" />
                           </svg>
                           <div className="absolute flex flex-col items-center">
                             <span className="text-[11px] xs:text-[12px] sm:text-[14px] font-black font-plus-jakarta text-navy leading-none">48+</span>
@@ -970,8 +970,8 @@ export default function InteractiveDashboard() {
                         </div>
 
                         <div className="flex flex-col items-center text-center">
-                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-amber-600 flex items-center gap-0.5 sm:gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block animate-pulse" />
+                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-blue-600 flex items-center gap-0.5 sm:gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-600 inline-block animate-pulse" />
                             Full Stack
                           </span>
                           <span className="text-[7px] sm:text-[8.5px] text-slate-400 font-dm-sans font-normal whitespace-nowrap hidden xs:inline">6 Squads</span>
@@ -986,12 +986,12 @@ export default function InteractiveDashboard() {
                       <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">Engineers</span>
                       <div className="flex items-baseline justify-between mt-0.5 sm:mt-1">
                         <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight">48+</span>
-                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-amber-700 bg-amber-50 px-1 sm:px-1.5 py-0.5 rounded border border-amber-100/60 hidden xs:inline-block">Top 1%</span>
+                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-blue-700 bg-blue-50 px-1 sm:px-1.5 py-0.5 rounded border border-blue-100/60 hidden xs:inline-block">Top 1%</span>
                       </div>
                       <div className="w-full h-5 sm:h-8 mt-1 flex items-center">
-                        <div className="w-full bg-amber-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-blue-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
                           <motion.div
-                            className="bg-amber-500 h-full rounded-full"
+                            className="bg-blue-600 h-full rounded-full"
                             animate={{ width: ['75%', '98%', '75%'] }}
                             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                           />
@@ -1002,15 +1002,15 @@ export default function InteractiveDashboard() {
                       <div className="flex items-center justify-between">
                         <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">Hubs</span>
                         <span className="relative flex h-1.5 w-1.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-amber-500" />
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
                         </span>
                       </div>
                       <div className="mt-0.5 sm:mt-1">
                         <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight">6 Zones</span>
                       </div>
                       <div className="flex items-center gap-0.5 sm:gap-1 mt-1 sm:mt-2 text-[7px] xs:text-[8px] sm:text-[9px] font-medium font-dm-sans">
-                        <span className="bg-amber-50 text-amber-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">US</span>
+                        <span className="bg-blue-50 text-blue-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">US</span>
                         <span className="bg-blue-50 text-cobalt px-1 sm:px-1.5 py-0.5 rounded font-bold">UK</span>
                         <span className="bg-slate-200/80 text-slate-700 px-1 sm:px-1.5 py-0.5 rounded font-bold hidden xs:inline">IN</span>
                       </div>
@@ -1020,7 +1020,7 @@ export default function InteractiveDashboard() {
                       <div className="flex items-end justify-between mt-0.5 sm:mt-1">
                         <div className="min-w-0 flex-1">
                           <span className="text-[12px] xs:text-[15px] sm:text-[20px] font-extrabold font-plus-jakarta text-navy tracking-tight block">98/100</span>
-                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-emerald-600">
+                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-blue-600">
                             <span>↑</span>
                             <span className="truncate">Top Class</span>
                           </div>
@@ -1029,7 +1029,7 @@ export default function InteractiveDashboard() {
                           {[40, 70, 60, 95].map((h, i) => (
                             <motion.div
                               key={i}
-                              className="w-1 xs:w-1.5 sm:w-2 bg-amber-500 rounded-t-[2px]"
+                              className="w-1 xs:w-1.5 sm:w-2 bg-blue-600 rounded-t-[2px]"
                               animate={{ height: [`${h * 0.7}%`, `${h}%`, `${h * 0.7}%`] }}
                               transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
                             />
@@ -1070,10 +1070,10 @@ export default function InteractiveDashboard() {
                     {/* DIFFERENT CHART 6: 3 Flowing Security Checkpoint Gates */}
                     <div className="col-span-4 flex justify-center">
                       <div className="flex flex-col items-start gap-1 sm:gap-1.5 pt-0.5 sm:pt-1 w-full max-w-[170px]">
-                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-emerald-50 border border-emerald-100/80 shadow-xs">
-                          <ShieldCheck className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-emerald-600" />
-                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-emerald-600">SOC2 II</span>
-                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-emerald-700/70 hidden xs:inline">Passed</span>
+                        <div className="inline-flex items-center gap-1 xs:gap-1.5 px-1.5 xs:px-2.5 py-0.5 xs:py-1 rounded-md bg-blue-50 border border-blue-100/80 shadow-xs">
+                          <ShieldCheck className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-blue-600" />
+                          <span className="text-[8.5px] xs:text-[10px] font-bold font-plus-jakarta text-blue-600">SOC2 II</span>
+                          <span className="text-[7.5px] xs:text-[9.5px] font-medium font-dm-sans text-blue-700/70 hidden xs:inline">Passed</span>
                         </div>
 
                         {/* Security Gates Pipeline */}
@@ -1085,11 +1085,11 @@ export default function InteractiveDashboard() {
                           ].map((gate, i) => (
                             <div key={i} className="flex flex-col items-center gap-0.5 sm:gap-1">
                               <motion.div
-                                className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 rounded sm:rounded-lg bg-emerald-100/80 border border-emerald-200 flex items-center justify-center text-emerald-700"
+                                className="w-5 h-5 xs:w-6 xs:h-6 sm:w-8 sm:h-8 rounded sm:rounded-lg bg-blue-100/80 border border-blue-200 flex items-center justify-center text-blue-700"
                                 animate={{ scale: [1, 1.08, 1] }}
                                 transition={{ duration: 2.2, repeat: Infinity, delay: i * 0.3 }}
                               >
-                                <CheckCircle2 className="w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-4 sm:h-4 text-emerald-600" />
+                                <CheckCircle2 className="w-2.5 h-2.5 xs:w-3 xs:h-3 sm:w-4 sm:h-4 text-blue-600" />
                               </motion.div>
                               <span className="text-[6px] sm:text-[7.5px] font-bold text-slate-500">{gate.name}</span>
                             </div>
@@ -1102,28 +1102,28 @@ export default function InteractiveDashboard() {
                     <div className="col-span-3 flex justify-end">
                       <div className="flex flex-col items-center justify-between h-full py-0.5">
                         <div className="flex items-center gap-1 self-start">
-                          <ShieldCheck className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-emerald-600" />
+                          <ShieldCheck className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-blue-600" />
                           <span className="text-[9px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 tracking-tight truncate">Trust</span>
                         </div>
 
                         {/* Shield Badge Visual */}
                         <div className="relative w-[48px] h-[48px] xs:w-[58px] xs:h-[58px] sm:w-[72px] sm:h-[72px] flex items-center justify-center my-0.5 sm:my-1">
                           <motion.div
-                            className="w-8 h-8 xs:w-10 xs:h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white shadow-md shadow-emerald-500/25"
+                            className="w-8 h-8 xs:w-10 xs:h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-2xl bg-gradient-to-tr from-blue-700 to-blue-500 flex items-center justify-center text-white shadow-md shadow-blue-500/25"
                             animate={{ rotate: [0, 2, -2, 0] }}
                             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
                           >
                             <ShieldCheck className="w-4 h-4 xs:w-5 xs:h-5 sm:w-7 sm:h-7 text-white" />
                           </motion.div>
                           <motion.div
-                            className="absolute inset-0 rounded-full border border-emerald-400/40"
+                            className="absolute inset-0 rounded-full border border-blue-400/40"
                             animate={{ scale: [1, 1.15, 1], opacity: [0.8, 0, 0.8] }}
                             transition={{ duration: 2.5, repeat: Infinity }}
                           />
                         </div>
 
                         <div className="flex flex-col items-center text-center">
-                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-bold font-dm-sans text-emerald-600 flex items-center gap-0.5 sm:gap-1">
+                          <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-bold font-dm-sans text-blue-600 flex items-center gap-0.5 sm:gap-1">
                             100%
                           </span>
                           <span className="text-[7px] sm:text-[8.5px] text-slate-400 font-dm-sans font-normal whitespace-nowrap hidden xs:inline">Zero Vuln</span>
@@ -1138,12 +1138,12 @@ export default function InteractiveDashboard() {
                       <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">Encryption</span>
                       <div className="flex items-baseline justify-between mt-0.5 sm:mt-1">
                         <span className="text-[12px] xs:text-[15px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight truncate">AES-256</span>
-                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-emerald-700 bg-emerald-50 px-1 sm:px-1.5 py-0.5 rounded border border-emerald-100/60 hidden xs:inline-block">Rest</span>
+                        <span className="text-[7px] sm:text-[9px] font-medium font-dm-sans text-blue-700 bg-blue-50 px-1 sm:px-1.5 py-0.5 rounded border border-blue-100/60 hidden xs:inline-block">Rest</span>
                       </div>
                       <div className="w-full h-5 sm:h-8 mt-1 flex items-center">
-                        <div className="w-full bg-emerald-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-blue-100/60 h-1 sm:h-1.5 rounded-full overflow-hidden">
                           <motion.div
-                            className="bg-emerald-600 h-full rounded-full"
+                            className="bg-blue-600 h-full rounded-full"
                             animate={{ width: ['80%', '100%', '80%'] }}
                             transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                           />
@@ -1154,15 +1154,15 @@ export default function InteractiveDashboard() {
                       <div className="flex items-center justify-between">
                         <span className="text-[8px] xs:text-[9.5px] sm:text-[11px] font-medium font-dm-sans text-slate-400 truncate">Compliance</span>
                         <span className="relative flex h-1.5 w-1.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-blue-600" />
                         </span>
                       </div>
                       <div className="mt-0.5 sm:mt-1">
                         <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight">Passed</span>
                       </div>
                       <div className="flex items-center gap-0.5 sm:gap-1 mt-1 sm:mt-2 text-[7px] xs:text-[8px] sm:text-[9px] font-medium font-dm-sans">
-                        <span className="bg-emerald-50 text-emerald-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">ISO</span>
+                        <span className="bg-blue-50 text-blue-700 px-1 sm:px-1.5 py-0.5 rounded font-bold">ISO</span>
                         <span className="bg-blue-50 text-cobalt px-1 sm:px-1.5 py-0.5 rounded font-bold">GDPR</span>
                       </div>
                     </div>
@@ -1171,7 +1171,7 @@ export default function InteractiveDashboard() {
                       <div className="flex items-end justify-between mt-0.5 sm:mt-1">
                         <div className="min-w-0 flex-1">
                           <span className="text-[13px] xs:text-[16px] sm:text-[22px] font-extrabold font-plus-jakarta text-navy tracking-tight block">&lt;1m</span>
-                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-emerald-600">
+                          <div className="flex items-center gap-0.5 sm:gap-1 mt-0.5 text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-medium font-dm-sans text-blue-600">
                             <span>↑</span>
                             <span>Multi-Zone</span>
                           </div>
@@ -1180,7 +1180,7 @@ export default function InteractiveDashboard() {
                           {[50, 80, 65, 100].map((h, i) => (
                             <motion.div
                               key={i}
-                              className="w-1 xs:w-1.5 sm:w-2 bg-emerald-500 rounded-t-[2px]"
+                              className="w-1 xs:w-1.5 sm:w-2 bg-blue-600 rounded-t-[2px]"
                               animate={{ height: [`${h * 0.7}%`, `${h}%`, `${h * 0.7}%`] }}
                               transition={{ duration: 2, repeat: Infinity, delay: i * 0.2 }}
                             />

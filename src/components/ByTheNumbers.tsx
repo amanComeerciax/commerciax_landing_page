@@ -130,9 +130,9 @@ export default function ByTheNumbers() {
             </div>
 
             {/* Main Headline */}
-            <h2 className="font-instrument text-[42px] sm:text-[56px] lg:text-[66px] font-normal text-[#0A1628] leading-[1.08] tracking-[-0.02em]">
+            <h2 className="font-plus-jakarta font-extrabold text-[36px] sm:text-[50px] lg:text-[62px] text-[#0A1628] leading-[1.08] tracking-[-0.03em]">
               <FoldText text="Shipped in the last" splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} /> <br />
-              <span className="italic text-blue-600">
+              <span className="font-instrument italic font-normal text-blue-600">
                 <FoldText text="24 months." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
               </span>
             </h2>
