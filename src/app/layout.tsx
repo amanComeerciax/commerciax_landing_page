@@ -31,6 +31,14 @@ export const metadata: Metadata = {
   description:
     "From idea to production, Commerciax helps businesses build, launch and scale with AI-powered software delivered at lightning speed.",
   keywords: ["AI software", "SaaS", "automation", "Commerciax", "product development"],
+  icons: {
+    icon: [
+      { url: "/favicon.png", type: "image/png" },
+      { url: "/icon.png", type: "image/png" },
+    ],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     title: "Commerciax — Ship Smarter Tools at High Speed",
     description:
