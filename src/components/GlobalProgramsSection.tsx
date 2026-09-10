@@ -1,7 +1,11 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import AnimatedNumber from './AnimatedNumber';
+import FoldText from './FoldText';
+import { gsap, useGSAP } from '@/lib/gsap';
 
 const programs = [
   {
@@ -191,8 +195,14 @@ export default function GlobalProgramsSection() {
       <div className="absolute top-10 right-0 w-[600px] h-[600px] bg-gradient-to-b from-blue-100/35 via-indigo-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
       <div className="absolute bottom-10 -left-20 w-[500px] h-[500px] bg-blue-100/25 rounded-full blur-3xl pointer-events-none z-0" />
 
-      {/* Background Global Network Map & Flight Arc Lines */}
-      <div className="absolute inset-0 pointer-events-none z-0 opacity-55 overflow-hidden">
+      {/* Background Global Network Map & Flight Arc Lines with Seamless Top/Bottom Melt */}
+      <div 
+        className="absolute inset-0 pointer-events-none z-0 opacity-55 overflow-hidden"
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
+        }}
+      >
         <svg
           viewBox="0 0 1440 600"
           className="w-full h-full object-cover"
@@ -337,9 +347,11 @@ export default function GlobalProgramsSection() {
           </div>
 
           {/* Main Headline */}
-          <h2 className="font-plus-jakarta text-[38px] sm:text-[50px] lg:text-[58px] font-extrabold text-[#0A1628] leading-[1.08] tracking-[-0.03em] mb-4">
-            Part of the programs <br />
-            shaping <span className="font-instrument italic font-normal text-blue-600">global AI</span>.
+          <h2 className="font-instrument text-[34px] xs:text-[44px] sm:text-[54px] lg:text-[62px] font-normal text-navy leading-[1.1] sm:leading-[1.08] tracking-tight mb-4">
+            <FoldText text="Part of the programs shaping" splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />{' '}
+            <span className="italic text-blue-600 font-normal">
+              <FoldText text="global AI." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
+            </span>
           </h2>
 
           {/* Subtitle */}
@@ -352,13 +364,9 @@ export default function GlobalProgramsSection() {
         {/* 6 PARTNER / PROGRAM CARDS (3 COLUMNS X 2 ROWS)             */}
         {/* ========================================================== */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 mb-14 sm:mb-16">
-          {programs.map((prog, idx) => (
-            <motion.div
+          {programs.map((prog) => (
+            <div
               key={prog.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.06 }}
               className="group bg-white/85 hover:bg-white rounded-2xl sm:rounded-[22px] p-5 sm:p-6 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-slate-300 transition-all duration-300 flex items-center justify-between gap-4 cursor-pointer"
             >
               <div className="flex items-center gap-4 sm:gap-5 min-w-0 flex-1">
@@ -380,7 +388,7 @@ export default function GlobalProgramsSection() {
               <div className="w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 group-hover:text-blue-600 group-hover:border-blue-300 group-hover:bg-blue-50 transition-all shrink-0">
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
@@ -401,7 +409,7 @@ export default function GlobalProgramsSection() {
             {/* Stat 1 */}
             <div className="flex items-baseline gap-2.5">
               <span className="font-instrument italic text-[34px] sm:text-[38px] font-normal text-blue-600 leading-none">
-                6+
+                <AnimatedNumber value={6} suffix="+" duration={1400} />
               </span>
               <span className="text-[10px] font-mono tracking-[0.18em] text-slate-500 uppercase">
                 GLOBAL PROGRAMS
@@ -413,7 +421,7 @@ export default function GlobalProgramsSection() {
             {/* Stat 2 */}
             <div className="flex items-baseline gap-2.5">
               <span className="font-instrument italic text-[34px] sm:text-[38px] font-normal text-blue-600 leading-none">
-                4
+                <AnimatedNumber value={4} duration={1200} />
               </span>
               <span className="text-[10px] font-mono tracking-[0.18em] text-slate-500 uppercase">
                 CONTINENTS
@@ -425,7 +433,7 @@ export default function GlobalProgramsSection() {
             {/* Stat 3 */}
             <div className="flex items-baseline gap-2.5">
               <span className="font-instrument italic text-[34px] sm:text-[38px] font-normal text-blue-600 leading-none">
-                1
+                <AnimatedNumber value={1} duration={1000} />
               </span>
               <span className="text-[10px] font-mono tracking-[0.18em] text-slate-500 uppercase">
                 SHARED MISSION

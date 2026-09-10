@@ -24,6 +24,8 @@ const instrumentSerif = Instrument_Serif({
   display: "swap",
 });
 
+import SmoothScroll from "@/components/SmoothScroll";
+
 export const metadata: Metadata = {
   title: "Commerciax — Ship Smarter Tools at High Speed",
   description:
@@ -44,7 +46,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${plusJakarta.variable} ${dmSans.variable} ${instrumentSerif.variable}`}>
-      <body className="font-plus-jakarta antialiased">{children}</body>
+      <body className="font-plus-jakarta antialiased">
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
+      </body>
     </html>
   );
 }

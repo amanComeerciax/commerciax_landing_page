@@ -54,42 +54,6 @@ export default function GlobeVisualization() {
         </motion.div>
       </div>
 
-      {/* 3D Isometric Architectural Podium Slab (Plinth) under Dashboard */}
-      <div
-        className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[95%] max-w-[840px] xl:max-w-[900px] 2xl:max-w-[960px] pointer-events-none z-0 hidden sm:block"
-        style={{
-          perspective: '1400px',
-        }}
-      >
-        <div
-          className="relative w-full rounded-2xl bg-gradient-to-b from-white/95 via-white/80 to-white/45 backdrop-blur-lg border border-white/90 shadow-2xl shadow-slate-300/50 overflow-hidden"
-          style={{
-            height: '48px',
-            transform: 'rotateY(-10deg) rotateX(20deg) rotateZ(-1.8deg)',
-            transformStyle: 'preserve-3d',
-          }}
-        >
-          {/* Top highlight line */}
-          <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-white to-transparent opacity-80" />
-
-          {/* Front Face Engraved Text */}
-          <div className="flex items-center justify-between h-full px-6 text-slate-400 font-extrabold tracking-[0.22em] text-[8.5px] uppercase select-none">
-            <div className="flex items-center gap-2.5">
-              <span>Build</span>
-              <span className="text-[6px] text-slate-300">•</span>
-              <span>Launch</span>
-              <span className="text-[6px] text-slate-300">•</span>
-              <span>Scale</span>
-              <span className="text-[6px] text-slate-300">•</span>
-              <span>Together</span>
-            </div>
-            <div className="text-slate-300/90 tracking-[0.16em] text-[8px] font-bold hidden sm:block">
-              A Faster Tomorrow —
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Studio Depth: Soft Blurred Plant Leaf on Far Right Edge */}
       <div className="absolute -right-8 bottom-10 w-28 h-44 opacity-25 blur-sm pointer-events-none hidden xl:block select-none">
         <svg viewBox="0 0 100 160" fill="none" className="w-full h-full text-emerald-800">

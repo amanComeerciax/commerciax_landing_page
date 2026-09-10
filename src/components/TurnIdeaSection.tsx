@@ -1,16 +1,18 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import OriginButton from './OriginButton';
+import AnimatedNumber from './AnimatedNumber';
+import FoldText from './FoldText';
 import {
   ArrowRight,
   Check,
   Zap,
   Users,
   ShieldCheck,
-  BarChart3,
-  Box,
-  Send,
 } from 'lucide-react';
+import { gsap, useGSAP } from '@/lib/gsap';
 
 const steps = [
   {
@@ -36,131 +38,138 @@ const steps = [
 ];
 
 export default function TurnIdeaSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
+  const processRef = useRef<HTMLDivElement>(null);
+  const isProcessInView = useInView(processRef, { once: true, amount: 0.25 });
+
+  useGSAP(
+    () => {
+      if (!sectionRef.current) return;
+
+      if (glowRef.current) {
+        gsap.to(glowRef.current, {
+          scale: 1.25,
+          opacity: 0.8,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.5,
+          },
+        });
+      }
+    },
+    { scope: sectionRef }
+  );
+
   return (
     <section
+      ref={sectionRef}
       id="cta-section"
       className="relative w-full py-16 sm:py-24 bg-[#FAF8F5] text-navy overflow-hidden"
     >
-      <div className="site-container px-4 sm:px-8 lg:px-12 max-w-[1340px] mx-auto">
-        {/* ========================================================== */}
-        {/* MAIN HERO SPLIT-GRADIENT CARD CONTAINER                    */}
-        {/* ========================================================== */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="relative rounded-[32px] sm:rounded-[36px] bg-gradient-to-r from-[#FAF8F5] via-[#EEF5FF]/70 to-[#0C192E] border border-slate-200/90 p-8 sm:p-12 lg:p-16 overflow-hidden shadow-[0_20px_60px_-15px_rgba(15,23,42,0.08)]"
+      {/* Seamless Edge Melting */}
+      <div className="absolute top-0 left-0 right-0 h-28 sm:h-36 bg-gradient-to-b from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
+      <div className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
+
+      <div className="site-container px-4 sm:px-8 lg:px-12 max-w-[1340px] mx-auto z-10 relative">
+        <div
+          ref={cardRef}
+          className="relative rounded-[28px] sm:rounded-[32px] bg-white border border-slate-200/80 p-8 sm:p-12 lg:p-16 overflow-hidden shadow-[0_8px_40px_-12px_rgba(10,22,40,0.08)]"
         >
-          {/* Ambient Lighting Glows in Dark Right Area */}
-          <div className="absolute -top-24 -right-24 w-[450px] h-[450px] bg-blue-500/20 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 right-1/4 w-[350px] h-[350px] bg-indigo-500/15 rounded-full blur-3xl pointer-events-none" />
+          {/* Ambient Glow in Background */}
+          <div
+            ref={glowRef}
+            className="absolute -right-24 -top-24 w-[450px] h-[450px] bg-gradient-to-br from-blue-400/10 via-cyan-300/10 to-transparent rounded-full blur-3xl pointer-events-none z-0"
+          />
 
-          {/* Right Circular Dotted Track & Pulse Radar Nodes */}
-          <div className="hidden lg:block absolute -top-8 -right-8 w-[620px] h-[620px] pointer-events-none opacity-45">
-            <svg viewBox="0 0 600 600" fill="none" className="w-full h-full">
-              <circle
-                cx="380"
-                cy="300"
-                r="240"
-                stroke="#93C5FD"
-                strokeWidth="1.2"
-                strokeDasharray="4 6"
-              />
-              <circle cx="150" cy="220" r="4.5" fill="#2563EB" />
-              <circle cx="150" cy="220" r="9" stroke="#93C5FD" strokeWidth="1" opacity="0.6" className="animate-ping" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+            {/* LEFT: Heading & Action Details */}
+            <div className="lg:col-span-7 flex flex-col justify-between">
+              <div className="flex flex-col">
+                {/* Eyebrow */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50/80 border border-blue-100/90 mb-5 self-start shadow-xs">
+                  <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+                  <span className="text-[11px] font-mono tracking-[0.2em] font-bold text-blue-700 uppercase">
+                    READY TO SHIP?
+                  </span>
+                </div>
 
-              <circle cx="340" cy="80" r="4" fill="#2563EB" />
-              <circle cx="340" cy="80" r="8" stroke="#93C5FD" strokeWidth="1" opacity="0.6" className="animate-ping" />
+                {/* Headline */}
+                <h2 className="font-instrument text-[36px] xs:text-[46px] sm:text-[56px] lg:text-[64px] font-normal text-[#0A1628] leading-[1.08] sm:leading-[1.04] tracking-tight mb-5">
+                  <FoldText text="Turn your idea into" splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} /> <br />
+                  <span className="italic text-blue-600 font-normal">
+                    <FoldText text="production." splitBy="word" trigger="scroll" duration={0.65} />
+                  </span>
+                </h2>
 
-              <circle cx="560" cy="320" r="4.5" fill="#2563EB" />
-              <circle cx="560" cy="320" r="9" stroke="#93C5FD" strokeWidth="1" opacity="0.6" className="animate-ping" />
-            </svg>
-          </div>
+                {/* Subtitle */}
+                <p className="text-[15px] sm:text-[16px] text-slate-500 font-dm-sans leading-relaxed mb-8 max-w-md">
+                  Book a 30-minute strategy call. We&apos;ll map the fastest path from your goal to shipped software.
+                </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-center relative z-10">
-            {/* ========================================================== */}
-            {/* LEFT COLUMN: 6 COLS                                       */}
-            {/* ========================================================== */}
-            <div className="lg:col-span-6 flex flex-col justify-between">
-              {/* Eyebrow */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200/60 border border-slate-300/60 mb-5 self-start">
-                <span className="w-2 h-2 rounded-full bg-blue-600" />
-                <span className="text-[11px] font-mono tracking-[0.2em] font-bold text-slate-700 uppercase">
-                  READY TO SHIP?
-                </span>
+                {/* Buttons */}
+                <div className="flex flex-wrap items-center gap-4 mb-10">
+                  <OriginButton
+                    href="#contact"
+                    variant="primary"
+                    size="md"
+                    icon={<ArrowRight className="w-4 h-4" />}
+                  >
+                    Book a Strategy Call
+                  </OriginButton>
+                  <OriginButton
+                    href="#services"
+                    variant="outline"
+                    size="md"
+                  >
+                    Explore Capabilities
+                  </OriginButton>
+                </div>
               </div>
 
-              {/* Headline */}
-              <h2 className="font-plus-jakarta text-[42px] sm:text-[54px] lg:text-[62px] font-extrabold text-[#0A1628] leading-[1.04] tracking-[-0.03em] mb-5">
-                Turn your idea into <br />
-                <span className="font-instrument italic font-normal text-blue-600">
-                  production.
-                </span>
-              </h2>
-
-              {/* Subtitle */}
-              <p className="text-[15px] sm:text-[16px] text-slate-600 font-dm-sans leading-relaxed mb-8 max-w-md">
-                Book a 30-minute strategy call. We’ll map the fastest path from your goal to shipped software.
-              </p>
-
-              {/* 2 Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 mb-12 sm:mb-14">
-                <a
-                  href="#contact"
-                  className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#0A1628] hover:bg-slate-800 text-white font-dm-sans text-[13.5px] font-semibold transition-all shadow-md shadow-navy/15 hover:-translate-y-0.5 group cursor-pointer"
-                >
-                  <span>Book a Strategy Call</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
-
-                <a
-                  href="#contact"
-                  className="inline-flex items-center px-7 py-3.5 rounded-full bg-white/95 hover:bg-white text-slate-800 border border-slate-200/90 font-dm-sans text-[13.5px] font-semibold transition-all shadow-2xs hover:shadow-xs hover:border-slate-300 cursor-pointer"
-                >
-                  Contact Us
-                </a>
-              </div>
-
-              {/* Bottom 3 Feature / Trust Badges */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-6 border-t border-slate-200/80">
+              {/* Three Trust Badges */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 border-t border-slate-200/80">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
-                    <Zap className="w-4 h-4 fill-blue-600" />
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100/60">
+                    <Zap className="w-3.5 h-3.5" />
                   </div>
                   <div>
                     <div className="text-[12.5px] font-bold font-plus-jakarta text-[#0A1628]">
-                      No deck
+                      Rapid kickoff
                     </div>
-                    <div className="text-[11px] text-slate-500 font-dm-sans">
-                      Just a conversation
+                    <div className="text-[11px] text-slate-400 font-dm-sans">
+                      Start in 48 hours
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
-                    <Users className="w-4 h-4 text-blue-600" />
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100/60">
+                    <Users className="w-3.5 h-3.5" />
                   </div>
                   <div>
                     <div className="text-[12.5px] font-bold font-plus-jakarta text-[#0A1628]">
                       Expert team
                     </div>
-                    <div className="text-[11px] text-slate-500 font-dm-sans">
+                    <div className="text-[11px] text-slate-400 font-dm-sans">
                       Product to production
                     </div>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
-                    <ShieldCheck className="w-4 h-4 text-blue-600" />
+                  <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100/60">
+                    <ShieldCheck className="w-3.5 h-3.5" />
                   </div>
                   <div>
                     <div className="text-[12.5px] font-bold font-plus-jakarta text-[#0A1628]">
                       Real outcomes
                     </div>
-                    <div className="text-[11px] text-slate-500 font-dm-sans">
+                    <div className="text-[11px] text-slate-400 font-dm-sans">
                       Built for scale
                     </div>
                   </div>
@@ -168,181 +177,130 @@ export default function TurnIdeaSection() {
               </div>
             </div>
 
-            {/* ========================================================== */}
-            {/* RIGHT COLUMN: 6 COLS (SOFTWARE WINDOW & FLOATING BADGES)   */}
-            {/* ========================================================== */}
-            <div className="lg:col-span-6 relative flex items-center justify-center pt-8 sm:pt-4">
-              {/* Floating Badge 1 (Left Middle: Strategy Today) */}
-              <motion.div
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="hidden sm:flex absolute -left-4 sm:left-0 top-1/2 -translate-y-1/2 z-30 flex-col items-center justify-center p-3 rounded-2xl bg-white/95 border border-slate-200/90 shadow-md backdrop-blur-md text-center w-20"
-              >
-                <div className="w-7 h-7 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-1">
-                  <BarChart3 className="w-4 h-4" />
-                </div>
-                <span className="text-[10px] font-bold font-plus-jakarta text-slate-900 leading-tight">
-                  Strategy
-                </span>
-                <span className="text-[9.5px] text-slate-500 font-dm-sans">
-                  today
-                </span>
-              </motion.div>
-
-              {/* Floating Badge 2 (Top Right: Ideas to impact) */}
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.25 }}
-                className="hidden sm:flex absolute top-0 right-4 sm:right-10 z-30 items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/95 border border-slate-200/90 shadow-md backdrop-blur-md"
-              >
-                <div className="w-7 h-7 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                  <Box className="w-4 h-4" />
-                </div>
-                <div className="text-left leading-tight">
-                  <div className="text-[11px] font-bold font-plus-jakarta text-slate-900">
-                    Ideas
-                  </div>
-                  <div className="text-[10px] text-slate-500 font-dm-sans">
-                    to impact
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Curved Arrow 1: from Top-Right badge down to window */}
-              <div className="hidden sm:block absolute top-14 right-14 z-25 pointer-events-none">
-                <svg className="w-6 h-8 text-slate-400 rotate-[15deg]" viewBox="0 0 30 40" fill="none">
-                  <path
-                    d="M 15,2 Q 26,16 18,34"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                  <path
-                    d="M 12,28 L 18,35 L 24,29"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-
-              {/* Floating Badge 3 (Bottom Right: Shipped tomorrow) */}
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="hidden sm:flex absolute bottom-12 right-2 sm:right-6 z-30 items-center gap-2 px-3.5 py-2 rounded-2xl bg-white/95 border border-slate-200/90 shadow-md backdrop-blur-md"
-              >
-                <div className="w-7 h-7 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                  <Send className="w-3.5 h-3.5 text-blue-600" />
-                </div>
-                <div className="text-left leading-tight">
-                  <div className="text-[11px] font-bold font-plus-jakarta text-slate-900">
-                    Shipped
-                  </div>
-                  <div className="text-[10px] text-slate-500 font-dm-sans">
-                    tomorrow
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Curved Arrow 2: from bottom right up to window */}
-              <div className="hidden sm:block absolute bottom-24 right-10 z-25 pointer-events-none">
-                <svg className="w-6 h-8 text-slate-400 rotate-[-15deg]" viewBox="0 0 30 40" fill="none">
-                  <path
-                    d="M 15,38 Q 26,24 18,6"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                    strokeLinecap="round"
-                    fill="none"
-                  />
-                  <path
-                    d="M 12,12 L 18,5 L 24,11"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </div>
-
-              {/* Bottom-Right Handwritten Script: Faster together. */}
-              <div className="hidden sm:block absolute -bottom-4 right-8 z-30 pointer-events-none">
-                <span className="font-serif italic text-[15px] sm:text-[16px] text-blue-200/90 tracking-wide rotate-[12deg] select-none whitespace-nowrap">
-                  Faster <br />
-                  together.
-                </span>
-              </div>
-
-              {/* ========================================================== */}
-              {/* MAIN TILTED SOFTWARE WINDOW                                */}
-              {/* ========================================================== */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.96 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="w-full max-w-[380px] sm:max-w-[420px] bg-white rounded-[26px] border border-slate-200/90 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.22),0_0_1px_1px_rgba(0,0,0,0.04)] p-6 sm:p-7 rotate-[-2deg] my-4"
-              >
-                {/* Window Top Bar with 3 Dots */}
-                <div className="flex items-center gap-1.5 mb-4 pb-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-                  <span className="w-2.5 h-2.5 rounded-full bg-slate-200" />
-                </div>
-
-                {/* Sub Header */}
-                <div className="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4">
-                  <span className="font-plus-jakarta font-bold text-[14px] sm:text-[14.5px] text-[#0A1628]">
+            {/* RIGHT: Sequential Animated Process Card */}
+            <div className="lg:col-span-5 w-full flex items-center justify-center lg:justify-end" ref={processRef}>
+              <div className="w-full max-w-[420px] bg-slate-50/90 rounded-[22px] border border-slate-200/80 p-6 sm:p-7 shadow-sm">
+                {/* Header */}
+                <div className="flex items-center justify-between pb-4 border-b border-slate-200/80 mb-5">
+                  <span className="font-plus-jakarta font-bold text-[14.5px] text-[#0A1628]">
                     Your Idea → Production
                   </span>
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200/60 text-[10.5px] font-semibold text-emerald-700">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-blue-50 border border-blue-200/70 text-[10.5px] font-semibold text-blue-700">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
                     On track
                   </span>
                 </div>
 
-                {/* 4 Steps Timeline List */}
+                {/* Steps with Sequential Checkmark Animations */}
                 <div className="space-y-3.5">
                   {steps.map((step, idx) => {
                     const isLast = idx === steps.length - 1;
+                    const stepDelay = 0.25 + idx * 0.7;
+                    const lineDelay = stepDelay + 0.35;
+
                     return (
                       <div key={step.title} className="flex items-start gap-3.5 relative">
-                        {/* Node */}
+                        {/* Step Check / Circle */}
                         <div className="relative flex flex-col items-center shrink-0">
                           {step.completed ? (
-                            <div className="w-5.5 h-5.5 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-2xs">
-                              <Check className="w-3 h-3 stroke-[3]" />
-                            </div>
+                            <motion.div
+                              initial={{ scale: 0.85, backgroundColor: '#FFFFFF', borderColor: '#CBD5E1' }}
+                              animate={
+                                isProcessInView
+                                  ? {
+                                      scale: [0.85, 1.22, 1],
+                                      backgroundColor: '#2563EB',
+                                      borderColor: '#2563EB',
+                                      boxShadow: '0 4px 14px -2px rgba(37, 99, 235, 0.45)',
+                                    }
+                                  : { scale: 0.85, backgroundColor: '#FFFFFF', borderColor: '#CBD5E1' }
+                              }
+                              transition={{
+                                duration: 0.45,
+                                delay: stepDelay,
+                                ease: [0.34, 1.56, 0.64, 1],
+                              }}
+                              className="w-6 h-6 rounded-full border-2 flex items-center justify-center shadow-xs z-10"
+                            >
+                              <motion.svg
+                                width="14"
+                                height="14"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="3.2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="w-3.5 h-3.5 text-white"
+                              >
+                                <motion.path
+                                  d="M20 6L9 17L4 12"
+                                  initial={{ pathLength: 0, opacity: 0 }}
+                                  animate={
+                                    isProcessInView
+                                      ? { pathLength: 1, opacity: 1 }
+                                      : { pathLength: 0, opacity: 0 }
+                                  }
+                                  transition={{
+                                    duration: 0.35,
+                                    delay: stepDelay + 0.15,
+                                    ease: 'easeOut',
+                                  }}
+                                />
+                              </motion.svg>
+                            </motion.div>
                           ) : (
-                            <div className="w-5.5 h-5.5 rounded-full border-2 border-blue-500 bg-white flex items-center justify-center" />
+                            <motion.div
+                              initial={{ borderColor: '#CBD5E1', backgroundColor: '#FFFFFF' }}
+                              animate={
+                                isProcessInView
+                                  ? {
+                                      borderColor: '#3B82F6',
+                                      backgroundColor: 'rgba(239, 246, 255, 0.8)',
+                                    }
+                                  : {}
+                              }
+                              transition={{ duration: 0.5, delay: stepDelay }}
+                              className="w-6 h-6 rounded-full border-2 bg-white flex items-center justify-center relative z-10"
+                            >
+                              {/* Active Pulsing Core for Launch Step */}
+                              <motion.span
+                                animate={{ scale: [0.8, 1.3, 0.8], opacity: [0.6, 1, 0.6] }}
+                                transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+                                className="w-2 h-2 rounded-full bg-blue-600"
+                              />
+                            </motion.div>
                           )}
 
-                          {/* Line to next */}
+                          {/* Connecting Line to Next Step */}
                           {!isLast && (
-                            <div
-                              className={`w-[1.5px] h-6 mt-1 ${
-                                step.completed
-                                  ? 'bg-blue-600/70'
-                                  : 'border-l border-dashed border-slate-300'
-                              }`}
-                            />
+                            <div className="w-[2px] h-5 bg-slate-200 relative overflow-hidden mt-1 rounded-full">
+                              <motion.div
+                                initial={{ scaleY: 0 }}
+                                animate={isProcessInView ? { scaleY: 1 } : { scaleY: 0 }}
+                                transition={{
+                                  duration: 0.35,
+                                  delay: lineDelay,
+                                  ease: 'easeInOut',
+                                }}
+                                style={{ transformOrigin: 'top' }}
+                                className="w-full h-full bg-blue-600 rounded-full"
+                              />
+                            </div>
                           )}
                         </div>
 
-                        {/* Text */}
+                        {/* Step Details */}
                         <div className="pt-0.5">
-                          <h4 className="font-plus-jakarta font-bold text-[12.5px] text-[#0A1628] leading-tight">
+                          <motion.h4
+                            initial={{ opacity: 0.7 }}
+                            animate={isProcessInView ? { opacity: 1 } : { opacity: 0.7 }}
+                            transition={{ duration: 0.3, delay: stepDelay }}
+                            className="font-plus-jakarta font-bold text-[13px] text-[#0A1628] leading-tight"
+                          >
                             {step.title}
-                          </h4>
-                          <p className="text-[10.5px] text-slate-500 font-dm-sans leading-snug mt-0.5">
+                          </motion.h4>
+                          <p className="text-[11px] text-slate-400 font-dm-sans leading-snug mt-0.5">
                             {step.subtitle}
                           </p>
                         </div>
@@ -350,10 +308,38 @@ export default function TurnIdeaSection() {
                     );
                   })}
                 </div>
-              </motion.div>
+
+                {/* Bottom Stats */}
+                <div className="grid grid-cols-3 gap-3 mt-6 pt-5 border-t border-slate-200/80">
+                  <div className="text-center">
+                    <span className="block font-instrument italic text-[20px] font-medium text-[#0A1628] leading-none">
+                      <AnimatedNumber value={1} suffix=" wk" duration={1000} />
+                    </span>
+                    <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-wider mt-1 block">
+                      Prototype
+                    </span>
+                  </div>
+                  <div className="text-center border-x border-slate-200/80">
+                    <span className="block font-instrument italic text-[20px] font-medium text-blue-600 leading-none">
+                      <AnimatedNumber value={10} suffix="d" duration={1200} />
+                    </span>
+                    <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-wider mt-1 block">
+                      Team Live
+                    </span>
+                  </div>
+                  <div className="text-center">
+                    <span className="block font-instrument italic text-[20px] font-medium text-[#0A1628] leading-none">
+                      <AnimatedNumber value={100} suffix="%" duration={1600} />
+                    </span>
+                    <span className="text-[9px] font-mono font-bold text-slate-400 uppercase tracking-wider mt-1 block">
+                      Ownership
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -11,6 +11,8 @@ import {
   ArrowUpRight,
   ArrowRight,
 } from 'lucide-react';
+import { gsap, useGSAP } from '@/lib/gsap';
+import FoldText from './FoldText';
 
 // Animated Counter Hook with Decimals & Smooth Deceleration
 function useAnimatedCount(
@@ -57,6 +59,7 @@ function useAnimatedCount(
 
 export default function ByTheNumbers() {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const bgImgRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { amount: 0.2, once: true });
 
   const projectsCount = useAnimatedCount(50, 1800, isInView, 0);
@@ -64,23 +67,52 @@ export default function ByTheNumbers() {
   const speedCount = useAnimatedCount(10, 1600, isInView, 0);
   const uptimeCount = useAnimatedCount(99.99, 2200, isInView, 2);
 
+  useGSAP(
+    () => {
+      if (!sectionRef.current || !bgImgRef.current) return;
+
+      gsap.to(bgImgRef.current, {
+        yPercent: 15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+    },
+    { scope: sectionRef }
+  );
+
   return (
     <section
       ref={sectionRef}
       className="relative w-full py-16 sm:py-20 lg:py-24 bg-[#FAF8F5] text-navy overflow-hidden"
     >
-      {/* Background Graphic Asset: numners.png */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+      {/* Background Graphic Asset: numners.png with Seamless Edge Melt */}
+      <div 
+        ref={bgImgRef}
+        className="absolute inset-0 w-full h-full pointer-events-none select-none z-0"
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 60%, transparent 95%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 60%, transparent 95%)',
+        }}
+      >
         <Image
           src="/numners.png"
           alt="Global Network Infrastructure"
           fill
           priority
-          className="object-cover object-right sm:object-center opacity-90"
+          className="object-cover object-right sm:object-center opacity-85"
         />
         {/* Soft edge gradients for seamless blending */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/30 via-transparent to-[#FAF8F5]/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/40 via-transparent to-[#FAF8F5]/50 pointer-events-none" />
       </div>
+
+      {/* Top and Bottom Melting Gradients */}
+      <div className="absolute top-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-b from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
+      <div className="absolute bottom-0 left-0 right-0 h-44 sm:h-64 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/90 to-transparent pointer-events-none z-[1]" />
 
       <div className="site-container relative px-4 sm:px-8 lg:px-12 max-w-[1320px] mx-auto z-10">
         {/* ========================================================== */}
@@ -99,9 +131,9 @@ export default function ByTheNumbers() {
 
             {/* Main Headline */}
             <h2 className="font-instrument text-[42px] sm:text-[56px] lg:text-[66px] font-normal text-[#0A1628] leading-[1.08] tracking-[-0.02em]">
-              Shipped in the last <br />
+              <FoldText text="Shipped in the last" splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} /> <br />
               <span className="italic text-blue-600">
-                24 months.
+                <FoldText text="24 months." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
               </span>
             </h2>
 
@@ -172,11 +204,7 @@ export default function ByTheNumbers() {
         {/* ========================================================== */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {/* ---------------- CARD 1: 50+ PROJECTS SHIPPED ---------------- */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: 0.05 }}
+          <div
             className="group relative bg-[#FDFBF7]/90 sm:bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-[22px] p-6 border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_32px_-6px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
           >
             {/* Top Row: Circular Icon Badge + Growth Pill */}
@@ -229,14 +257,10 @@ export default function ByTheNumbers() {
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* ---------------- CARD 2: 5 COUNTRIES LIVE ---------------- */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: 0.12 }}
+          <div
             className="group relative bg-[#FDFBF7]/90 sm:bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-[22px] p-6 border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_32px_-6px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
           >
             {/* Top Row: Circular Icon Badge + Growth Pill */}
@@ -265,73 +289,156 @@ export default function ByTheNumbers() {
                 </p>
               </div>
 
-              {/* Right Graphic: World Map with Live Pulsing Radar Nodes */}
-              <div className="w-[110px] sm:w-[120px] h-[68px] shrink-0 flex items-end justify-end pointer-events-none pb-0.5">
-                <svg viewBox="0 0 130 65" className="w-full h-full overflow-visible" fill="none">
-                  <g fill="#94A3B8" opacity="0.45">
-                    <circle cx="24" cy="22" r="1.8" />
-                    <circle cx="32" cy="30" r="2" />
-                    <circle cx="38" cy="16" r="2.2" />
-                    <circle cx="62" cy="24" r="1.8" />
-                    <circle cx="74" cy="20" r="2.2" />
-                    <circle cx="90" cy="28" r="2.5" />
-                    <circle cx="100" cy="36" r="2" />
-                    <circle cx="110" cy="50" r="2.4" />
+              {/* Right Graphic: High-Fidelity World Map with Route Arcs & Live Pulsing Radar Nodes */}
+              <div className="w-[125px] xs:w-[135px] sm:w-[150px] h-[75px] shrink-0 flex items-end justify-end pointer-events-none pb-0.5">
+                <svg viewBox="0 0 150 78" className="w-full h-full overflow-visible" fill="none">
+                  <defs>
+                    <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.85" />
+                      <stop offset="50%" stopColor="#06B6D4" stopOpacity="0.9" />
+                      <stop offset="100%" stopColor="#2563EB" stopOpacity="0.85" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* World Map Continent Silhouettes */}
+                  <g fill="#E2E8F0" stroke="#CBD5E1" strokeWidth="0.6" opacity="0.95">
+                    {/* North America */}
+                    <path d="M 8 15 C 10 11, 18 9, 26 11 C 32 12, 38 17, 40 23 C 37 27, 31 30, 26 32 C 22 36, 20 41, 16 39 C 12 36, 12 28, 10 24 C 7 20, 7 16, 8 15 Z" />
+                    {/* Greenland */}
+                    <path d="M 36 7 C 42 6, 45 9, 44 13 C 40 15, 36 12, 36 7 Z" />
+                    {/* South America */}
+                    <path d="M 24 39 C 30 39, 35 43, 34 51 C 32 59, 28 67, 24 69 C 22 67, 21 57, 22 49 C 23 44, 23 41, 24 39 Z" />
+                    {/* Europe & UK */}
+                    <path d="M 56 15 C 62 11, 70 11, 74 17 C 72 23, 66 25, 62 25 C 57 24, 55 19, 56 15 Z" />
+                    <path d="M 52 14 C 54 13, 56 15, 55 18 C 53 19, 51 17, 52 14 Z" />
+                    {/* Africa */}
+                    <path d="M 58 29 C 72 27, 80 31, 79 41 C 78 51, 72 61, 66 63 C 61 59, 58 49, 57 39 C 57 34, 57 30, 58 29 Z" />
+                    {/* Eurasia / Northern Asia */}
+                    <path d="M 76 13 C 90 9, 112 10, 124 15 C 130 21, 126 29, 118 33 C 108 35, 98 32, 90 31 C 84 29, 78 23, 76 13 Z" />
+                    {/* Middle East */}
+                    <path d="M 76 31 C 82 29, 86 33, 84 38 C 80 40, 75 36, 76 31 Z" />
+                    {/* India */}
+                    <path d="M 92 33 C 98 33, 102 37, 100 45 C 96 47, 92 43, 92 33 Z" />
+                    {/* East Asia & Japan */}
+                    <path d="M 110 25 C 118 25, 124 31, 122 37 C 116 45, 110 43, 108 35 C 107 29, 108 26, 110 25 Z" />
+                    <path d="M 126 23 C 128 22, 130 25, 128 28 C 126 28, 125 25, 126 23 Z" />
+                    {/* Australia */}
+                    <path d="M 118 49 C 130 47, 138 51, 136 59 C 132 65, 122 66, 118 61 C 116 56, 116 51, 118 49 Z" />
+                    <path d="M 140 61 C 143 60, 144 64, 142 67 C 140 67, 139 64, 140 61 Z" />
                   </g>
 
-                  {/* 5 Live Radar Nodes */}
-                  {/* US */}
-                  <circle cx="30" cy="24" r="2.5" fill="#2563EB" />
-                  <motion.circle
-                    cx="30"
-                    cy="24"
-                    r="5.5"
-                    stroke="#2563EB"
-                    strokeWidth="1"
-                    animate={{ scale: [1, 2], opacity: [0.9, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
-                  />
+                  {/* Background Matrix Dots on Landmass */}
+                  <g fill="#94A3B8" opacity="0.4">
+                    <circle cx="18" cy="22" r="1.2" />
+                    <circle cx="28" cy="28" r="1.2" />
+                    <circle cx="26" cy="54" r="1.2" />
+                    <circle cx="64" cy="18" r="1.2" />
+                    <circle cx="66" cy="46" r="1.2" />
+                    <circle cx="88" cy="20" r="1.2" />
+                    <circle cx="106" cy="24" r="1.2" />
+                    <circle cx="114" cy="36" r="1.2" />
+                    <circle cx="128" cy="56" r="1.2" />
+                  </g>
 
-                  {/* UAE */}
-                  <circle cx="44" cy="36" r="2.2" fill="#2563EB" />
+                  {/* Interconnecting Global Data Routes (US -> UAE -> IN -> KR -> AU) */}
+                  <g stroke="url(#routeGradient)" strokeWidth="1.1" strokeDasharray="2.5,2.5" opacity="0.85" fill="none">
+                    {/* US to UAE */}
+                    <path d="M 24 23 Q 50 11 79 34" />
+                    {/* UAE to IN */}
+                    <path d="M 79 34 Q 87 29 96 39" />
+                    {/* IN to KR */}
+                    <path d="M 96 39 Q 108 26 120 28" />
+                    {/* KR to AU */}
+                    <path d="M 120 28 Q 130 40 126 55" />
+                  </g>
 
-                  {/* India (IN) */}
-                  <circle cx="72" cy="26" r="2.5" fill="#2563EB" />
+                  {/* 5 Live Radar Beacons on Exact Coordinates */}
+                  {/* 1. US (North America) */}
+                  <g>
+                    <motion.circle
+                      cx="24"
+                      cy="23"
+                      r="5.5"
+                      stroke="#2563EB"
+                      strokeWidth="1.2"
+                      fill="none"
+                      animate={{ scale: [1, 2.2], opacity: [0.9, 0] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: 'easeOut' }}
+                    />
+                    <circle cx="24" cy="23" r="2.8" fill="#2563EB" />
+                    <circle cx="24" cy="23" r="1" fill="#FFFFFF" />
+                  </g>
 
-                  {/* Korea (KR) */}
-                  <circle cx="88" cy="30" r="2.8" fill="#2563EB" />
-                  <motion.circle
-                    cx="88"
-                    cy="30"
-                    r="6"
-                    stroke="#2563EB"
-                    strokeWidth="1"
-                    animate={{ scale: [1, 2], opacity: [0.9, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay: 0.5 }}
-                  />
+                  {/* 2. UAE (Middle East) */}
+                  <g>
+                    <motion.circle
+                      cx="79"
+                      cy="34"
+                      r="5.5"
+                      stroke="#2563EB"
+                      strokeWidth="1.2"
+                      fill="none"
+                      animate={{ scale: [1, 2.2], opacity: [0.9, 0] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: 'easeOut', delay: 0.4 }}
+                    />
+                    <circle cx="79" cy="34" r="2.8" fill="#2563EB" />
+                    <circle cx="79" cy="34" r="1" fill="#FFFFFF" />
+                  </g>
 
-                  {/* Australia (AU) */}
-                  <circle cx="110" cy="50" r="2.5" fill="#2563EB" />
-                  <motion.circle
-                    cx="110"
-                    cy="50"
-                    r="5.5"
-                    stroke="#2563EB"
-                    strokeWidth="1"
-                    animate={{ scale: [1, 2], opacity: [0.9, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: 'easeOut', delay: 1 }}
-                  />
+                  {/* 3. India (IN) */}
+                  <g>
+                    <motion.circle
+                      cx="96"
+                      cy="39"
+                      r="5.5"
+                      stroke="#2563EB"
+                      strokeWidth="1.2"
+                      fill="none"
+                      animate={{ scale: [1, 2.2], opacity: [0.9, 0] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: 'easeOut', delay: 0.8 }}
+                    />
+                    <circle cx="96" cy="39" r="2.8" fill="#2563EB" />
+                    <circle cx="96" cy="39" r="1" fill="#FFFFFF" />
+                  </g>
+
+                  {/* 4. Korea (KR) */}
+                  <g>
+                    <motion.circle
+                      cx="120"
+                      cy="28"
+                      r="5.5"
+                      stroke="#2563EB"
+                      strokeWidth="1.2"
+                      fill="none"
+                      animate={{ scale: [1, 2.2], opacity: [0.9, 0] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: 'easeOut', delay: 1.2 }}
+                    />
+                    <circle cx="120" cy="28" r="2.8" fill="#2563EB" />
+                    <circle cx="120" cy="28" r="1" fill="#FFFFFF" />
+                  </g>
+
+                  {/* 5. Australia (AU) */}
+                  <g>
+                    <motion.circle
+                      cx="126"
+                      cy="55"
+                      r="5.5"
+                      stroke="#2563EB"
+                      strokeWidth="1.2"
+                      fill="none"
+                      animate={{ scale: [1, 2.2], opacity: [0.9, 0] }}
+                      transition={{ duration: 2.2, repeat: Infinity, ease: 'easeOut', delay: 1.6 }}
+                    />
+                    <circle cx="126" cy="55" r="2.8" fill="#2563EB" />
+                    <circle cx="126" cy="55" r="1" fill="#FFFFFF" />
+                  </g>
                 </svg>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* ---------------- CARD 3: 10X FASTER DELIVERY ---------------- */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: 0.18 }}
+          <div
             className="group relative bg-[#FDFBF7]/90 sm:bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-[22px] p-6 border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_32px_-6px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
           >
             {/* Top Row: Circular Icon Badge + Growth Pill */}
@@ -392,14 +499,10 @@ export default function ByTheNumbers() {
                 </svg>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* ---------------- CARD 4: 99.99% UPTIME SLA ---------------- */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.45, delay: 0.24 }}
+          <div
             className="group relative bg-[#FDFBF7]/90 sm:bg-white/95 backdrop-blur-sm rounded-2xl sm:rounded-[22px] p-6 border border-slate-200/80 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_32px_-6px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
           >
             {/* Top Row: Circular Icon Badge + Growth Pill */}
@@ -472,7 +575,7 @@ export default function ByTheNumbers() {
                 </svg>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

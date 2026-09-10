@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Cpu,
@@ -8,835 +8,687 @@ import {
   Users,
   Rocket,
   ArrowRight,
-  CheckCircle2,
-  Sparkles,
-  Terminal,
-  Activity,
+  ChevronRight,
+  ChevronLeft,
+  Database,
+  Send,
+  Calendar,
+  Layers,
   ShieldCheck,
   Zap,
-  Layers,
-  Database,
-  Search,
+  CheckCircle,
   Code2,
-  GitBranch,
-  BarChart3,
-  Calendar,
-  Check,
-  ChevronRight,
-  Laptop,
 } from 'lucide-react';
+import OriginButton from './OriginButton';
+import FoldText from './FoldText';
+import { gsap, useGSAP } from '@/lib/gsap';
 
-interface ServiceData {
+/* ========================================================================= */
+/* SIMPLIFIED SERVICE DATA INTERFACE                                          */
+/* ========================================================================= */
+
+export interface ServiceStory {
   id: string;
   num: string;
-  badge: string;
+  pillar: string;
   category: string;
-  title: string;
+  badge: string;
+  headlineMain: string;
+  headlineItalic: string;
   tagline: string;
-  description: string;
   features: string[];
-  metrics: { label: string; value: string }[];
-  icon: typeof Cpu;
-  accent: {
-    gradient: string;
-    border: string;
-    text: string;
-    bg: string;
-  };
+  serviceUrl: string;
+  ctaText: string;
+  stats: { value: string; label: string }[];
+  steps: { num: string; title: string; desc: string; metric: string; icon: React.ComponentType<{ className?: string }> }[];
+  icon: React.ComponentType<{ className?: string }>;
+  tintGradient: string;
+  accentBg: string;
+  accentBorder: string;
+  accentText: string;
 }
 
-const SERVICES: ServiceData[] = [
+const SERVICES_DATA: ServiceStory[] = [
+  /* 01 // BUILD: AI SOFTWARE DEVELOPMENT */
   {
     id: 'ai-dev',
     num: '01',
-    category: 'BUILD & AUTOMATE',
-    badge: 'Enterprise AI Stack',
-    title: 'AI Software Development',
-    tagline: 'Custom LLM architectures, RAG pipelines, & autonomous agent systems.',
-    description:
-      'We design and deploy production-grade AI applications on your infrastructure, adhering to strict data privacy and security boundaries. From day-one functional prototypes to multi-tenant scalable software in weeks.',
+    pillar: 'Build',
+    category: 'AI Software Development',
+    badge: 'Week-One Prototypes',
+    headlineMain: 'Week-One',
+    headlineItalic: 'Prototypes',
+    tagline: 'Custom LLM apps, RAG pipelines, and autonomous agents — shipped on your stack, in your cloud. Production in weeks.',
     features: [
-      'Custom LLM applications & contextual copilots',
-      'High-throughput RAG over documents & internal codebases',
-      'Predictive analytics & real-time feature ML pipelines',
-      'Autonomous multi-agent workflow orchestration',
+      'Custom LLM apps & copilots',
+      'RAG over docs, tickets & code',
+      'Autonomous workflow agents',
     ],
-    metrics: [
-      { label: 'Time-to-Prototype', value: '7 Days' },
-      { label: 'Query Latency', value: '< 24ms' },
-      { label: 'Accuracy SLA', value: '99.4%' },
+    serviceUrl: 'https://commerciax.com/service-ai-software.html',
+    ctaText: 'Explore service',
+    stats: [
+      { value: '7 Days', label: 'Prototype' },
+      { value: '<24ms', label: 'Latency' },
+      { value: '99.4%', label: 'Accuracy' },
+    ],
+    steps: [
+      { num: '01', title: 'Ingest', desc: 'Index docs, code & tickets', metric: '100M+ tokens/s', icon: Database },
+      { num: '02', title: 'Embed', desc: 'Hybrid vector semantic search', metric: '<14ms latency', icon: Layers },
+      { num: '03', title: 'Reason', desc: 'Multi-agent privacy routing', metric: '99.8% confidence', icon: ShieldCheck },
+      { num: '04', title: 'Execute', desc: 'Sandboxed autonomous dispatch', metric: 'Zero data leak', icon: Zap },
     ],
     icon: Cpu,
-    accent: {
-      gradient: 'from-blue-600 via-indigo-600 to-violet-600',
-      border: 'border-blue-500/40',
-      text: 'text-blue-600',
-      bg: 'bg-blue-50',
-    },
+    tintGradient: 'linear-gradient(145deg, #E0E7FF 0%, #C7D2FE 100%)',
+    accentBg: 'bg-blue-50',
+    accentBorder: 'border-blue-200',
+    accentText: 'text-blue-600',
   },
+
+  /* 02 // GROW: B2B LEAD GENERATION */
   {
     id: 'lead-gen',
     num: '02',
-    category: 'GROWTH ENGINE',
+    pillar: 'Grow',
+    category: 'B2B Lead Generation',
     badge: 'Fixed-Price SLA',
-    title: 'B2B Lead Generation',
-    tagline: 'AI-powered pipeline engine with intent detection and booked-meeting SLAs.',
-    description:
-      'Turn cold pipeline into predictable revenue. Our proprietary AI engine identifies high-intent accounts, enriches decision-maker ICPs, and crafts personalized multi-channel outreach that books qualified sales conversations.',
+    headlineMain: '3.4× Meeting',
+    headlineItalic: 'Conversion',
+    tagline: 'AI-powered pipeline engine — intent signals, ICP enrichment, and hyper-personalized outreach with a booked-meeting SLA.',
     features: [
-      'Real-time intent signal detection & ICP account scoring',
-      'Hyper-personalized outreach across email, LinkedIn & calls',
-      'Guaranteed qualified meeting SLA in your contract',
-      'Live pipeline dashboard with attribution tracking',
+      'ICP scoring & intent signals',
+      'AI personalization across channels',
+      'Qualified-meeting SLAs',
     ],
-    metrics: [
-      { label: 'Meeting Conversion', value: '3.4×' },
-      { label: 'ICP Accuracy', value: '98.8%' },
-      { label: 'Avg ROI', value: '11.2×' },
+    serviceUrl: 'https://commerciax.com/service-b2b-leadgen.html',
+    ctaText: 'Explore service',
+    stats: [
+      { value: '3.4×', label: 'Conversion' },
+      { value: '18.4%', label: 'Reply rate' },
+      { value: '11.2×', label: 'Avg ROI' },
+    ],
+    steps: [
+      { num: '01', title: 'Intent', desc: 'Detect buying signals at scale', metric: '10M+ signals/day', icon: TrendingUp },
+      { num: '02', title: 'Score', desc: 'AI-powered account prioritization', metric: '98% accuracy', icon: Database },
+      { num: '03', title: 'Outreach', desc: 'Personalized multi-channel', metric: '3× higher response', icon: Send },
+      { num: '04', title: 'Meeting', desc: 'Qualified meetings delivered', metric: '3.4× conversion', icon: Calendar },
     ],
     icon: TrendingUp,
-    accent: {
-      gradient: 'from-indigo-600 via-purple-600 to-pink-600',
-      border: 'border-indigo-500/40',
-      text: 'text-indigo-600',
-      bg: 'bg-indigo-50',
-    },
+    tintGradient: 'linear-gradient(145deg, #EDE9FE 0%, #DDD6FE 100%)',
+    accentBg: 'bg-indigo-50',
+    accentBorder: 'border-indigo-200',
+    accentText: 'text-indigo-600',
   },
+
+  /* 03 // SCALE: EMPLOYEE PODS */
   {
     id: 'employee-pods',
     num: '03',
-    category: 'DEDICATED SQUADS',
-    badge: '10-Day Fast Deployment',
-    title: 'Employee Pods',
-    tagline: 'Senior engineering squads embedded directly into your core team.',
-    description:
-      'Overcome hiring bottlenecks immediately. Get senior-only (7+ yrs) engineers, ML architects, and product designers fully embedded in your Slack, GitHub, and daily standups within 10 days on flexible month-to-month contracts.',
+    pillar: 'Scale',
+    category: 'Employee Pods',
+    badge: '10-Day Deployment',
+    headlineMain: '10 Days to',
+    headlineItalic: 'Embed Squads',
+    tagline: 'Pre-vetted squads of senior engineers, designers & AI specialists — embedded with your team. Month-to-month, senior always.',
     features: [
-      'Rapid 10-day onboarding from brief to first merged commit',
-      'Senior-only talent vetted through rigorous production code tests',
-      '4 tailored pod shapes: Core Build, AI/ML, Growth, & Platform',
-      'Dedicated delivery lead with daily syncs & SLAs',
+      '10-day time-to-start',
+      'Senior-only talent (7+ years)',
+      'Dedicated lead + SLAs',
     ],
-    metrics: [
-      { label: 'Deployment Speed', value: '10 Days' },
-      { label: 'Senior Talent Ratio', value: '100%' },
-      { label: 'Retention Rate', value: '96.2%' },
+    serviceUrl: '#contact',
+    ctaText: 'Explore service',
+    stats: [
+      { value: '10 Days', label: 'Start time' },
+      { value: '7+ Yrs', label: 'Experience' },
+      { value: '96.2%', label: 'Retention' },
+    ],
+    steps: [
+      { num: '01', title: 'Shape', desc: 'Choose pod type & stack', metric: '4 pod shapes', icon: Users },
+      { num: '02', title: 'Match', desc: 'Curate 7+ yr senior talent', metric: '48h turnaround', icon: CheckCircle },
+      { num: '03', title: 'Embed', desc: 'Slack, GitHub & daily syncs', metric: 'Day 10 first commit', icon: Layers },
+      { num: '04', title: 'Scale', desc: 'Month-to-month, zero lock-in', metric: 'Dedicated lead', icon: Rocket },
     ],
     icon: Users,
-    accent: {
-      gradient: 'from-cyan-600 via-blue-600 to-indigo-600',
-      border: 'border-cyan-500/40',
-      text: 'text-cyan-700',
-      bg: 'bg-cyan-50',
-    },
+    tintGradient: 'linear-gradient(145deg, #CFFAFE 0%, #A5F3FC 100%)',
+    accentBg: 'bg-cyan-50',
+    accentBorder: 'border-cyan-200',
+    accentText: 'text-cyan-700',
   },
+
+  /* 04 // LAUNCH: SAAS PRODUCT STUDIO */
   {
     id: 'saas-studio',
     num: '04',
-    category: 'VENTURE STUDIO',
-    badge: 'Idea to First 100 Users',
-    title: 'SaaS Product Studio',
-    tagline: 'Zero-to-one SaaS products built, engineered, and launched in 8–14 weeks.',
-    description:
-      'We partner with founders and enterprise incubators to design, build, and take software products to market at lightning speed. Complete turn-key delivery with product strategy, brand design, full-stack development, and launch playbooks.',
+    pillar: 'Launch',
+    category: 'SaaS Product Studio',
+    badge: '8–14 Weeks',
+    headlineMain: 'Zero-to-One',
+    headlineItalic: 'SaaS Products',
+    tagline: 'Zero-to-one SaaS products in 8–14 weeks. Research, design, engineering, launch — all under one roof.',
     features: [
-      'Fixed timeline & fixed-price guaranteed delivery',
-      'Turnkey delivery: Research, UX, Architecture & Launch',
-      'GTM playbook & initial user acquisition setup',
-      'Battle-tested playbook proven on Neweb.ai & Fonda.co',
+      'Fixed timeline, fixed price',
+      'Go-to-market playbook included',
+      'Battle-tested on our own products',
     ],
-    metrics: [
-      { label: 'Launch Timeline', value: '8–14 Wks' },
-      { label: 'Products Shipped', value: '18+' },
-      { label: 'Avg Time to MVP', value: '38 Days' },
+    serviceUrl: 'https://commerciax.com/service-saas-products.html',
+    ctaText: 'Explore service',
+    stats: [
+      { value: '8–14 Wks', label: 'Delivery' },
+      { value: 'Fixed $', label: 'Cost' },
+      { value: '1st 100', label: 'Users' },
+    ],
+    steps: [
+      { num: '01', title: 'Research', desc: 'Market research & UX blueprint', metric: 'Weeks 1–2', icon: Code2 },
+      { num: '02', title: 'Build', desc: 'Core engine & high-fidelity UI', metric: 'Weeks 3–6', icon: Layers },
+      { num: '03', title: 'Engineer', desc: 'Billing, multi-tenancy & AI', metric: 'Weeks 7–10', icon: Zap },
+      { num: '04', title: 'Launch', desc: 'GTM playbook & first users', metric: 'Weeks 11–14', icon: Rocket },
     ],
     icon: Rocket,
-    accent: {
-      gradient: 'from-amber-600 via-orange-600 to-red-600',
-      border: 'border-amber-500/40',
-      text: 'text-amber-700',
-      bg: 'bg-amber-50',
-    },
+    tintGradient: 'linear-gradient(145deg, #FEF3C7 0%, #FDE68A 100%)',
+    accentBg: 'bg-amber-50',
+    accentBorder: 'border-amber-200',
+    accentText: 'text-amber-700',
   },
 ];
 
 export default function ServicesSection() {
   const [activeIdx, setActiveIdx] = useState(0);
-  const activeService = SERVICES[activeIdx];
-
-  // Optional auto-rotate or timer indicator
-  const [progress, setProgress] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    if (isHovered) return;
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          setActiveIdx((curr) => (curr + 1) % SERVICES.length);
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 120);
+  const total = SERVICES_DATA.length;
+  const AUTOPLAY_DURATION = 6500;
 
-    return () => clearInterval(interval);
-  }, [isHovered, activeIdx]);
+  const handleNext = useCallback(() => {
+    setActiveIdx((prev) => (prev + 1) % total);
+    setProgress(0);
+  }, [total]);
+
+  const handlePrev = useCallback(() => {
+    setActiveIdx((prev) => (prev - 1 + total) % total);
+    setProgress(0);
+  }, [total]);
 
   const handleSelect = (idx: number) => {
     setActiveIdx(idx);
     setProgress(0);
   };
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleNext, handlePrev]);
+
+  // Autoplay countdown timer
+  useEffect(() => {
+    if (isHovered) return;
+    const intervalTime = 50;
+    const step = (intervalTime / AUTOPLAY_DURATION) * 100;
+
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          handleNext();
+          return 0;
+        }
+        return prev + step;
+      });
+    }, intervalTime);
+
+    return () => clearInterval(timer);
+  }, [isHovered, handleNext]);
+
+  const active = SERVICES_DATA[activeIdx];
+
+  // Receding side card indices
+  const leftIdx1 = (activeIdx - 1 + total) % total;
+  const leftIdx2 = (activeIdx - 2 + total) % total;
+  const rightIdx1 = (activeIdx + 1) % total;
+  const rightIdx2 = (activeIdx + 2) % total;
+
+  const sectionRef = useRef<HTMLElement>(null);
+  const dockRef = useRef<HTMLDivElement>(null);
+
   return (
     <section
+      ref={sectionRef}
       id="services"
-      className="relative w-full py-20 sm:py-28 lg:py-32 bg-[#FAF8F5] text-navy overflow-hidden"
+      className="relative w-full py-16 sm:py-24 lg:py-28 bg-[#FAF8F5] text-navy overflow-hidden"
     >
-      {/* Background Decorative Ambient Radial Glows */}
-      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-blue-100/50 via-indigo-50/30 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
-      <div className="absolute -bottom-20 right-0 w-[500px] h-[500px] bg-purple-100/30 rounded-full blur-3xl pointer-events-none z-0" />
+      {/* Seamless Edge Blending Gradients */}
+      <div className="absolute top-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-b from-[#FAF8F5] via-[#FAF8F5]/85 to-transparent pointer-events-none z-[1]" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/85 to-transparent pointer-events-none z-[1]" />
 
-      <div className="site-container relative px-4 sm:px-8 lg:px-12 max-w-[1360px] mx-auto z-10">
-        {/* ========================================================== */}
-        {/* SECTION TOP HEADER: EDITORIAL BRANDING                     */}
-        {/* ========================================================== */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 sm:mb-16">
-          <div className="max-w-2xl">
-            {/* Eyebrow */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-slate-200/80 shadow-xs mb-4">
-              <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
-              <span className="text-[11px] font-mono tracking-[0.2em] font-bold text-slate-700 uppercase">
-                CAPABILITIES & ENGAGEMENTS
-              </span>
-            </div>
+      {/* Ambient Radial Lighting Glows */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-blue-100/30 via-indigo-50/15 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute bottom-10 right-0 w-[400px] h-[400px] bg-purple-100/20 rounded-full blur-3xl pointer-events-none z-0" />
 
-            {/* Main Headline */}
-            <h2 className="font-plus-jakarta text-[36px] sm:text-[48px] lg:text-[54px] font-extrabold text-[#0A1628] leading-[1.08] tracking-[-0.03em]">
-              Architected for speed.{' '}
-              <span className="font-instrument italic font-normal text-blue-600 block sm:inline">
-                Engineered for scale.
-              </span>
-            </h2>
+      <div className="site-container relative px-3 xs:px-4 sm:px-6 lg:px-8 max-w-[1440px] mx-auto z-10">
+        {/* SECTION HEADER */}
+        <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-slate-200/80 shadow-xs mb-3.5 sm:mb-4">
+            <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+            <span className="text-[11px] font-mono tracking-[0.2em] font-bold text-slate-700 uppercase">
+              CAPABILITIES &amp; ENGAGEMENTS
+            </span>
           </div>
-
-          <p className="text-[15px] sm:text-[16px] text-slate-600 font-dm-sans max-w-md leading-relaxed">
+          <h2 className="font-instrument text-[34px] xs:text-[42px] sm:text-[54px] lg:text-[62px] font-normal text-navy leading-[1.1] sm:leading-[1.08] tracking-tight mb-4">
+            <FoldText text="Architected for" splitBy="word" trigger="scroll" duration={0.65} />{' '}
+            <span className="italic text-blue-600 font-normal">
+              <FoldText text="speed." splitBy="word" trigger="scroll" duration={0.65} />
+            </span>{' '}
+            <FoldText text="Engineered for" splitBy="word" trigger="scroll" duration={0.65} />{' '}
+            <span className="italic text-blue-600 font-normal">
+              <FoldText text="scale." splitBy="word" trigger="scroll" duration={0.65} />
+            </span>
+          </h2>
+          <p className="text-[14.5px] sm:text-[16px] text-slate-600 font-dm-sans max-w-xl mx-auto leading-relaxed">
             Choose a dedicated service model tailored to where your business is right now — from tactical AI development to full venture co-building.
           </p>
         </div>
 
-        {/* ========================================================== */}
-        {/* TOP FLOATING SEGMENTED DOCK: 4 INTERACTIVE SERVICE SELECTORS */}
-        {/* ========================================================== */}
+        {/* TOP SEGMENTED DOCK: 4 PILLARS */}
         <div
-          className="relative mb-8 sm:mb-10 p-1.5 sm:p-2 bg-slate-200/50 backdrop-blur-md rounded-2xl sm:rounded-[24px] border border-slate-200/80 grid grid-cols-2 lg:grid-cols-4 gap-2 shadow-inner"
+          ref={dockRef}
+          className="relative mb-6 sm:mb-8 p-1.5 sm:p-2 bg-slate-200/50 backdrop-blur-md rounded-2xl sm:rounded-[24px] border border-slate-200/80 grid grid-cols-2 lg:grid-cols-4 gap-2 shadow-inner"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {SERVICES.map((service, idx) => {
-            const isActive = activeIdx === idx;
+          {SERVICES_DATA.map((service, idx) => {
+            const isAct = activeIdx === idx;
             const Icon = service.icon;
 
             return (
               <button
                 key={service.id}
                 onClick={() => handleSelect(idx)}
-                className={`relative px-4 py-3.5 sm:py-4 rounded-xl sm:rounded-[18px] text-left transition-all duration-300 flex items-center justify-between group overflow-hidden cursor-pointer ${
-                  isActive
-                    ? 'text-[#0A1628]'
-                    : 'text-slate-600 hover:text-navy hover:bg-white/40'
+                className={`relative px-3.5 py-3 sm:py-3.5 rounded-xl sm:rounded-[18px] text-left transition-all duration-300 flex items-center justify-between group overflow-hidden cursor-pointer ${
+                  isAct
+                    ? 'bg-white text-[#0A1628] shadow-[0_8px_20px_rgba(10,22,40,0.08)] border border-slate-200/80'
+                    : 'text-slate-600 hover:text-[#0A1628] hover:bg-white/60'
                 }`}
               >
-                {/* Active Backdrop Pill with LayoutId Spring Animation */}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeServiceTabBackdrop"
-                    className="absolute inset-0 bg-white rounded-xl sm:rounded-[18px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border border-slate-200/90 z-0"
-                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                  />
-                )}
-
-                {/* Content Inside Tab Button */}
-                <div className="relative z-10 flex items-center gap-3 min-w-0">
+                <div className="flex items-center gap-2.5 sm:gap-3 relative z-10 min-w-0">
                   <div
-                    className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center font-mono text-[11px] sm:text-[12px] font-bold transition-colors ${
-                      isActive
-                        ? 'bg-[#0A1628] text-white shadow-xs'
-                        : 'bg-slate-200/70 text-slate-600 group-hover:bg-slate-300/80'
+                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
+                      isAct
+                        ? `${service.accentBg} ${service.accentText}`
+                        : 'bg-slate-200/80 text-slate-500 group-hover:bg-slate-200 group-hover:text-[#0A1628]'
                     }`}
                   >
-                    {service.num}
+                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
-
                   <div className="min-w-0">
-                    <span className="block font-plus-jakarta font-bold text-[13px] sm:text-[14px] truncate leading-tight">
-                      {service.title}
+                    <span className="block text-[9.5px] sm:text-[10px] font-mono font-bold tracking-wider uppercase opacity-60">
+                      {service.num} // {service.pillar.toUpperCase()}
                     </span>
-                    <span className="hidden sm:block text-[11px] font-mono text-slate-500 uppercase tracking-wider truncate mt-0.5">
-                      {service.badge}
+                    <span className="block text-[12.5px] sm:text-[13.5px] font-bold font-plus-jakarta truncate">
+                      {service.category}
                     </span>
                   </div>
                 </div>
 
-                {/* Right Icon */}
-                <div className="relative z-10 hidden sm:flex items-center justify-center pl-2">
-                  <Icon
-                    className={`w-4 h-4 transition-transform ${
-                      isActive
-                        ? 'text-blue-600 scale-110'
-                        : 'text-slate-400 group-hover:text-slate-600'
-                    }`}
-                  />
-                </div>
-
-                {/* Active Progress Bar Underneath */}
-                {isActive && (
-                  <div className="absolute bottom-0 left-3 right-3 h-[2px] bg-slate-100 rounded-full overflow-hidden z-10">
-                    <motion.div
-                      className="h-full bg-blue-600 rounded-full"
-                      style={{ width: `${progress}%` }}
-                    />
-                  </div>
+                {isAct && (
+                  <span className="relative z-10 w-2 h-2 rounded-full bg-blue-600 ml-1 shrink-0 animate-ping" />
                 )}
               </button>
             );
           })}
         </div>
 
-        {/* ========================================================== */}
-        {/* MAIN SHOWCASE CANVAS: SPLIT-SCREEN INTERACTIVE STAGE       */}
-        {/* ========================================================== */}
+        {/* PROOFCHAIN PRO PERSPECTIVE CAROUSEL STAGE */}
         <div
-          className="relative bg-white/90 backdrop-blur-xl rounded-3xl sm:rounded-[36px] border border-slate-200/90 shadow-[0_24px_64px_-16px_rgba(0,0,0,0.06)] overflow-hidden"
+          className="relative w-full flex items-center justify-center"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Top Edge Gradient Stripe */}
-          <motion.div
-            key={`stripe-${activeService.id}`}
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className={`h-1.5 w-full bg-gradient-to-r ${activeService.accent.gradient} origin-left`}
-          />
+          {/* LEFT FLANKING CARDS */}
+          <div className="hidden 2xl:flex items-center gap-3 shrink-0 select-none mr-3">
+            <FlankingSideCard
+              service={SERVICES_DATA[leftIdx2]}
+              onClick={() => handleSelect(leftIdx2)}
+              scale={0.72}
+              opacity={0.35}
+              width={90}
+              height={380}
+            />
+            <FlankingSideCard
+              service={SERVICES_DATA[leftIdx1]}
+              onClick={() => handleSelect(leftIdx1)}
+              scale={0.86}
+              opacity={0.7}
+              width={116}
+              height={420}
+            />
+          </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeService.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: 'easeInOut' }}
-              className="p-6 sm:p-10 lg:p-14 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
-            >
-              {/* ---------------- LEFT 5 COLS: CONTENT & FEATURES ---------------- */}
-              <div className="lg:col-span-5 flex flex-col justify-between">
-                <div>
-                  {/* Category & Service Number */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-mono text-[11px] font-bold tracking-wider uppercase">
-                      {activeService.category}
-                    </span>
-                    <span className="text-[12px] font-mono text-slate-400 font-medium">
-                      STEP {activeService.num} / 04
-                    </span>
-                  </div>
+          {/* MAIN CENTER SPOTLIGHT */}
+          <div className="relative w-full max-w-[1240px] shrink-0 z-20">
+            <AnimatePresence mode="popLayout">
+              <motion.div
+                key={active.id}
+                initial={{ opacity: 0, scale: 0.97, y: 18, filter: 'blur(4px)' }}
+                animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, scale: 0.97, y: -10, filter: 'blur(4px)' }}
+                transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                className="relative rounded-[28px] sm:rounded-[36px] bg-gradient-to-b from-white/95 via-white/90 to-white/95 backdrop-blur-2xl border border-white/90 shadow-[0_24px_70px_rgba(10,25,50,0.11),inset_0_1.5px_2px_0_rgba(255,255,255,0.95)] p-5 sm:p-7 lg:p-9 overflow-hidden"
+              >
+                {/* Ambient glow */}
+                <div
+                  className="absolute -top-24 -left-24 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-20"
+                  style={{ background: active.tintGradient }}
+                />
 
-                  {/* Big Instrument Serif Title */}
-                  <h3 className="font-instrument italic text-[36px] sm:text-[46px] lg:text-[52px] font-normal text-[#0A1628] leading-[1.06] mb-3">
-                    {activeService.title}
-                  </h3>
+                {/* CLEAN 2-COLUMN LAYOUT */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start relative z-10">
+                  {/* LEFT COLUMN: Content */}
+                  <div className="flex flex-col">
+                    {/* Tags */}
+                    <motion.div
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.4, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex items-center gap-2 mb-4 flex-wrap"
+                    >
+                      <span className="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 font-mono text-[10.5px] font-bold tracking-wider uppercase border border-slate-200/80">
+                        {active.num} // {active.pillar.toUpperCase()}
+                      </span>
+                      <span className={`px-2.5 py-1 rounded-md text-[10.5px] font-mono font-bold ${active.accentBg} ${active.accentText} border ${active.accentBorder}`}>
+                        {active.badge}
+                      </span>
+                    </motion.div>
 
-                  {/* Subtitle / Tagline */}
-                  <p className="text-[15px] sm:text-[16px] font-semibold text-blue-950 font-plus-jakarta mb-4">
-                    {activeService.tagline}
-                  </p>
+                    {/* Headline */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+                      className="mb-4"
+                    >
+                      <h3 className="font-plus-jakarta text-[34px] sm:text-[42px] lg:text-[48px] font-extrabold text-[#0A1628] leading-[1.04] tracking-tight">
+                        {active.headlineMain}
+                      </h3>
+                      <span className="font-instrument italic font-normal text-blue-600 text-[40px] sm:text-[48px] lg:text-[56px] leading-[1.02] block -mt-1">
+                        {active.headlineItalic}
+                      </span>
+                    </motion.div>
 
-                  {/* Detailed Description */}
-                  <p className="text-[14px] sm:text-[15px] text-slate-600 font-dm-sans leading-relaxed mb-6">
-                    {activeService.description}
-                  </p>
+                    {/* Tagline */}
+                    <motion.p
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.45, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="text-[13.5px] sm:text-[14.5px] text-slate-600 font-dm-sans leading-relaxed mb-5 max-w-lg"
+                    >
+                      {active.tagline}
+                    </motion.p>
 
-                  {/* Features List with Styled Chip Cards */}
-                  <div className="space-y-2.5 mb-8">
-                    {activeService.features.map((feature, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.1 + i * 0.08 }}
-                        className="flex items-start gap-3 p-3 rounded-xl bg-[#FAF8F5] border border-slate-200/80 hover:bg-white hover:border-slate-300 hover:shadow-xs transition-all"
+                    {/* Feature Points */}
+                    <div className="space-y-2.5 mb-7">
+                      {active.features.map((feat, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.35, delay: 0.28 + i * 0.06, ease: [0.16, 1, 0.3, 1] }}
+                          className="flex items-center gap-2.5 text-[13px] sm:text-[13.5px] text-slate-700 font-dm-sans"
+                        >
+                          <span className="text-blue-600 font-bold shrink-0">→</span>
+                          <span className="font-medium">{feat}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    {/* CTA Buttons */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                      className="flex flex-wrap items-center gap-3"
+                    >
+                      <OriginButton
+                        href={active.serviceUrl}
+                        variant="primary"
+                        size="md"
+                        icon={<ArrowRight className="w-4 h-4" />}
                       >
-                        <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center shrink-0 mt-0.5">
-                          <Check className="w-3 h-3 text-blue-700 stroke-[3]" />
-                        </div>
-                        <span className="text-[13px] sm:text-[13.5px] font-medium text-slate-800 font-dm-sans">
-                          {feature}
+                        {active.ctaText}
+                      </OriginButton>
+                      <OriginButton
+                        href="#contact"
+                        variant="secondary"
+                        size="md"
+                        icon={<ArrowRight className="w-3.5 h-3.5" />}
+                      >
+                        Book intro call
+                      </OriginButton>
+                    </motion.div>
+                  </div>
+
+                  {/* RIGHT COLUMN: Process Steps + Stats */}
+                  <div className="flex flex-col gap-5">
+                    {/* Process Steps Card */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                      className="rounded-2xl bg-white/90 border border-slate-200/80 p-5 shadow-[0_8px_24px_rgba(10,25,50,0.05)]"
+                    >
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className="text-[10.5px] font-mono font-bold text-slate-500 tracking-wider uppercase">
+                          How it works
                         </span>
-                      </motion.div>
-                    ))}
+                        <div className="flex-1 h-[1px] bg-slate-200/80" />
+                      </div>
+
+                      <div className="relative">
+                        {/* Vertical connecting line */}
+                        <motion.div
+                          initial={{ scaleY: 0 }}
+                          animate={{ scaleY: 1 }}
+                          transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                          className="absolute left-[17px] top-5 bottom-5 w-[1.5px] bg-gradient-to-b from-blue-500 via-blue-400 to-indigo-500 z-0 origin-top"
+                        />
+
+                        <div className="flex flex-col gap-4">
+                          {active.steps.map((step, stepIdx) => {
+                            const StepIcon = step.icon;
+                            return (
+                              <motion.div
+                                key={step.num}
+                                initial={{ opacity: 0, x: 14 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.38, delay: 0.25 + stepIdx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                                className="relative flex items-center justify-between gap-3 z-10 group"
+                              >
+                                <div className="flex items-center gap-3 min-w-0">
+                                  <div className="w-9 h-9 rounded-xl bg-blue-50/95 border border-blue-200/80 shadow-sm flex items-center justify-center text-blue-600 shrink-0 group-hover:bg-blue-600 group-hover:text-white transition-all duration-200">
+                                    <StepIcon className="w-4 h-4" />
+                                  </div>
+                                  <div className="min-w-0">
+                                    <div className="flex items-center gap-1.5">
+                                      <span className="text-[10.5px] font-mono font-bold text-slate-400">
+                                        {step.num}
+                                      </span>
+                                      <span className="text-[12.5px] font-bold font-plus-jakarta text-slate-900 uppercase tracking-wide">
+                                        {step.title}
+                                      </span>
+                                    </div>
+                                    <span className="text-[11px] text-slate-500 font-dm-sans leading-tight block mt-0.5 truncate">
+                                      {step.desc}
+                                    </span>
+                                  </div>
+                                </div>
+                                <span className="px-2 py-0.5 rounded-md bg-blue-50/80 border border-blue-100 text-[9.5px] font-mono font-bold text-blue-600 shrink-0 whitespace-nowrap">
+                                  {step.metric}
+                                </span>
+                              </motion.div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Key Metrics Strip */}
+                    <div className="grid grid-cols-3 gap-3">
+                      {active.stats.map((stat, idx) => (
+                        <motion.div
+                          key={idx}
+                          initial={{ opacity: 0, y: 14, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          transition={{ duration: 0.4, delay: 0.55 + idx * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                          className="rounded-xl bg-white/90 border border-slate-200/70 p-3.5 text-center shadow-sm hover:shadow-md hover:border-slate-300 transition-all"
+                        >
+                          <span className="block font-instrument italic text-[22px] sm:text-[24px] font-medium text-blue-600 leading-none">
+                            {stat.value}
+                          </span>
+                          <span className="text-[9.5px] font-mono font-bold text-slate-500 uppercase tracking-wider block mt-1.5">
+                            {stat.label}
+                          </span>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
                 </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
-                {/* Bottom Actions */}
-                <div className="pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#0A1628] hover:bg-blue-900 text-white font-dm-sans text-[14px] font-semibold shadow-md shadow-navy/15 hover:-translate-y-0.5 transition-all group cursor-pointer"
-                  >
-                    <span>Start with {activeService.title.split(' ')[0]}</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </a>
+          {/* RIGHT FLANKING CARDS */}
+          <div className="hidden 2xl:flex items-center gap-3 shrink-0 select-none ml-3">
+            <FlankingSideCard
+              service={SERVICES_DATA[rightIdx1]}
+              onClick={() => handleSelect(rightIdx1)}
+              scale={0.86}
+              opacity={0.7}
+              width={116}
+              height={420}
+            />
+            <FlankingSideCard
+              service={SERVICES_DATA[rightIdx2]}
+              onClick={() => handleSelect(rightIdx2)}
+              scale={0.72}
+              opacity={0.35}
+              width={90}
+              height={380}
+            />
+          </div>
+        </div>
 
-                  <a
-                    href="#contact"
-                    className="inline-flex items-center justify-center gap-1.5 text-[13px] font-medium text-slate-600 hover:text-blue-600 font-dm-sans transition-colors cursor-pointer"
-                  >
-                    <span>View case studies</span>
-                    <span>→</span>
-                  </a>
-                </div>
-              </div>
+        {/* BOTTOM CONTROLS */}
+        <div className="flex items-center justify-center gap-4 sm:gap-6 mt-6 sm:mt-8">
+          <button
+            onClick={handlePrev}
+            aria-label="Previous capability"
+            className="w-10 h-10 rounded-full bg-white/90 hover:bg-white text-navy border border-slate-200/90 shadow-sm flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer group"
+          >
+            <ChevronLeft className="w-4 h-4 text-slate-700 group-hover:text-navy group-hover:-translate-x-0.5 transition-transform" />
+          </button>
 
-              {/* ---------------- RIGHT 7 COLS: INTERACTIVE TECH SIMULATION ---------------- */}
-              <div className="lg:col-span-7">
-                {activeService.id === 'ai-dev' && <AiDevWidget />}
-                {activeService.id === 'lead-gen' && <LeadGenWidget />}
-                {activeService.id === 'employee-pods' && <EmployeePodsWidget />}
-                {activeService.id === 'saas-studio' && <SaaSStudioWidget />}
-              </div>
-            </motion.div>
-          </AnimatePresence>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-white/70 backdrop-blur-md border border-slate-200/80 shadow-2xs">
+            {SERVICES_DATA.map((service, index) => {
+              const isAct = index === activeIdx;
+              return (
+                <button
+                  key={service.id}
+                  onClick={() => handleSelect(index)}
+                  aria-label={`Go to ${service.category}`}
+                  className="relative h-2 rounded-full overflow-hidden transition-all duration-300 cursor-pointer"
+                  style={{ width: isAct ? 60 : 8 }}
+                >
+                  <div
+                    className={`w-full h-full rounded-full ${
+                      isAct ? 'bg-slate-200' : 'bg-slate-300 hover:bg-slate-400'
+                    }`}
+                  />
+                  {isAct && (
+                    <motion.div
+                      className="absolute inset-y-0 left-0 rounded-full bg-blue-600"
+                      style={{ width: `${progress}%` }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            onClick={handleNext}
+            aria-label="Next capability"
+            className="w-10 h-10 rounded-full bg-white/90 hover:bg-white text-navy border border-slate-200/90 shadow-sm flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer group"
+          >
+            <ChevronRight className="w-4 h-4 text-slate-700 group-hover:text-navy group-hover:translate-x-0.5 transition-transform" />
+          </button>
         </div>
       </div>
     </section>
   );
 }
 
-/* ================================================================= */
-/* 1. LIGHT-THEMED VISUAL: AI SOFTWARE DEVELOPMENT ARCHITECTURE      */
-/* ================================================================= */
-function AiDevWidget() {
-  return (
-    <div className="relative rounded-2xl sm:rounded-[28px] bg-gradient-to-br from-white via-[#F8FAFC] to-blue-50/40 p-6 sm:p-8 shadow-[0_16px_48px_-12px_rgba(37,99,235,0.08)] border border-blue-200/70 overflow-hidden">
-      {/* Background Soft Glow & Grid Accent */}
-      <div className="absolute -top-12 -right-12 w-48 h-48 bg-blue-400/10 rounded-full blur-2xl pointer-events-none" />
-      <div className="absolute -bottom-10 -left-10 w-44 h-44 bg-indigo-400/10 rounded-full blur-2xl pointer-events-none" />
-
-      {/* Top Status Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-200/80 relative z-10">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
-            <Cpu className="w-4 h-4 stroke-[2.2]" />
-          </div>
-          <div>
-            <span className="block text-[13px] font-bold text-slate-900 font-plus-jakarta">
-              Neural Architecture & RAG Engine
-            </span>
-            <span className="text-[11px] font-mono text-blue-600 font-medium">
-              hybrid-rag.production // zero-hallucination SLA
-            </span>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-mono font-bold">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>STATUS: 200 OK</span>
-        </div>
-      </div>
-
-      {/* Interactive Pipeline Steps */}
-      <div className="mt-5 space-y-3.5 relative z-10">
-        {/* Step 1: Multimodal Vector Embeddings */}
-        <div className="p-4 rounded-xl bg-white/90 border border-slate-200/90 shadow-xs flex items-center justify-between hover:border-blue-400 transition-all">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shrink-0">
-              <Database className="w-4 h-4 stroke-[2]" />
-            </div>
-            <div>
-              <span className="block text-[13px] font-bold text-slate-800">
-                01. Proprietary Vector Knowledge Index
-              </span>
-              <span className="text-[11.5px] text-slate-500 font-dm-sans">
-                Dense semantic retrieval over documents, codebases & customer history
-              </span>
-            </div>
-          </div>
-          <span className="px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 font-mono text-[10.5px] font-bold shrink-0 ml-2">
-            &lt; 14ms
-          </span>
-        </div>
-
-        {/* Step 2: Multi-Agent Reasoning & Guardrails */}
-        <div className="p-4 rounded-xl bg-white/90 border border-slate-200/90 shadow-xs flex items-center justify-between hover:border-indigo-400 transition-all">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shrink-0">
-              <ShieldCheck className="w-4 h-4 stroke-[2]" />
-            </div>
-            <div>
-              <span className="block text-[13px] font-bold text-slate-800">
-                02. Multi-Agent Reasoning & PII Guardrails
-              </span>
-              <span className="text-[11.5px] text-slate-500 font-dm-sans">
-                Claude 3.7 + Custom LLMs with strict privacy compliance & confidence scoring
-              </span>
-            </div>
-          </div>
-          <span className="px-2.5 py-1 rounded-md bg-indigo-50 text-indigo-700 font-mono text-[10.5px] font-bold shrink-0 ml-2">
-            99.8% Conf.
-          </span>
-        </div>
-
-        {/* Step 3: Production API & Tool Dispatch */}
-        <div className="p-4 rounded-xl bg-white/90 border border-slate-200/90 shadow-xs flex items-center justify-between hover:border-emerald-400 transition-all">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 shrink-0">
-              <Zap className="w-4 h-4 stroke-[2]" />
-            </div>
-            <div>
-              <span className="block text-[13px] font-bold text-slate-800">
-                03. Automated Tool & Action Execution
-              </span>
-              <span className="text-[11.5px] text-slate-500 font-dm-sans">
-                Sandboxed SQL queries, CRM updates, and scheduled background workers
-              </span>
-            </div>
-          </div>
-          <span className="px-2.5 py-1 rounded-md bg-emerald-50 text-emerald-700 font-mono text-[10.5px] font-bold shrink-0 ml-2">
-            Zero-Leakage
-          </span>
-        </div>
-
-        {/* Bottom Key Metrics Row */}
-        <div className="grid grid-cols-3 gap-3 pt-3 border-t border-slate-200/70">
-          <div className="p-3 rounded-xl bg-white border border-slate-200/80 text-center shadow-2xs">
-            <span className="block text-[18px] font-instrument italic text-[#0A1628]">
-              7 Days
-            </span>
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
-              To Prototype
-            </span>
-          </div>
-          <div className="p-3 rounded-xl bg-white border border-slate-200/80 text-center shadow-2xs">
-            <span className="block text-[18px] font-instrument italic text-blue-600">
-              &lt; 24ms
-            </span>
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
-              Avg Latency
-            </span>
-          </div>
-          <div className="p-3 rounded-xl bg-white border border-slate-200/80 text-center shadow-2xs">
-            <span className="block text-[18px] font-instrument italic text-emerald-600">
-              99.4%
-            </span>
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
-              Accuracy SLA
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+/* ========================================================================= */
+/* FLANKING SIDE CARD                                                        */
+/* ========================================================================= */
+interface FlankingSideCardProps {
+  service: ServiceStory;
+  onClick: () => void;
+  scale: number;
+  opacity: number;
+  width: number;
+  height: number;
 }
 
-/* ================================================================= */
-/* 2. LIGHT-THEMED VISUAL: B2B LEAD GENERATION ENGINE                */
-/* ================================================================= */
-function LeadGenWidget() {
+function FlankingSideCard({
+  service,
+  onClick,
+  scale,
+  opacity,
+  width,
+  height,
+}: FlankingSideCardProps) {
+  const Icon = service.icon;
+
   return (
-    <div className="relative rounded-2xl sm:rounded-[28px] bg-gradient-to-br from-white via-[#FAF5FF] to-indigo-50/40 p-6 sm:p-8 shadow-[0_16px_48px_-12px_rgba(99,102,241,0.08)] border border-indigo-200/70 overflow-hidden">
-      {/* Background Soft Glow */}
-      <div className="absolute -top-12 -right-12 w-48 h-48 bg-purple-400/10 rounded-full blur-2xl pointer-events-none" />
-
-      {/* Top Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-200/80 relative z-10">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-indigo-100 flex items-center justify-center text-indigo-600">
-            <TrendingUp className="w-4 h-4 stroke-[2.2]" />
-          </div>
-          <div>
-            <span className="block text-[13px] font-bold text-slate-900 font-plus-jakarta">
-              B2B Revenue Pipeline Radar
-            </span>
-            <span className="text-[11px] font-mono text-indigo-600 font-medium">
-              Multi-Channel Intent Signals · Booked SLA
-            </span>
-          </div>
+    <motion.div
+      onClick={onClick}
+      whileHover={{ scale: scale * 1.04, opacity: Math.min(1, opacity + 0.25) }}
+      className="relative rounded-2xl bg-white/85 backdrop-blur-md border border-white/90 shadow-sm p-3 flex flex-col justify-between cursor-pointer overflow-hidden transition-all duration-300 group select-none"
+      style={{
+        width: `${width}px`,
+        height: `${height}px`,
+        opacity,
+        background: service.tintGradient,
+      }}
+    >
+      {/* Top Number & Icon */}
+      <div className="flex flex-col items-center gap-1.5">
+        <div className="w-7 h-7 rounded-lg bg-white/90 shadow-2xs flex items-center justify-center text-slate-800">
+          <Icon className="w-3.5 h-3.5" />
         </div>
-
-        <div className="px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-[11px] font-mono font-bold text-indigo-700">
-          Booked: 24 Meetings/Wk
-        </div>
-      </div>
-
-      {/* Live Pipeline Feed Cards */}
-      <div className="mt-5 space-y-3 relative z-10">
-        {[
-          {
-            name: 'Stripe Ecosystem Partner',
-            contact: 'VP Engineering · $45M Series B',
-            match: '99.2% ICP Match',
-            status: 'Meeting Confirmed',
-            tagColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-          },
-          {
-            name: 'Enterprise Cloud Security',
-            contact: 'Chief Technology Officer · 850 Employees',
-            match: '98.5% Intent Signal',
-            status: 'Follow-up Scheduled',
-            tagColor: 'bg-blue-50 text-blue-700 border-blue-200',
-          },
-          {
-            name: 'High-Growth AI Platform',
-            contact: 'Head of Product & Infrastructure',
-            match: '97.8% High Intent',
-            status: 'Outreach Sequence Live',
-            tagColor: 'bg-purple-50 text-purple-700 border-purple-200',
-          },
-        ].map((lead, i) => (
-          <div
-            key={i}
-            className="p-3.5 sm:p-4 rounded-xl bg-white border border-slate-200/90 shadow-xs flex items-center justify-between hover:border-indigo-300 transition-all"
-          >
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-[11px] font-bold text-white shadow-2xs">
-                {lead.name.split(' ').map((n) => n[0]).slice(0, 2).join('')}
-              </div>
-              <div>
-                <span className="block text-[13px] font-bold text-slate-900 leading-tight">
-                  {lead.name}
-                </span>
-                <span className="text-[11px] text-slate-500 font-dm-sans leading-tight">
-                  {lead.contact}
-                </span>
-              </div>
-            </div>
-
-            <div className="text-right shrink-0 ml-2">
-              <span className={`inline-block px-2 py-0.5 rounded-md border text-[10px] font-mono font-bold ${lead.tagColor}`}>
-                {lead.status}
-              </span>
-              <span className="block text-[10px] font-mono text-slate-400 mt-0.5">
-                {lead.match}
-              </span>
-            </div>
-          </div>
-        ))}
-
-        {/* Performance Metric Row */}
-        <div className="grid grid-cols-3 gap-3 pt-3 border-t border-slate-200/70">
-          <div className="p-3 rounded-xl bg-white border border-slate-200/80 text-center shadow-2xs">
-            <span className="block text-[18px] font-instrument italic text-indigo-600">
-              3.4×
-            </span>
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
-              Meeting Conv.
-            </span>
-          </div>
-          <div className="p-3 rounded-xl bg-white border border-slate-200/80 text-center shadow-2xs">
-            <span className="block text-[18px] font-instrument italic text-[#0A1628]">
-              18.4%
-            </span>
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
-              Reply Rate
-            </span>
-          </div>
-          <div className="p-3 rounded-xl bg-white border border-slate-200/80 text-center shadow-2xs">
-            <span className="block text-[18px] font-instrument italic text-emerald-600">
-              11.2×
-            </span>
-            <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
-              Average ROI
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ================================================================= */
-/* 3. LIGHT-THEMED VISUAL: EMPLOYEE PODS SQUAD HUB                   */
-/* ================================================================= */
-function EmployeePodsWidget() {
-  return (
-    <div className="relative rounded-2xl sm:rounded-[28px] bg-gradient-to-br from-white via-[#F0FDF4] to-cyan-50/40 p-6 sm:p-8 shadow-[0_16px_48px_-12px_rgba(6,182,212,0.08)] border border-cyan-200/70 overflow-hidden">
-      {/* Background Soft Glow */}
-      <div className="absolute -top-12 -right-12 w-48 h-48 bg-cyan-400/10 rounded-full blur-2xl pointer-events-none" />
-
-      {/* Top Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-200/80 relative z-10">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-cyan-100 flex items-center justify-center text-cyan-700">
-            <Users className="w-4 h-4 stroke-[2.2]" />
-          </div>
-          <div>
-            <span className="block text-[13px] font-bold text-slate-900 font-plus-jakarta">
-              Dedicated Squad Architecture
-            </span>
-            <span className="text-[11px] font-mono text-cyan-700 font-medium">
-              Squad #POD-774 · Embedded in 10 Days
-            </span>
-          </div>
-        </div>
-
-        <span className="px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[11px] font-mono font-bold text-cyan-800">
-          ● 4 Members Active
+        <span className="text-[10px] font-mono font-bold text-slate-800 tracking-wider">
+          {service.num}
         </span>
       </div>
 
-      {/* 4 Pod Member Cards Grid */}
-      <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 relative z-10">
-        {[
-          {
-            name: 'Kavita Raman',
-            role: 'Staff ML / LLM Architect',
-            exp: '8+ Yrs Exp',
-            stack: 'PyTorch · LangChain · CUDA',
-          },
-          {
-            name: 'Marcus Bell',
-            role: 'Principal Full-Stack Lead',
-            exp: '9+ Yrs Exp',
-            stack: 'Next.js · Go · Distributed APIs',
-          },
-          {
-            name: 'Elena Rostova',
-            role: 'Lead Product Designer',
-            exp: '7+ Yrs Exp',
-            stack: 'Figma · Design Systems · UX',
-          },
-          {
-            name: 'David Kim',
-            role: 'Staff DevOps & Cloud Eng',
-            exp: '8+ Yrs Exp',
-            stack: 'AWS · Kubernetes · Terraform',
-          },
-        ].map((member, idx) => (
-          <div
-            key={idx}
-            className="p-3.5 rounded-xl bg-white border border-slate-200/90 shadow-xs hover:border-cyan-300 transition-all"
-          >
-            <div className="flex items-center justify-between mb-1">
-              <span className="text-[13px] font-bold text-slate-900">
-                {member.name}
-              </span>
-              <span className="text-[10px] font-mono text-cyan-700 bg-cyan-50 border border-cyan-200 px-1.5 py-0.5 rounded font-bold">
-                {member.exp}
-              </span>
-            </div>
-            <span className="block text-[11.5px] text-slate-600 font-medium font-dm-sans">
-              {member.role}
-            </span>
-            <span className="block text-[10px] font-mono text-slate-400 mt-2">
-              {member.stack}
-            </span>
-          </div>
-        ))}
+      {/* Vertical Category Title */}
+      <div className="my-auto py-2 flex items-center justify-center">
+        <span
+          className="text-[11.5px] font-bold font-plus-jakarta text-slate-800 whitespace-nowrap"
+          style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+        >
+          {service.category}
+        </span>
       </div>
 
-      {/* Integration Strip */}
-      <div className="mt-4 p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-xs flex items-center justify-between text-[12px] font-dm-sans">
-        <span className="text-slate-600 font-medium">
-          Direct Slack + GitHub + Daily 9:30 AM Standup Syncs.
-        </span>
-        <span className="font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded text-[10.5px] font-bold shrink-0 ml-2">
-          10-Day SLA ✓
+      {/* Bottom Metric Preview */}
+      <div className="w-full text-center py-1 rounded bg-white/80 backdrop-blur-xs border border-white/70">
+        <span className="text-[9px] font-mono font-bold text-slate-700 truncate block">
+          {service.stats[0].value}
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 }
-
-/* ================================================================= */
-/* 4. LIGHT-THEMED VISUAL: SAAS PRODUCT STUDIO LAUNCH TRACK          */
-/* ================================================================= */
-function SaaSStudioWidget() {
-  return (
-    <div className="relative rounded-2xl sm:rounded-[28px] bg-gradient-to-br from-white via-[#FFFBEB] to-amber-50/40 p-6 sm:p-8 shadow-[0_16px_48px_-12px_rgba(245,158,11,0.08)] border border-amber-200/70 overflow-hidden">
-      {/* Background Soft Glow */}
-      <div className="absolute -top-12 -right-12 w-48 h-48 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
-
-      {/* Top Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-200/80 relative z-10">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-amber-100 flex items-center justify-center text-amber-700">
-            <Rocket className="w-4 h-4 stroke-[2.2]" />
-          </div>
-          <div>
-            <span className="block text-[13px] font-bold text-slate-900 font-plus-jakarta">
-              Zero-to-One Launch Radar
-            </span>
-            <span className="text-[11px] font-mono text-amber-700 font-medium">
-              8–14 Week Rapid Production Sprint
-            </span>
-          </div>
-        </div>
-
-        <span className="px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-[11px] font-mono font-bold text-amber-800">
-          Fixed Timeline & Cost
-        </span>
-      </div>
-
-      {/* 4-Phase Roadmap Timeline */}
-      <div className="mt-5 space-y-2.5 relative z-10">
-        {[
-          {
-            phase: 'Weeks 1–2',
-            title: 'Discovery & System Architecture Blueprint',
-            status: 'COMPLETED',
-            tagColor: 'text-emerald-700 bg-emerald-50 border-emerald-200',
-          },
-          {
-            phase: 'Weeks 3–6',
-            title: 'Core Product Engine & High-Fidelity UI',
-            status: 'COMPLETED',
-            tagColor: 'text-emerald-700 bg-emerald-50 border-emerald-200',
-          },
-          {
-            phase: 'Weeks 7–10',
-            title: 'Billing, Multi-Tenancy & AI Integrations',
-            status: 'ACTIVE SPRINT',
-            tagColor: 'text-amber-700 bg-amber-50 border-amber-200',
-          },
-          {
-            phase: 'Weeks 11–14',
-            title: 'Public Launch & First 100 Paying Users',
-            status: 'SCHEDULED',
-            tagColor: 'text-blue-700 bg-blue-50 border-blue-200',
-          },
-        ].map((step, idx) => (
-          <div
-            key={idx}
-            className="p-3 sm:p-3.5 rounded-xl bg-white border border-slate-200/90 shadow-xs flex items-center justify-between hover:border-amber-300 transition-all"
-          >
-            <div className="flex items-center gap-3">
-              <span className="text-[11px] font-mono font-bold text-slate-500 w-20 shrink-0">
-                {step.phase}
-              </span>
-              <span className="text-[12.5px] font-bold text-slate-900 font-plus-jakarta">
-                {step.title}
-              </span>
-            </div>
-            <span
-              className={`px-2 py-0.5 rounded text-[10px] font-mono font-bold border shrink-0 ml-2 ${step.tagColor}`}
-            >
-              {step.status}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      {/* Proof of Work Shipped Badge */}
-      <div className="mt-4 pt-3.5 border-t border-slate-200/70 flex items-center justify-between text-[11px] font-mono text-slate-500">
-        <span>Shipped on internal ventures:</span>
-        <div className="flex items-center gap-3 font-bold text-slate-800">
-          <span className="text-amber-700 font-semibold">Neweb.ai ($42k MRR)</span>
-          <span>•</span>
-          <span className="text-amber-700 font-semibold">Fonda.co (14k Users)</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-

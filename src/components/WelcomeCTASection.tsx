@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Check, Globe, Zap } from 'lucide-react';
+import OriginButton from './OriginButton';
 
 const sprintSteps = [
   {
@@ -66,22 +67,24 @@ export default function WelcomeCTASection() {
               Book a free strategy session and get a sprint roadmap tailored to your goals — no deck templates, no filler.
             </p>
 
-            {/* Action Buttons (Side by Side) */}
+            {/* Action Buttons (Side by Side) with Origin Pro Effect */}
             <div className="flex flex-wrap items-center gap-4">
-              <a
+              <OriginButton
                 href="#contact"
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-[#0A1628] hover:bg-slate-800 text-white font-dm-sans text-[13.5px] font-semibold transition-all shadow-md shadow-navy/15 hover:-translate-y-0.5 group cursor-pointer"
+                variant="primary"
+                size="md"
+                icon={<ArrowRight className="w-4 h-4" />}
               >
-                <span>Book a Call</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </a>
+                Book a Call
+              </OriginButton>
 
-              <a
+              <OriginButton
                 href="#services"
-                className="inline-flex items-center px-7 py-3.5 rounded-full bg-white/90 hover:bg-white text-slate-800 border border-slate-200/90 font-dm-sans text-[13.5px] font-semibold transition-all shadow-2xs hover:shadow-xs hover:border-slate-300 cursor-pointer"
+                variant="secondary"
+                size="md"
               >
                 Explore Our Approach
-              </a>
+              </OriginButton>
             </div>
           </div>
 

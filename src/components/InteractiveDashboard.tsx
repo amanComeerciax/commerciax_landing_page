@@ -1195,6 +1195,38 @@ export default function InteractiveDashboard() {
           </div>
         </div>
       </div>
+
+      {/* 3D Architectural Podium Slab (Plinth) Directly Underneath Dashboard */}
+      <div
+        className="w-[96%] sm:w-[94%] mx-auto -mt-2.5 sm:-mt-3 relative z-0 pointer-events-none hidden sm:block"
+        style={{
+          transform: isMobile ? 'none' : 'rotateY(-10deg) rotateX(10deg) rotateZ(-1.8deg)',
+          transformStyle: isMobile ? 'flat' : 'preserve-3d',
+        }}
+      >
+        <div
+          className="relative w-full rounded-2xl bg-gradient-to-b from-white/95 via-[#F1F5F9]/90 to-[#E2E8F0]/80 backdrop-blur-xl border border-white/95 shadow-[0_16px_36px_-10px_rgba(15,23,42,0.14)] overflow-hidden py-3 sm:py-3.5 px-6"
+        >
+          {/* Top highlight shine line */}
+          <div className="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90" />
+
+          {/* Front Face Engraved Text */}
+          <div className="flex items-center justify-between text-slate-500 font-extrabold tracking-[0.24em] text-[9px] sm:text-[9.5px] uppercase select-none">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <span className="text-slate-700">Build</span>
+              <span className="text-[7px] text-blue-500 font-bold">•</span>
+              <span className="text-slate-700">Launch</span>
+              <span className="text-[7px] text-blue-500 font-bold">•</span>
+              <span className="text-slate-700">Scale</span>
+              <span className="text-[7px] text-blue-500 font-bold">•</span>
+              <span className="text-blue-600 font-black">Together</span>
+            </div>
+            <div className="text-slate-400 tracking-[0.18em] text-[8.5px] sm:text-[9px] font-bold hidden sm:block">
+              A FASTER TOMORROW —
+            </div>
+          </div>
+        </div>
+      </div>
     </motion.div>
   );
 }

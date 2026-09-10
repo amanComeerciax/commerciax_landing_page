@@ -1,9 +1,16 @@
 'use client';
 
+import { useRef } from 'react';
 import { motion } from 'framer-motion';
 import { FileText, Layers } from 'lucide-react';
+import FoldText from './FoldText';
+import { gsap, useGSAP } from '@/lib/gsap';
 
 export default function HowWeWork() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
   const steps = [
     {
       num: '01',
@@ -62,11 +69,43 @@ export default function HowWeWork() {
     },
   ];
 
+  useGSAP(
+    () => {
+      if (!sectionRef.current) return;
+
+      // Animate the path drawing on scroll
+      if (pathRef.current) {
+        const length = pathRef.current.getTotalLength();
+        gsap.set(pathRef.current, {
+          strokeDasharray: length,
+          strokeDashoffset: length,
+        });
+
+        gsap.to(pathRef.current, {
+          strokeDashoffset: 0,
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 70%',
+            end: 'center center',
+            scrub: 1.2,
+          },
+        });
+      }
+    },
+    { scope: sectionRef }
+  );
+
   return (
     <section
+      ref={sectionRef}
       id="how-we-work"
       className="relative w-full py-20 sm:py-28 lg:py-32 bg-[#FAF8F5] text-navy overflow-hidden"
     >
+      {/* Seamless Edge Melting Gradients */}
+      <div className="absolute top-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-b from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
+
       {/* Soft Ambient Background Lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-blue-100/30 via-indigo-50/15 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
 
@@ -102,52 +141,29 @@ export default function HowWeWork() {
         {/* ========================================================== */}
         <div className="max-w-3xl mx-auto text-center mb-16 sm:mb-24">
           {/* Eyebrow Pill */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-slate-200/90 shadow-xs mb-6"
-          >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-slate-200/90 shadow-xs mb-6">
             <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
             <span className="text-[11px] font-mono tracking-[0.2em] font-bold text-slate-700 uppercase">
               HOW WE WORK
             </span>
-          </motion.div>
+          </div>
 
           {/* Main 3-Line Editorial Headline */}
-          <motion.h2
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-[44px] sm:text-[60px] lg:text-[72px] leading-[1.04] tracking-[-0.03em] text-[#0A1628]"
-          >
-            <span className="font-instrument italic font-normal text-blue-600">
-              10x Speed{' '}
+          <h2 className="font-instrument text-[36px] xs:text-[48px] sm:text-[62px] lg:text-[72px] font-normal leading-[1.08] sm:leading-[1.04] tracking-tight text-navy">
+            <span className="italic text-blue-600 font-normal">
+              <FoldText text="10x Speed" splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />{' '}
             </span>
-            <span className="font-plus-jakarta font-extrabold text-[#0A1628]">
-              To
-            </span>
+            <FoldText text="to Production." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
             <br />
-            <span className="font-plus-jakarta font-extrabold text-[#0A1628]">
-              Production.
+            <span className="italic text-navy/90 font-normal">
+              <FoldText text="By Design." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
             </span>
-            <br />
-            <span className="font-instrument italic font-normal text-[#1E293B]">
-              By Design.
-            </span>
-          </motion.h2>
+          </h2>
 
           {/* Subtitle Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-6 text-[15px] sm:text-[16px] text-slate-600 font-dm-sans leading-relaxed max-w-xl mx-auto"
-          >
+          <p className="mt-6 text-[15px] sm:text-[16px] text-slate-600 font-dm-sans leading-relaxed max-w-xl mx-auto">
             AI-native engineers and internal agent systems work in parallel — compressing the path from problem definition to a running production system.
-          </motion.p>
+          </p>
         </div>
 
         {/* ========================================================== */}
@@ -162,12 +178,12 @@ export default function HowWeWork() {
               fill="none"
               preserveAspectRatio="none"
             >
-              {/* Curved Trajectory Path */}
+              {/* Curved Trajectory Path with Ref for GSAP Self-Draw */}
               <path
+                ref={pathRef}
                 d="M 10,75 C 90,110 140,25 240,25 C 340,25 390,105 480,105 C 570,105 620,25 720,25 C 820,25 870,105 960,105 C 1030,105 1070,30 1100,-10"
-                stroke="#CBD5E1"
-                strokeWidth="1.3"
-                strokeDasharray="4 4"
+                stroke="#2563EB"
+                strokeWidth="1.6"
                 fill="none"
               />
 
@@ -176,12 +192,12 @@ export default function HowWeWork() {
               <circle cx="10" cy="75" r="4.5" fill="#2563EB" />
 
               {/* Inter-Card Circular Node 1 */}
-              <circle cx="480" cy="105" r="4.5" stroke="#64748B" strokeWidth="1.6" fill="#FAF8F5" />
-              <circle cx="480" cy="105" r="1.5" fill="#64748B" />
+              <circle cx="480" cy="105" r="4.5" stroke="#2563EB" strokeWidth="1.6" fill="#FAF8F5" />
+              <circle cx="480" cy="105" r="1.5" fill="#2563EB" />
 
               {/* Inter-Card Circular Node 2 */}
-              <circle cx="960" cy="105" r="4.5" stroke="#64748B" strokeWidth="1.6" fill="#FAF8F5" />
-              <circle cx="960" cy="105" r="1.5" fill="#64748B" />
+              <circle cx="960" cy="105" r="4.5" stroke="#2563EB" strokeWidth="1.6" fill="#FAF8F5" />
+              <circle cx="960" cy="105" r="1.5" fill="#2563EB" />
 
               {/* Far Right Focal Node */}
               <circle cx="1100" cy="-10" r="10" fill="#2563EB" fillOpacity="0.12" />
@@ -190,71 +206,65 @@ export default function HowWeWork() {
           </div>
 
           {/* 3 Process Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7 lg:gap-8 relative z-10">
+          <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-7 lg:gap-8 relative z-10">
             {steps.map((step, idx) => {
               return (
-                <motion.div
+                <div
                   key={step.num}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.15 }}
-                  className="group relative bg-[#FDFBF7] rounded-[22px] p-7 sm:p-8 pt-9 pb-8 border border-[#E7E2D9] shadow-[0_10px_32px_-8px_rgba(0,0,0,0.03),0_2px_6px_rgba(0,0,0,0.02)] hover:shadow-[0_16px_40px_-6px_rgba(37,99,235,0.07)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
+                  className="group relative bg-[#FAF8F5]/90 rounded-[28px] border border-slate-200/90 p-7 sm:p-8 flex flex-col justify-between shadow-[0_4px_20px_-4px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_-8px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-300 min-h-[380px]"
                 >
-                  {/* Step Number placed directly above top-left edge */}
-                  <span className="absolute -top-7 left-6 sm:left-7 font-instrument italic text-[38px] sm:text-[42px] font-normal text-slate-400 select-none pointer-events-none leading-none">
-                    {step.num}
-                  </span>
+                  {/* Top Bar: Circular Icon + Step Number */}
+                  <div>
+                    <div className="flex items-center justify-between mb-8">
+                      {/* Icon Container */}
+                      <div className="w-12 h-12 rounded-2xl bg-white border border-slate-200/90 shadow-2xs flex items-center justify-center group-hover:scale-105 transition-transform">
+                        {step.icon}
+                      </div>
 
-                  {/* Centered Overlapping Top Icon Badge */}
-                  <div className="absolute -top-7 left-1/2 -translate-x-1/2">
-                    <div
-                      className={`w-[54px] h-[54px] rounded-[18px] border-[1.5px] flex items-center justify-center shadow-xs transition-transform group-hover:scale-105 duration-300 ${step.badgeBg}`}
-                    >
-                      {step.icon}
+                      {/* Step Number in Serif */}
+                      <span className="font-instrument italic text-[36px] font-normal text-slate-400 group-hover:text-blue-600 transition-colors leading-none">
+                        {step.num}
+                      </span>
                     </div>
-                  </div>
 
-                  {/* Card Content */}
-                  <div className="mt-3">
-                    {/* Title */}
-                    <h3 className="font-instrument italic text-[24px] sm:text-[26px] font-normal text-[#0A1628] mb-3 leading-snug">
+                    {/* Step Title */}
+                    <h3 className="font-instrument italic text-[28px] sm:text-[32px] font-normal text-[#0A1628] leading-[1.1] mb-3 group-hover:text-blue-600 transition-colors">
                       {step.title}
                     </h3>
 
-                    {/* Description */}
-                    <p className="text-[13px] sm:text-[13.5px] text-slate-600 font-dm-sans leading-[1.68]">
+                    {/* Step Description */}
+                    <p className="text-[13.5px] sm:text-[14px] text-slate-600 font-dm-sans leading-relaxed">
                       {step.description}
                     </p>
                   </div>
 
-                  {/* Action Link at Bottom */}
-                  <div className="mt-8 flex items-center">
-                    <span className="inline-flex items-center gap-2 text-[11px] font-mono font-bold tracking-[0.14em] text-blue-600 uppercase group-hover:text-blue-700 transition-colors">
-                      <span className="text-blue-600 font-bold">→</span>
-                      <span>{step.action}</span>
+                  {/* Bottom Action Pill Badge */}
+                  <div className="mt-8 pt-5 border-t border-slate-200/70 flex items-center justify-between">
+                    <span
+                      className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-[0.18em] uppercase border ${step.badgeBg}`}
+                    >
+                      {step.action}
+                    </span>
+                    <span className="text-[11px] font-mono font-medium text-slate-400">
+                      STEP {step.num}
                     </span>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
         </div>
 
-        {/* ========================================================== */}
-        {/* 3. BOTTOM DIVIDER BAR WITH EDITORIAL LABELS                */}
-        {/* ========================================================== */}
-        <div className="mt-20 sm:mt-28 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-slate-400 font-mono text-[10.5px] tracking-[0.18em] uppercase">
-          <span className="font-semibold text-slate-500 shrink-0">
-            A CLEARER PATH FORWARD
-          </span>
+        {/* Bottom Editorial Callout */}
+        <div className="mt-14 sm:mt-20 pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div className="flex items-center gap-3 text-[12.5px] font-dm-sans text-slate-500">
+            <span className="w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+            <span>Continuous delivery pipeline with enterprise SLAs and zero lock-in.</span>
+          </div>
 
-          {/* Dividing Hairline */}
-          <div className="hidden sm:block flex-1 h-[1px] bg-slate-200 mx-6" />
-
-          <span className="font-semibold text-slate-500 shrink-0">
-            BUILT FOR WHAT&apos;S NEXT
-          </span>
+          <div className="text-[11px] font-mono tracking-[0.2em] text-slate-400 uppercase">
+            SHIP WEEKLY · OWN FOREVER
+          </div>
         </div>
       </div>
     </section>

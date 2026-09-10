@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import {
   Check,
@@ -11,6 +11,8 @@ import {
   Eye,
   Box,
 } from 'lucide-react';
+import FoldText from './FoldText';
+import { gsap, useGSAP } from '@/lib/gsap';
 
 // Reusable 3D Photorealistic Sphere Marble with Specular Lighting
 function MarbleSphere({
@@ -163,10 +165,16 @@ function MarbleSphere({
 }
 
 export default function CapabilitiesBento() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [activeScenario, setActiveScenario] = useState<'base' | 'opt'>('opt');
 
   return (
-    <section className="relative w-full overflow-hidden py-16 sm:py-24 lg:py-32 bg-[#FAF8F5] text-navy">
+    <section ref={sectionRef} className="relative w-full overflow-hidden py-16 sm:py-24 lg:py-32 bg-[#FAF8F5] text-navy">
+      {/* Seamless Edge Melting Gradients */}
+      <div className="absolute top-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-b from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
+
       {/* Background Soft Lighting Gradients */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] sm:w-[900px] h-[400px] bg-gradient-to-b from-blue-100/35 via-indigo-50/15 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
       <div className="absolute bottom-10 -right-20 w-[400px] h-[400px] bg-amber-50/40 rounded-full blur-3xl pointer-events-none z-0" />
@@ -191,16 +199,16 @@ export default function CapabilitiesBento() {
           </motion.div>
 
           {/* Heading */}
-          <motion.h2
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-instrument text-[32px] xs:text-[40px] sm:text-[52px] lg:text-[60px] font-normal leading-[1.1] sm:leading-[1.06] tracking-tight text-navy"
-          >
-            Architected for <span className="italic text-cobalt font-normal">clarity.</span>{' '}
-            Engineered for <span className="italic text-cobalt font-normal">speed.</span>
-          </motion.h2>
+          <h2 className="font-instrument text-[32px] xs:text-[40px] sm:text-[52px] lg:text-[60px] font-normal leading-[1.1] sm:leading-[1.06] tracking-tight text-navy">
+            <FoldText text="Architected for" splitBy="word" trigger="scroll" duration={0.65} />{' '}
+            <span className="italic text-cobalt font-normal">
+              <FoldText text="clarity." splitBy="word" trigger="scroll" duration={0.65} />
+            </span>{' '}
+            <FoldText text="Engineered for" splitBy="word" trigger="scroll" duration={0.65} />{' '}
+            <span className="italic text-cobalt font-normal">
+              <FoldText text="speed." splitBy="word" trigger="scroll" duration={0.65} />
+            </span>
+          </h2>
 
           {/* Subtitle */}
           <motion.p
@@ -217,15 +225,11 @@ export default function CapabilitiesBento() {
         {/* ========================================================== */}
         {/* 2. BENTO GRID (3 Top Cards + 2 Bottom Cards)                */}
         {/* ========================================================== */}
-        <div className="flex flex-col gap-5 sm:gap-6 w-full max-w-[1380px] mx-auto">
+        <div ref={gridRef} className="flex flex-col gap-5 sm:gap-6 w-full max-w-[1380px] mx-auto">
           {/* ---------------- TOP ROW: 3 CARDS ---------------- */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {/* ---------------- CARD 1: NO MORE BOTTLENECKS ---------------- */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55, delay: 0.1 }}
+            <div
               className="group relative bg-gradient-to-br from-[#EBF3FF] via-[#F2F7FF] to-[#D6E7FC] hover:from-[#E3EFFF] hover:to-[#CCE1FA] rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-blue-200/80 shadow-[0_8px_25px_-5px_rgba(37,99,235,0.08)] hover:shadow-[0_18px_40px_-8px_rgba(37,99,235,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               {/* Inner ambient blue glow */}
@@ -372,14 +376,10 @@ export default function CapabilitiesBento() {
                   </span>
                 </motion.div>
               </div>
-            </motion.div>
+            </div>
 
             {/* ---------------- CARD 2: ONE TRUSTED VIEW ---------------- */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55, delay: 0.2 }}
+            <div
               className="group relative bg-gradient-to-br from-[#EBF3FF] via-[#F2F7FF] to-[#D6E7FC] hover:from-[#E3EFFF] hover:to-[#CCE1FA] rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-blue-200/80 shadow-[0_8px_25px_-5px_rgba(37,99,235,0.08)] hover:shadow-[0_18px_40px_-8px_rgba(37,99,235,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               {/* Inner ambient blue glow */}
@@ -488,14 +488,10 @@ export default function CapabilitiesBento() {
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* ---------------- CARD 3: SAFE AI OUTPUTS ---------------- */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55, delay: 0.3 }}
+            <div
               className="group relative bg-gradient-to-br from-[#EBF3FF] via-[#F2F7FF] to-[#D6E7FC] hover:from-[#E3EFFF] hover:to-[#CCE1FA] rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-blue-200/80 shadow-[0_8px_25px_-5px_rgba(37,99,235,0.08)] hover:shadow-[0_18px_40px_-8px_rgba(37,99,235,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               {/* Inner ambient blue glow */}
@@ -590,17 +586,13 @@ export default function CapabilitiesBento() {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
 
           {/* ---------------- BOTTOM ROW: 2 WIDER CARDS ---------------- */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
             {/* ---------------- CARD 4 (7 Cols): ROI FROM TOOLS ---------------- */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55, delay: 0.4 }}
+            <div
               className="lg:col-span-7 group relative bg-gradient-to-br from-[#EBF3FF] via-[#F2F7FF] to-[#D6E7FC] hover:from-[#E3EFFF] hover:to-[#CCE1FA] rounded-[24px] sm:rounded-[30px] p-6 sm:p-8 border border-blue-200/80 shadow-[0_8px_25px_-5px_rgba(37,99,235,0.08)] hover:shadow-[0_18px_40px_-8px_rgba(37,99,235,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               {/* Inner ambient blue glow */}
@@ -662,14 +654,10 @@ export default function CapabilitiesBento() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* ---------------- CARD 5 (5 Cols): FAST SCENARIOS ---------------- */}
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.55, delay: 0.5 }}
+            <div
               className="lg:col-span-5 group relative bg-gradient-to-br from-[#EBF3FF] via-[#F2F7FF] to-[#D6E7FC] hover:from-[#E3EFFF] hover:to-[#CCE1FA] rounded-[24px] sm:rounded-[30px] p-6 sm:p-8 border border-blue-200/80 shadow-[0_8px_25px_-5px_rgba(37,99,235,0.08)] hover:shadow-[0_18px_40px_-8px_rgba(37,99,235,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
               {/* Inner ambient blue glow */}
@@ -779,7 +767,7 @@ export default function CapabilitiesBento() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

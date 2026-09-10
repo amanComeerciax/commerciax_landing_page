@@ -2,32 +2,35 @@
 
 import { motion } from 'framer-motion';
 import { ArrowRight, Zap, Shield, Users } from 'lucide-react';
+import OriginButton from './OriginButton';
 
 export default function HeroActions() {
   return (
     <div className="flex flex-col gap-6 relative">
-      {/* Action Buttons */}
+      {/* Action Buttons with Origin Pro Effect */}
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.4 }}
         className="flex flex-wrap items-center gap-3 sm:gap-4"
       >
-        <a
-          href="#"
+        <OriginButton
+          href="#contact"
           id="cta-book-call"
-          className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 xs:px-7 xs:py-3.5 sm:px-8 sm:py-4 bg-navy text-white text-[13.5px] xs:text-[15px] sm:text-[16px] font-semibold rounded-full hover:bg-navy-light transition-all duration-200 hover:shadow-xl hover:shadow-navy/20 hover:-translate-y-0.5 active:translate-y-0"
+          variant="primary"
+          size="lg"
+          icon={<ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5" />}
         >
           Book a call
-          <ArrowRight className="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform duration-200 group-hover:translate-x-1" />
-        </a>
-        <a
-          href="#"
+        </OriginButton>
+        <OriginButton
+          href="#services"
           id="cta-explore"
-          className="inline-flex items-center justify-center gap-2 px-5 py-2.5 xs:px-7 xs:py-3.5 sm:px-8 sm:py-4 bg-white/85 hover:bg-white text-navy text-[13.5px] xs:text-[15px] sm:text-[16px] font-semibold rounded-full border border-slate-200/90 hover:border-slate-300 transition-all duration-200 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0 shadow-sm"
+          variant="secondary"
+          size="lg"
         >
           Explore IT solutions
-        </a>
+        </OriginButton>
       </motion.div>
 
       {/* Feature Highlights Row for IT Company */}

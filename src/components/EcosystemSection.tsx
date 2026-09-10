@@ -1,12 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Award, Globe, Users, ArrowUpRight, ArrowRight } from 'lucide-react';
 import RotatingGlobe from './RotatingGlobe';
+import OriginButton from './OriginButton';
+import AnimatedNumber from './AnimatedNumber';
+import FoldText from './FoldText';
+import { gsap, useGSAP } from '@/lib/gsap';
 
 export default function EcosystemSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const orbitHubRef = useRef<HTMLDivElement>(null);
   const [globeSize, setGlobeSize] = useState(300);
 
   useEffect(() => {
@@ -29,24 +35,60 @@ export default function EcosystemSection() {
     return () => window.removeEventListener('resize', updateSize);
   }, []);
 
+  useGSAP(
+    () => {
+      if (!sectionRef.current) return;
+
+      // Animate the orbit hub elements on scroll
+      if (orbitHubRef.current) {
+        gsap.fromTo(
+          orbitHubRef.current,
+          { scale: 0.92, opacity: 0.7 },
+          {
+            scale: 1,
+            opacity: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: 'top 80%',
+              end: 'center center',
+              scrub: 1,
+            },
+          }
+        );
+      }
+    },
+    { scope: sectionRef }
+  );
+
   return (
-    <section className="relative w-full overflow-hidden py-14 sm:py-20 lg:py-28 bg-[#FAF8F5] text-navy">
-      {/* Official High-Resolution 3D Orbit & Holographic Globe Background Graphic */}
-      <div className="absolute inset-0 pointer-events-none select-none z-0">
+    <section ref={sectionRef} className="relative w-full overflow-hidden py-14 sm:py-20 lg:py-28 bg-[#FAF8F5] text-navy">
+      {/* Official High-Resolution 3D Orbit & Holographic Globe Background Graphic with Seamless Edge Melt */}
+      <div 
+        className="absolute inset-0 pointer-events-none select-none z-0"
+        style={{
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 72%, transparent 100%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 12%, black 72%, transparent 100%)',
+        }}
+      >
         <Image
           src="/back2.png"
           alt="Ecosystem Network Background"
           fill
           priority
           quality={100}
-          className="object-cover object-center w-full h-full opacity-95"
+          className="object-cover object-center w-full h-full opacity-90"
         />
       </div>
 
+      {/* Seamless Section Blending Gradients (Melts top and bottom edges) */}
+      <div className="absolute top-0 left-0 right-0 h-32 sm:h-44 bg-gradient-to-b from-[#FAF8F5] via-[#FAF8F5]/80 to-transparent pointer-events-none z-[1]" />
+      <div className="absolute bottom-0 left-0 right-0 h-44 sm:h-64 lg:h-80 bg-gradient-to-t from-[#FAF8F5] via-[#FAF8F5]/85 to-transparent pointer-events-none z-[1]" />
+
       {/* Soft Ambient Background Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[850px] h-[400px] sm:h-[500px] bg-gradient-to-b from-blue-100/40 via-indigo-50/20 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
-      <div className="absolute top-12 -left-20 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-blue-100/30 rounded-full blur-3xl pointer-events-none z-0" />
-      <div className="absolute top-20 -right-20 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-indigo-100/20 rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[850px] h-[400px] sm:h-[500px] bg-gradient-to-b from-blue-100/30 via-indigo-50/15 to-transparent rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-12 -left-20 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-blue-100/20 rounded-full blur-3xl pointer-events-none z-0" />
+      <div className="absolute top-20 -right-20 w-[300px] sm:w-[400px] h-[300px] sm:h-[400px] bg-indigo-100/15 rounded-full blur-3xl pointer-events-none z-0" />
 
       <div className="site-container relative px-3.5 xs:px-4 sm:px-8 lg:px-12 z-10">
         {/* ========================================================== */}
@@ -68,17 +110,13 @@ export default function EcosystemSection() {
           </motion.div>
 
           {/* Main Heading */}
-          <motion.h2
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-instrument text-[30px] xs:text-[36px] sm:text-[48px] lg:text-[56px] xl:text-[62px] font-normal leading-[1.1] sm:leading-[1.08] tracking-tight text-navy"
-          >
-            Built with{' '}
-            <span className="italic text-cobalt font-normal">trust.</span>{' '}
-            Backed by the right people.
-          </motion.h2>
+          <h2 className="font-instrument text-[30px] xs:text-[36px] sm:text-[48px] lg:text-[56px] xl:text-[62px] font-normal leading-[1.1] sm:leading-[1.08] tracking-tight text-navy">
+            <FoldText text="Built with" splitBy="word" trigger="scroll" duration={0.65} />{' '}
+            <span className="italic text-cobalt font-normal">
+              <FoldText text="trust." splitBy="word" trigger="scroll" duration={0.65} />
+            </span>{' '}
+            <FoldText text="Backed by the right people." splitBy="word" trigger="scroll" duration={0.65} stagger={0.045} />
+          </h2>
 
           {/* Subtitle */}
           <motion.p
@@ -95,7 +133,7 @@ export default function EcosystemSection() {
         {/* ========================================================== */}
         {/* 2. CENTRAL 3D ORBIT HUB + 6 FLOATING GLASSMORPHIC CARDS    */}
         {/* ========================================================== */}
-        <div className="relative w-full max-w-[1400px] mx-auto min-h-0 lg:min-h-[740px] flex flex-col lg:flex-row items-center justify-center mb-14 sm:mb-20 lg:mb-24 select-none">
+        <div ref={orbitHubRef} className="relative w-full max-w-[1400px] mx-auto min-h-0 lg:min-h-[740px] flex flex-col lg:flex-row items-center justify-center mb-14 sm:mb-20 lg:mb-24 select-none">
 
           {/* ========================================================== */}
           {/* SVG 3D ORBITAL CONNECTION NETWORK & 3D BLUE SPHERES        */}
@@ -390,7 +428,9 @@ export default function EcosystemSection() {
             >
               <span className="w-2.5 h-2.5 rounded-full bg-cobalt shadow-[0_0_8px_rgba(37,99,235,0.6)] animate-pulse" />
               <div className="flex flex-col">
-                <span className="text-[15px] font-extrabold font-plus-jakarta text-navy leading-none">50+</span>
+                <span className="text-[15px] font-extrabold font-plus-jakarta text-navy leading-none">
+                  <AnimatedNumber value={50} suffix="+" duration={1600} />
+                </span>
                 <span className="text-[11px] text-slate-400 font-dm-sans mt-0.5">Countries</span>
               </div>
             </motion.div>
@@ -405,7 +445,9 @@ export default function EcosystemSection() {
             >
               <span className="w-2.5 h-2.5 rounded-full bg-cobalt shadow-[0_0_8px_rgba(37,99,235,0.6)] animate-pulse" />
               <div className="flex flex-col text-left">
-                <span className="text-[15px] font-extrabold font-plus-jakarta text-navy leading-none">1000+</span>
+                <span className="text-[15px] font-extrabold font-plus-jakarta text-navy leading-none">
+                  <AnimatedNumber value={1000} suffix="+" duration={1800} />
+                </span>
                 <span className="text-[11px] text-slate-400 font-dm-sans mt-0.5">Builders</span>
               </div>
             </motion.div>
@@ -831,7 +873,7 @@ export default function EcosystemSection() {
               </span>
               <h3 className="font-instrument text-[24px] xs:text-[28px] sm:text-[34px] lg:text-[38px] font-normal leading-[1.1] sm:leading-[1.08] text-white">
                 Recognized<br className="hidden xs:inline" />{' '}
-                <span className="italic text-cyan-400">beyond</span> the product.
+                <span className="italic text-blue-500 font-normal">beyond</span> the product.
               </h3>
             </div>
 
@@ -842,7 +884,7 @@ export default function EcosystemSection() {
             <div className="flex flex-wrap items-center justify-center lg:justify-start gap-5 sm:gap-8 xl:gap-12 text-white">
               {/* Stat 1 */}
               <div className="flex items-center gap-2.5 sm:gap-3.5">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-500/10 border border-blue-400/20 flex items-center justify-center text-cyan-400 shrink-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-600/15 border border-blue-500/30 flex items-center justify-center text-blue-500 shrink-0">
                   <Award className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="flex flex-col text-left">
@@ -857,7 +899,7 @@ export default function EcosystemSection() {
 
               {/* Stat 2 */}
               <div className="flex items-center gap-2.5 sm:gap-3.5">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-500/10 border border-blue-400/20 flex items-center justify-center text-cyan-400 shrink-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-600/15 border border-blue-500/30 flex items-center justify-center text-blue-500 shrink-0">
                   <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="flex flex-col text-left">
@@ -872,7 +914,7 @@ export default function EcosystemSection() {
 
               {/* Stat 3 */}
               <div className="flex items-center gap-2.5 sm:gap-3.5">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-500/10 border border-blue-400/20 flex items-center justify-center text-cyan-400 shrink-0">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-blue-600/15 border border-blue-500/30 flex items-center justify-center text-blue-500 shrink-0">
                   <Users className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="flex flex-col text-left">
@@ -886,15 +928,17 @@ export default function EcosystemSection() {
               </div>
             </div>
 
-            {/* Right Action Button */}
+            {/* Right Action Button with Origin Pro Effect */}
             <div className="shrink-0 pt-1 lg:pt-0 w-full sm:w-auto flex justify-center">
-              <a
-                href="#"
-                className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-7 sm:py-3.5 bg-white hover:bg-slate-100 text-navy text-[13.5px] sm:text-[14.5px] font-bold rounded-full transition-all duration-200 hover:shadow-xl hover:shadow-white/10 hover:-translate-y-0.5 active:translate-y-0 w-full sm:w-auto text-center"
+              <OriginButton
+                href="#products"
+                variant="white"
+                size="md"
+                className="w-full sm:w-auto text-center"
+                icon={<ArrowRight className="w-4 h-4 text-navy group-hover:text-white" />}
               >
                 Explore our ecosystem
-                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 text-navy" />
-              </a>
+              </OriginButton>
             </div>
           </div>
         </motion.div>
