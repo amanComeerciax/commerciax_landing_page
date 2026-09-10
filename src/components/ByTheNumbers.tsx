@@ -104,10 +104,10 @@ export default function ByTheNumbers() {
           alt="Global Network Infrastructure"
           fill
           priority
-          className="object-cover object-right sm:object-center opacity-85"
+          className="object-cover object-right sm:object-center opacity-35 mix-blend-multiply"
         />
         {/* Soft edge gradients for seamless blending */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/40 via-transparent to-[#FAF8F5]/50 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#FAF8F5]/60 via-[#FAF8F5]/30 to-[#FAF8F5]/80 pointer-events-none" />
       </div>
 
       {/* Top and Bottom Melting Gradients */}

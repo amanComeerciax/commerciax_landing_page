@@ -230,12 +230,8 @@ export default function CapabilitiesBento() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
             {/* ---------------- CARD 1: NO MORE BOTTLENECKS ---------------- */}
             <div
-              className="group relative bg-gradient-to-br from-[#EBF3FF] via-[#F2F7FF] to-[#D6E7FC] hover:from-[#E3EFFF] hover:to-[#CCE1FA] rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-blue-200/80 shadow-[0_8px_25px_-5px_rgba(37,99,235,0.08)] hover:shadow-[0_18px_40px_-8px_rgba(37,99,235,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              className="group relative bg-white/95 hover:bg-white rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-slate-200/90 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(10,22,40,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(10,22,40,0.09)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
-              {/* Inner ambient blue glow */}
-              <div className="absolute -top-10 -right-10 w-44 h-44 bg-gradient-to-bl from-blue-400/25 via-sky-300/15 to-transparent rounded-full blur-2xl pointer-events-none" />
-              <div className="absolute -bottom-8 -left-8 w-36 h-36 bg-gradient-to-tr from-indigo-400/15 to-transparent rounded-full blur-xl pointer-events-none" />
-
               <div className="relative z-10">
                 {/* Header: Title + 3D Blue Sphere */}
                 <div className="flex items-start justify-between gap-3 mb-3">
@@ -380,12 +376,8 @@ export default function CapabilitiesBento() {
 
             {/* ---------------- CARD 2: ONE TRUSTED VIEW ---------------- */}
             <div
-              className="group relative bg-gradient-to-br from-[#EBF3FF] via-[#F2F7FF] to-[#D6E7FC] hover:from-[#E3EFFF] hover:to-[#CCE1FA] rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-blue-200/80 shadow-[0_8px_25px_-5px_rgba(37,99,235,0.08)] hover:shadow-[0_18px_40px_-8px_rgba(37,99,235,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              className="group relative bg-white/95 hover:bg-white rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-slate-200/90 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(10,22,40,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(10,22,40,0.09)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
-              {/* Inner ambient blue glow */}
-              <div className="absolute -top-10 -right-10 w-44 h-44 bg-gradient-to-bl from-emerald-400/20 via-sky-300/15 to-transparent rounded-full blur-2xl pointer-events-none" />
-              <div className="absolute -bottom-8 -left-8 w-36 h-36 bg-gradient-to-tr from-blue-400/15 to-transparent rounded-full blur-xl pointer-events-none" />
-
               <div className="relative z-10">
                 {/* Header: Title + 3D Emerald Sphere */}
                 <div className="flex items-start justify-between gap-3 mb-3">
@@ -492,12 +484,8 @@ export default function CapabilitiesBento() {
 
             {/* ---------------- CARD 3: SAFE AI OUTPUTS ---------------- */}
             <div
-              className="group relative bg-gradient-to-br from-[#EBF3FF] via-[#F2F7FF] to-[#D6E7FC] hover:from-[#E3EFFF] hover:to-[#CCE1FA] rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-blue-200/80 shadow-[0_8px_25px_-5px_rgba(37,99,235,0.08)] hover:shadow-[0_18px_40px_-8px_rgba(37,99,235,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              className="group relative bg-white/95 hover:bg-white rounded-[24px] sm:rounded-[30px] p-6 sm:p-7 border border-slate-200/90 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(10,22,40,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(10,22,40,0.09)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
-              {/* Inner ambient blue glow */}
-              <div className="absolute -top-10 -right-10 w-44 h-44 bg-gradient-to-bl from-amber-400/20 via-sky-300/15 to-transparent rounded-full blur-2xl pointer-events-none" />
-              <div className="absolute -bottom-8 -left-8 w-36 h-36 bg-gradient-to-tr from-blue-400/15 to-transparent rounded-full blur-xl pointer-events-none" />
-
               <div className="relative z-10">
                 {/* Header: Title + 3D Gold Sphere */}
                 <div className="flex items-start justify-between gap-3 mb-3">
@@ -593,12 +581,8 @@ export default function CapabilitiesBento() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
             {/* ---------------- CARD 4 (7 Cols): ROI FROM TOOLS ---------------- */}
             <div
-              className="lg:col-span-7 group relative bg-gradient-to-br from-[#EBF3FF] via-[#F2F7FF] to-[#D6E7FC] hover:from-[#E3EFFF] hover:to-[#CCE1FA] rounded-[24px] sm:rounded-[30px] p-6 sm:p-8 border border-blue-200/80 shadow-[0_8px_25px_-5px_rgba(37,99,235,0.08)] hover:shadow-[0_18px_40px_-8px_rgba(37,99,235,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              className="lg:col-span-7 group relative bg-white/95 hover:bg-white rounded-[24px] sm:rounded-[30px] p-6 sm:p-8 border border-slate-200/90 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(10,22,40,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(10,22,40,0.09)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
-              {/* Inner ambient blue glow */}
-              <div className="absolute -top-12 -right-12 w-56 h-56 bg-gradient-to-bl from-cyan-400/25 via-blue-400/15 to-transparent rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-10 -left-10 w-44 h-44 bg-gradient-to-tr from-indigo-400/15 to-transparent rounded-full blur-xl pointer-events-none" />
-
               <div className="relative z-10">
                 {/* Header: Title + 3D Cyan Sphere */}
                 <div className="flex items-start justify-between gap-3 mb-3">
@@ -658,12 +642,8 @@ export default function CapabilitiesBento() {
 
             {/* ---------------- CARD 5 (5 Cols): FAST SCENARIOS ---------------- */}
             <div
-              className="lg:col-span-5 group relative bg-gradient-to-br from-[#EBF3FF] via-[#F2F7FF] to-[#D6E7FC] hover:from-[#E3EFFF] hover:to-[#CCE1FA] rounded-[24px] sm:rounded-[30px] p-6 sm:p-8 border border-blue-200/80 shadow-[0_8px_25px_-5px_rgba(37,99,235,0.08)] hover:shadow-[0_18px_40px_-8px_rgba(37,99,235,0.18)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              className="lg:col-span-5 group relative bg-white/95 hover:bg-white rounded-[24px] sm:rounded-[30px] p-6 sm:p-8 border border-slate-200/90 hover:border-slate-300 shadow-[0_4px_24px_-4px_rgba(10,22,40,0.05)] hover:shadow-[0_12px_36px_-6px_rgba(10,22,40,0.09)] hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden"
             >
-              {/* Inner ambient blue glow */}
-              <div className="absolute -top-12 -right-12 w-56 h-56 bg-gradient-to-bl from-blue-400/25 via-indigo-400/15 to-transparent rounded-full blur-3xl pointer-events-none" />
-              <div className="absolute -bottom-10 -left-10 w-44 h-44 bg-gradient-to-tr from-sky-400/15 to-transparent rounded-full blur-xl pointer-events-none" />
-
               <div className="relative z-10">
                 {/* Header: Title */}
                 <div className="flex items-start justify-between gap-3 mb-3">
